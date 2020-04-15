@@ -27,6 +27,7 @@ endif()
 # Option variables.
 #================================
 option(ZEUS_BUILD_TESTS "Build Zeus unit tests" ON)
+option(ZEUS_CLANG_FORMAT_TARGET "Create clang-format target" ON)
 
 #================================
 # Directory variables.
@@ -49,20 +50,22 @@ source_group("include\\zeus" FILES ${ZEUS_INCLUDE_GROUP})
 #================================
 # Clang targets.
 #================================
-find_program(CLANG_FORMAT_EXE
-    NAMES "clang-format"
-    DOC "Path to clang-format executable"
-    )
-if (NOT CLANG_FORMAT_EXE)
-    message(STATUS "clang-format not found.")
-else()
-    message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
-    set(ZEUS_FILES
-        ${ZEUS_HEADER_FILES}
+if (ZEUS_CLANG_FORMAT_TARGET)
+    find_program(CLANG_FORMAT_EXE
+        NAMES "clang-format"
+        DOC "Path to clang-format executable"
         )
-    add_custom_target(clang-format
-        COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${ZEUS_FILES}
-        )
+    if (NOT CLANG_FORMAT_EXE)
+        message(STATUS "clang-format not found.")
+    else()
+        message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
+        set(ZEUS_FILES
+            ${ZEUS_HEADER_FILES}
+            )
+        add_custom_target(clang-format
+            COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${ZEUS_FILES}
+            )
+    endif()
 endif()
 
 #================================
