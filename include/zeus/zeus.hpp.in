@@ -1,0 +1,12 @@
+#pragma once
+
+#include <string_view>
+
+namespace zeus
+{
+    static constexpr auto zeus_version_major{@ZEUS_VERSION_MAJOR@};
+    static constexpr auto zeus_version_minor{@ZEUS_VERSION_MINOR@};
+    static constexpr auto zeus_version_patch{@ZEUS_VERSION_PATCH@};
+
+    static constexpr std::string_view zeus_version_string{"@ZEUS_VERSION_MAJOR@.@ZEUS_VERSION_MINOR@.@ZEUS_VERSION_PATCH@"};
+}

@@ -117,7 +117,7 @@ endif()
 #================================
 # Core module.
 #================================
-add_library(zeus INTERFACE ${ZEUS_INCLUDE_GROUP})
+add_library(zeus INTERFACE)
 target_include_directories(zeus INTERFACE ${ZEUS_SOURCE_ROOT})
 target_link_libraries(zeus INTERFACE fmt::fmt magic_enum::magic_enum)
 if (NOT MSVC)
