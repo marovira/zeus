@@ -10,18 +10,18 @@ namespace zeus
                         std::string file,
                         int line,
                         std::string message);
+} // namespace zeus
 
 #define ZEUS_BUILD_DEBUG
 #if defined(ZEUS_BUILD_DEBUG)
 #    define ASSERT(condition) \
-        assert_handler(condition, __FILE__, __LINE__, #condition);
+        zeus::assert_handler(condition, __FILE__, __LINE__, #condition);
 #    define ASSERT_MSG(condition, message) \
-        assert_handler(condition, __FILE__, __LINE__, message)
+        zeus::assert_handler(condition, __FILE__, __LINE__, message)
 #else
 #    define ASSERT(condition)
 #    define ASSERT_MSG(condition, message)
 #endif
-} // namespace zeus
 
 #if defined(ZEUS_ASSERT_IMPL)
 #    if defined(ZEUS_PLATFORM_WINDOWS)
