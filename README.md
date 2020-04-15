@@ -2,6 +2,11 @@
 
 > A C++ utilities library
 
+[![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
+[![Generic badge](https://img.shields.io/badge/Language-C++17-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
+[![Build status](https://ci.appveyor.com/api/projects/status/jnwfj58q927n864i?svg=true)](https://ci.appveyor.com/project/marovira/zeus)
+[![Build Status](https://travis-ci.org/marovira/zeus.svg?branch=master)](https://travis-ci.org/marovira/zeus)
+
 ## What is Zeus?
 
 Zeus is a C++ utility library that was born from the core modules shared across
@@ -20,7 +25,7 @@ The following are **core** requirements of Zeus:
 
 Zeus supports the following platforms and compilers:
 
-| ** Platform (Compiler) | **Version** |
+| **Platform (Compiler) | **Version** |
 |------------------------|-------------|
 | Windows (MSVC) | 19.25 |
 | Linux (GCC) | 9.2 |
