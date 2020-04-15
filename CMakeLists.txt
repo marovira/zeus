@@ -156,7 +156,7 @@ if (ZEUS_BUILD_TESTS)
     source_group("source" FILES ${ZEUS_TEST_GROUP})
     add_executable(zeus_test ${ZEUS_TEST_LIST})
     target_link_libraries(zeus_test
-        zeus_core
+        zeus
         Catch2::Catch2)
     set_target_properties(zeus_test PROPERTIES FOLDER "tests")
 

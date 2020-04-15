@@ -5,6 +5,11 @@ configure_file(${ZEUS_SOURCE_ROOT}/zeus/zeus.hpp.in ${ZEUS_VERSION_HEADER})
 
 set(ZEUS_HEADER_LIST
     ${ZEUS_VERSION_HEADER}
+    ${ZEUS_SOURCE_ROOT}/zeus/assert.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/float.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/functional.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/platform.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/timer.hpp
     )
 
 # Wrap each list for the source groups above.
