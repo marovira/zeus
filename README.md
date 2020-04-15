@@ -25,8 +25,8 @@ The following are **core** requirements of Zeus:
 
 Zeus supports the following platforms and compilers:
 
-| **Platform (Compiler) | **Version** |
-|------------------------|-------------|
+| Platform (Compiler) | Version |
+|---------------------|---------|
 | Windows (MSVC) | 19.25 |
 | Linux (GCC) | 9.2 |
 | Linux (LLVM Clang) | 9.0 |
