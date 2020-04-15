@@ -130,12 +130,12 @@ target_compile_features(zeus INTERFACE cxx_std_17)
 target_compile_options(zeus INTERFACE ${ZEUS_COMPILER_FLAGS})
 target_compile_options(zeus INTERFACE ${ZEUS_DEBUG_FLAGS})
 target_compile_definitions(zeus INTERFACE ${ZEUS_COMPILE_DEFINITIONS})
-set_target_properties(zeus PROPERTIES FOLDER "zeus")
 add_library(zeus::zeus ALIAS zeus)
 
 # Add a dummy target for MSVC so the files are visible.
 if (MSVC)
     add_custom_target(_zeus SOURCES ${ZEUS_INCLUDE_GROUP})
+    set_target_properties(_zeus PROPERTIES FOLDER "zeus")
 endif()
 
 #================================
