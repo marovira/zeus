@@ -6,13 +6,13 @@
 
 namespace zeus
 {
-    enum class platform
+    enum class Platform
     {
         windows = 0,
         linux
     };
 
-    enum class build_type
+    enum class BuildType
     {
         debug = 0,
         release
@@ -20,20 +20,20 @@ namespace zeus
 
 #if defined(_WIN32) || defined(_WIN64)
 #    define ZEUS_PLATFORM_WINDOWS
-    static constexpr platform current_platform{platform::windows};
+    static constexpr Platform current_platform{Platform::windows};
 #elif defined(__APPLE__)
 #    error "Support for Apple is deprecated"
 #elif defined(__linux__)
 #    define ZEUS_PLATFORM_LINUX
-    static constexpr platform current_platform{platform::linux};
+    static constexpr Platform current_platform{Platform::linux};
 #endif
 
 #if defined(_DEBUG) || defined(DEBUG) || defined(__DEBUG__)
 #    define ZEUS_BUILD_DEBUG
-    static constexpr build_type current_build{build_type::debug};
+    static constexpr BuildType current_build{BuildType::debug};
 #else
 #    define ZEUS_BUILD_RELEASE
-    static constexpr build_type current_build{build_type::release};
+    static constexpr BuildType current_build{BuildType::release};
 #endif
 
 } // namespace zeus

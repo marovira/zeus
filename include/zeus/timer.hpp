@@ -5,10 +5,10 @@
 namespace zeus
 {
     template<typename T, typename Res = std::chrono::high_resolution_clock>
-    class timer
+    class Timer
     {
     public:
-        constexpr timer() = default;
+        constexpr Timer() = default;
 
         constexpr void start()
         {

@@ -10,7 +10,7 @@ namespace zeus
 {
     template<typename T,
              typename = std::enable_if<std::is_floating_point<T>::value>>
-    using epsilon_fn = T (*)();
+    using EpsilonFun = T (*)();
 
     template<typename T,
              typename = std::enable_if<std::is_floating_point<T>::value>>
@@ -21,7 +21,7 @@ namespace zeus
     }
 
     template<typename T,
-             epsilon_fn<T> epsilon,
+             EpsilonFun<T> epsilon,
              typename = std::enable_if<std::is_floating_point<T>::value>>
     inline constexpr bool are_equal(T a, T b)
     {
@@ -37,7 +37,7 @@ namespace zeus
     }
 
     template<typename T,
-             epsilon_fn<T> epsilon,
+             EpsilonFun<T> epsilon,
              typename = std::enable_if<std::is_floating_point<T>::value>>
     inline constexpr bool is_zero(T a)
     {
@@ -52,7 +52,7 @@ namespace zeus
     }
 
     template<typename T,
-             epsilon_fn<T> epsilon,
+             EpsilonFun<T> epsilon,
              typename = std::enable_if<std::is_floating_point<T>::value>>
     inline constexpr bool geq(T a, T b)
     {
@@ -67,7 +67,7 @@ namespace zeus
     }
 
     template<typename T,
-             epsilon_fn<T> epsilon,
+             EpsilonFun<T> epsilon,
              typename = std::enable_if<std::is_floating_point<T>::value>>
     inline constexpr bool leq(T a, T b)
     {
