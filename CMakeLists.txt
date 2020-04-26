@@ -28,6 +28,7 @@ endif()
 #================================
 option(ZEUS_BUILD_TESTS "Build Zeus unit tests" ON)
 option(ZEUS_CLANG_FORMAT_TARGET "Create clang-format target" ON)
+option(ZEUS_INSTALL_TARGET "Create install target" OFF)
 
 #================================
 # Directory variables.
@@ -118,10 +119,12 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL
 endif()
 
 #================================
-# Core module.
+# Main library.
 #================================
 add_library(zeus INTERFACE)
-target_include_directories(zeus INTERFACE ${ZEUS_SOURCE_ROOT})
+target_include_directories(zeus INTERFACE 
+    $<BUILD_INTERFACE:${ZEUS_SOURCE_ROOT}>
+    $<INSTALL_INTERFACE:include>)
 target_link_libraries(zeus INTERFACE fmt::fmt magic_enum::magic_enum)
 if (NOT MSVC)
     target_link_libraries(zeus INTERFACE stdc++fs)
@@ -136,6 +139,44 @@ add_library(zeus::zeus ALIAS zeus)
 if (MSVC)
     add_custom_target(_zeus SOURCES ${ZEUS_INCLUDE_GROUP})
     set_target_properties(_zeus PROPERTIES FOLDER "zeus")
+endif()
+
+#================================
+# Install targets.
+#================================
+if (ZEUS_INSTALL_TARGET)
+    install(TARGETS zeus
+        EXPORT zeus
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION lib
+        INCLUDES DESTINATION include
+        )
+
+    include(CMakePackageConfigHelpers)
+    include(GNUInstallDirs)
+    write_basic_package_version_file(
+        "${PROJECT_BINARY_DIR}/zeusConfigVersion.cmake"
+        VERSION ${PACKAGE_VERSION}
+        COMPATIBILITY AnyNewerVersion
+        )
+
+    install(EXPORT zeus 
+        FILE zeusTargets.cmake
+        NAMESPACE zeus::
+        DESTINATION lib/cmake/zeus
+        )
+
+    install(FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/zeus-config.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/zeusConfigVersion.cmake"
+        DESTINATION lib/cmake/zeus
+        )
+
+    install(FILES
+        ${ZEUS_INCLUDE_GROUP}
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/zeus"
+        )
 endif()
 
 #================================
