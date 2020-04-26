@@ -11,6 +11,7 @@ set(ZEUS_HEADER_LIST
     ${ZEUS_SOURCE_ROOT}/zeus/platform.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/timer.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/constants.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/filesystem.hpp
     )
 
 # Wrap each list for the source groups above.
