@@ -12,22 +12,22 @@ namespace zeus
 
         constexpr void start()
         {
-            _begin = Res::now();
+            m_begin = Res::now();
         }
 
         constexpr void reset()
         {
-            _begin = std::chrono::time_point<Res>();
+            m_begin = std::chrono::time_point<Res>();
         }
 
         constexpr T elapsed() const
         {
-            return std::chrono::duration_cast<second>(Res::now() - _begin)
+            return std::chrono::duration_cast<second>(Res::now() - m_begin)
                 .count();
         }
 
     private:
         using second = std::chrono::duration<T>;
-        std::chrono::time_point<Res> _begin;
+        std::chrono::time_point<Res> m_begin;
     };
 } // namespace zeus
