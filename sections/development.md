@@ -51,17 +51,17 @@ The constants are all templated `constexpr` variables. The template will only
 accept floating point types, as integral types are usually not used for these
 constants (and they can be converted if need be). The defined constants are:
 
-* `e`: Euler's constant <img src="https://render.githubusercontent.com/render/math?math=e">
-* `log_2_e`: $\log_2(e)$
-* `ln_2`: $\ln(2)$
-* `ln_10`: $\ln(10)$
-* `pi`: $\pi$
-* `py_by_2`: $\pi / 2$
-* `one_by_pi`: $1 / \pi$
-* `two_by_pi`: $2 / \pi$
-* `two_by_sqrt_pi`: $2 / \sqrt{\pi}$
-* `sqrt_2`: $\sqrt{2}$
-* `one_by_sqrt_2`: $1 / \sqrt{2}$
+* `e`,
+* `log_2_e`,
+* `ln_2`,
+* `ln_10`,
+* `pi`,
+* `py_by_2`,
+* `one_by_pi`,
+* `two_by_pi`,
+* `two_by_sqrt_pi`,
+* `sqrt_2`,
+* `one_by_sqrt_2`
 
 The constants can be used as follows:
 
@@ -106,25 +106,25 @@ Provides a series of functions for floating point comparisons. All functions
 rely on the same base formula for comparison. For any two floating point numbers
 $a, b$, they are considered equal if the following condition holds:
 
-$$
-\vert a - b \vert \leq \epsilon * s
-$$
+```c++
+std::abs(a - b) <= epsilon * scale;
+```
 
-Where $s$ is
+Where `scale` is
 
-$$
-s = \frac{\vert a \vert + \vert b \vert}{2}
-$$
+```c++
+scale = std::abs(a) + std::abs(b) / 2;
+```
 
-The value of $\epsilon$ used by default is the provided machine epsilon obtained
+The value of `\epsilon` used by default is the provided machine epsilon obtained
 via `std::numeric_limits<T>::epsilon`. The functions also have a template
 overload that allows for a custom epsilon function to be provided. The
 comparison functions are:
 
-* `are_equal`: evaluates $a = b$,
-* `is_zero`: evaluates $a = 0$,
-* `geq`: evaluates $a \geq b$,
-* `leq`: evaluates $a \leq b$.
+* `are_equal`: evaluates `a = b`,
+* `is_zero`: evaluates `a = 0`,
+* `geq`: evaluates `a &#8804 b`,
+* `leq`: evaluates `a &#8805 b`.
 
 The functions can be used as follows:
 
@@ -149,6 +149,62 @@ auto res = zeus::are_equal<float, epsilon>(1.0f, 2.0f);
 
 ## Functional <a name="functional"></a>
 
+Provides a different version of `std::iota` that allows you to increment each
+entry in the list by a custom amount. It can be used as follows:
+
+```c++
+#include <zeus/functional.hpp>
+#include <vector>
+
+std::vector<int> list(10);
+
+zeus::iota(list.begin(), list.end(), 0, 2);   // List starting at 0 increasing by 2
+```
+
 ## Platform <a name="platform"></a>
+
+Defines macros and variables that define the current platform and build
+configuration. These can be used for defining cross-platform behaviour both at
+the pre-processor level as well as through usage of `if constexpr`. The defined
+macros are:
+
+* `ZEUS_PLATFORM_WINDOWS`: defined in both 64-bit and 32-bit builds for windows
+  platforms.
+* `ZEUS_PLATFORM_LINUX`: defined in all Linux-based systems.
+* `ZEUS_BUILD_DEBUG`: defined for debug builds.
+* `ZEUS_BUILD_RELEASE`: defined for all non-debug builds.
+
+The constants are:
+
+* `current_platform`: defines the platform. Can be either `windows` or `linux`.
+* `current_build`: defines the build. Can be either `debug` or `release`.
+
+These can be used as follows:
+
+```c++
+#include <zeus/platform.hpp>
+
+#if defined(ZEUS_PLATFORM_WINDOWS)
+// Do something for Windows.
+#elif defined(ZEUS_PLATFORM_LINUX)
+// Do something for linux.
+#endif
+
+#if defined(ZEUS_BUILD_DEBUG)
+// Debug builds.
+#elif defined(ZEUS_BUILD_RELEASE)
+// Release builds.
+#endif
+
+if constexpr (current_platform == zeus::Platform::windows)
+{
+    // Windows.
+}
+
+if constexpr (current_build == zeus::BuildType::debug)
+{
+    // Debug.
+}
+```
 
 ## Timer <a name="timer"></a>
