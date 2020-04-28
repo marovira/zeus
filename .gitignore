@@ -5,6 +5,7 @@ bin/
 html/
 lib/
 gh-pages/
+site/
 
 # Generated files #
 generated/

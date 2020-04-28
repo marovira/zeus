@@ -13,6 +13,7 @@ skip_commits:
         - .clang-tidy
         - .gitignore
         - .travis.yml
+        - mkdocs.yml
 
 image: Visual Studio 2019
 
