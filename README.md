@@ -58,12 +58,17 @@ If you are submitting a pull request, the guidelines are the following:
    The coding standards can be seen throughout the code, and the formatting is
    handled through the `.clang-format` file located at the root of the
    directory. Any changes that do not follow the style and format will be
-   rejected.
+   rejected. You can view the style used on the
+   [style](https://marovira.github.io/zeus/style/) page of the documentation.
 2. Ensure that *all* unit tests are working prior to submitting the pull
    request. If you are adding a new feature that has been approved, it is your
    responsibility to provide the corresponding unit tests (if applicable). 
 
 ## License
 
-Atlas is published under the BSD-3 license and can be viewed
+Zeus is published under the BSD-3 license and can be viewed
 [here](https://github.com/marovira/zeus/blob/master/LICENSE).
+
+## Documentation
+
+The documentation for the project can be seen [here](https://marovira.github.io/zeus/)
