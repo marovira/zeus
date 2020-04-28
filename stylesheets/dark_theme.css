@@ -9,32 +9,42 @@ Default text color
 and background color
 */
 .md-main {
-  color: #F5F5F5 !important;
-  background-color: #212121 !important;
+  color: #888 !important;
+  background-color: #191919 !important;
 }
 
 /*
 Main headlines
 */
 .md-main h1 {
-  color: white !important;
+  color: #666 !important;
 }
 
 /*
 Tables
 */
-tbody {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+tbody tr:nth-child(even) {
+    background-color: #191919
 }
 
-.md-typeset table:not([class]) th {
-  background-color: rgba(255,255,255,0.11) !important;
+tbody tr:nth-child(odd) {
+    background-color: #1E1E1E
 }
 
-.md-typeset table:not([class]) tr:hover {
-  box-shadow: none !important;
-  background-color: rgba(255, 255, 255, 0.04) !important;
+th {
+  background-color: #0F0F0F !important;
+  color: #666;
 }
+
+tr {
+    transition: background-color 125ms;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.005);
+        box-shadow: 0 px2rem(1px) 0 var(--md-default-bg-color) inset;
+    }
+}
+
 
 /*
 Blockquotes
@@ -72,7 +82,7 @@ html .md-nav--primary .md-nav__title:before {
 }
 
 .md-nav__title {
-  color: rgba(255,255,255,1) !important;
+  color: #666 !important;
   background-color: #212121 !important;
 }
 
@@ -80,16 +90,16 @@ html .md-nav--primary .md-nav__title:before {
 Arrow Right Icon
 */
 .md-nav--primary .md-nav__link:after {
-  color: #FAFAFA !important;
+  color: #888 !important;
 }
 
 .md-nav__list {
-  color: rgba(255,255,255,1) !important;
+  color: #888 !important;
   background-color: #212121 !important;
 }
 
 .md-nav__item {
-  color: rgba(255,255,255,1) !important;
+  color: #888 !important;
   background-color: #212121 !important;
 }
 
