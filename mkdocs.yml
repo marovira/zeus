@@ -1,14 +1,40 @@
 site_name: Zeus
+repo_name: marovira/zeus
+repo_url: https://github.com/marovira/zeus
+
+theme:
+    name: material
+    palette:
+        primary: indigo
+        accent: indigo
+    font:
+        text: Roboto
+        code: Roboto Mono
+    language: en
+    icon:
+        logo: material/library
+        repo: fontawesome/brands/github
+
+extra_css:
+    - stylesheets/dark_theme.css
+    - stylesheets/codehilite.css
+
 nav:
     - Home: 'index.md'
     - Developer Manual: 'development.md'
     - Coding Style: 'style.md'
+
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
+
 markdown_extensions:
     - toc:
         permalink: "#"
     - tables
     - fenced_code
     - pymdownx.arithmatex
-theme: slate
+    - codehilite:
+        #guess_lang: False
+        use_pygments: True
+        noclasses: True
+        pygments_style: monokai
