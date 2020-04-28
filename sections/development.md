@@ -51,7 +51,7 @@ The constants are all templated `constexpr` variables. The template will only
 accept floating point types, as integral types are usually not used for these
 constants (and they can be converted if need be). The defined constants are:
 
-* `e`: Euler's constant <img src="https://rawgit.com/in	git@github.com:marovira/zeus/gh-pages/svgs/8cd34385ed61aca950a6b06d09fb50ac.svg?invert_in_darkmode" align=middle width=7.654137149999991pt height=14.15524440000002pt/>
+* `e`: Euler's constant <img src="svgs/8cd34385ed61aca950a6b06d09fb50ac.svg?invert_in_darkmode" align=middle width=7.654137149999991pt height=14.15524440000002pt/>
 * `log_2_e`: <img src="https://rawgit.com/in	git@github.com:marovira/zeus/gh-pages/svgs/47938fcd594aaea282f7702781235764.svg?invert_in_darkmode" align=middle width=49.04694134999999pt height=24.65753399999998pt/>
 * `ln_2`: <img src="https://rawgit.com/in	git@github.com:marovira/zeus/gh-pages/svgs/a207c798427d8198615645ec1ad3b648.svg?invert_in_darkmode" align=middle width=34.70331479999999pt height=24.65753399999998pt/>
 * `ln_10`: <img src="https://rawgit.com/in	git@github.com:marovira/zeus/gh-pages/svgs/4092a168cd2598110eceb50765db96ea.svg?invert_in_darkmode" align=middle width=42.922524149999994pt height=24.65753399999998pt/>
