@@ -1,23 +1,13 @@
 site_name: Zeus
-repo_name: marovira/zeus
+site_url: https://github.com/marovira/zeus
+site_description: Zeus Official Documentation
+site_author: Mauricio A. Rovira Galvez
+
+repo_name: GitHub
 repo_url: https://github.com/marovira/zeus
+edit_uri: ""
 
-theme:
-    name: material
-    palette:
-        primary: indigo
-        accent: indigo
-    font:
-        text: Roboto
-        code: Roboto Mono
-    language: en
-    icon:
-        logo: material/library
-        repo: fontawesome/brands/github
-
-extra_css:
-    - stylesheets/dark_theme.css
-    - stylesheets/codehilite.css
+theme: slate
 
 nav:
     - Home: 'index.md'
@@ -33,8 +23,4 @@ markdown_extensions:
     - tables
     - fenced_code
     - pymdownx.arithmatex
-    - codehilite:
-        #guess_lang: False
-        use_pygments: True
-        noclasses: True
-        pygments_style: monokai
+
