@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Developer Manual - Zeus</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/darcula.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Zeus</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Developer Manual</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../style/" class="nav-link">Coding Style</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../style/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#developers-manual" class="nav-link">Developer's Manual</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#asserthpp" class="nav-link">assert.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#constantshpp" class="nav-link">constants.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#filesystemhpp" class="nav-link">filesystem.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#floathpp" class="nav-link">float.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#functionalhpp" class="nav-link">functional.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#platformhpp" class="nav-link">platform.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#timerhpp" class="nav-link">timer.hpp</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="developers-manual">Developer's Manual<a class="headerlink" href="#developers-manual" title="Permanent link">#</a></h1>
+<p>Zeus is a header-only library, and each header provides several functions or
+classes. Here you will find a brief description and examples for each one.</p>
+<h2 id="asserthpp"><code>assert.hpp</code><a class="headerlink" href="#asserthpp" title="Permanent link">#</a></h2>
+<p>This header defines the following two assert macros:</p>
+<ul>
+<li><code>ASSERT</code>: if the condition fails, it will print the following: <code>error: in
+  file &lt;file-name&gt;(&lt;line-number&gt;): &lt;condition&gt;</code>.</li>
+<li><code>ASSERT_MSG</code>: if the condition fails, it will print the following: <code>error: in
+  file &lt;file-name&gt;(&lt;line-number&gt;): &lt;message&gt;</code>. </li>
+</ul>
+<p>Both assert macros will print their corresponding messages to <code>stderr</code>. If the
+code is being run on Windows with a debugger attached, the asserts will also
+cause the debugger to break, allowing for easier code inspection.</p>
+<p>In order to use the macros in your code, you must first add the following to a
+<em>single</em> file.</p>
+<pre><code class="c++">#define ZEUS_ASSERT_IMPL
+#include &lt;zeus/assert.hpp&gt;
+</code></pre>
+
+<p>Once you have done this, the header can now be used normally as follows:</p>
+<pre><code class="c++">#include &lt;zeus/assert.hpp&gt;
+
+int a{0};
+ASSERT(a == 0);                             // Assert with no custom message.
+ASSERT_MSG(a == 0, &quot;a should not be 0&quot;);    // Assert with custom message.
+</code></pre>
+
+<h2 id="constantshpp"><code>constants.hpp</code><a class="headerlink" href="#constantshpp" title="Permanent link">#</a></h2>
+<p>Provides a C++ version of all the constants contained in <code>&lt;cmath&gt;</code> as macros.
+The constants are all templated <code>constexpr</code> variables. The template will only
+accept floating point types, as integral types are usually not used for these
+constants (and they can be converted if need be). The defined constants are:</p>
+<ul>
+<li><code>e</code>: <span><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span>,</li>
+<li><code>log_2_e</code>: <span><span class="MathJax_Preview">\log_2(e)</span><script type="math/tex">\log_2(e)</script></span>,</li>
+<li><code>ln_2</code>: <span><span class="MathJax_Preview">\ln(2)</span><script type="math/tex">\ln(2)</script></span>,</li>
+<li><code>ln_10</code>: <span><span class="MathJax_Preview">\ln(10)</span><script type="math/tex">\ln(10)</script></span>,</li>
+<li><code>pi</code>: <span><span class="MathJax_Preview">\pi</span><script type="math/tex">\pi</script></span>,</li>
+<li><code>py_by_2</code>: <span><span class="MathJax_Preview">\pi / 2</span><script type="math/tex">\pi / 2</script></span>,</li>
+<li><code>one_by_pi</code>: <span><span class="MathJax_Preview">1 / \pi</span><script type="math/tex">1 / \pi</script></span>,</li>
+<li><code>two_by_pi</code>: <span><span class="MathJax_Preview">2 / \pi</span><script type="math/tex">2 / \pi</script></span>,</li>
+<li><code>two_by_sqrt_pi</code>: <span><span class="MathJax_Preview">2 / \sqrt{\pi}</span><script type="math/tex">2 / \sqrt{\pi}</script></span>,</li>
+<li><code>sqrt_2</code>: <span><span class="MathJax_Preview">\sqrt{2}</span><script type="math/tex">\sqrt{2}</script></span>,</li>
+<li><code>one_by_sqrt_2</code>: <span><span class="MathJax_Preview">1 / \sqrt{2}</span><script type="math/tex">1 / \sqrt{2}</script></span></li>
+</ul>
+<p>The constants can be used as follows:</p>
+<pre><code class="c++">#include &lt;zeus/constants.hpp&gt;
+
+auto pi = zeus::Constants&lt;float&gt;::pi;
+auto e  = zeus::Constants&lt;double&gt;::e;
+</code></pre>
+
+<h2 id="filesystemhpp"><code>filesystem.hpp</code><a class="headerlink" href="#filesystemhpp" title="Permanent link">#</a></h2>
+<p>Contains a few utility functions for file-based operations. Note that this uses
+the <code>&lt;experimental/filesystem&gt;</code> header. The reason behind this is that the
+normal <code>&lt;filesystem&gt;</code> header under Windows is not compatible with the current
+standard and will therefore not allow one of the functions to work correctly.
+This will be changed once MSVC becomes compliant in C++20. The functions are:</p>
+<ul>
+<li><code>get_file_last_write</code>: Returns the last time the provided file was written to.</li>
+<li><code>get_file_directory</code>: Returns the directory where the file is contained.</li>
+</ul>
+<p>Here's how to use them:</p>
+<pre><code class="c++">#include &lt;zeus/filesystem.hpp&gt;
+
+std::time_t time_stamp = zeus::get_file_last_write(&quot;some/path/to/file.txt&quot;);
+
+std::string root_dir = zeus::get_file_directory(&quot;some/path/to/file.txt&quot;);
+</code></pre>
+
+<h2 id="floathpp"><code>float.hpp</code><a class="headerlink" href="#floathpp" title="Permanent link">#</a></h2>
+<p>Provides a series of functions for floating point comparisons. All functions
+rely on the same base formula for comparison. For any two floating point numbers
+<span><span class="MathJax_Preview">a, b</span><script type="math/tex">a, b</script></span>, they are considered equal if the following condition holds:</p>
+<div>
+<div class="MathJax_Preview">
+\vert a - b \vert \leq \epsilon \cdot s
+</div>
+<script type="math/tex; mode=display">
+\vert a - b \vert \leq \epsilon \cdot s
+</script>
+</div>
+<p>Where <span><span class="MathJax_Preview">s</span><script type="math/tex">s</script></span> is</p>
+<div>
+<div class="MathJax_Preview">
+s = \frac{\vert a \vert + \vert b \vert}{2}
+</div>
+<script type="math/tex; mode=display">
+s = \frac{\vert a \vert + \vert b \vert}{2}
+</script>
+</div>
+<p>The value of <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span> used by default is the provided machine epsilon obtained
+via <code>std::numeric_limits&lt;T&gt;::epsilon</code>. The functions also have a template
+overload that allows for a custom epsilon function to be provided. The
+comparison functions are:</p>
+<ul>
+<li><code>are_equal</code>: evaluates <span><span class="MathJax_Preview">a = b</span><script type="math/tex">a = b</script></span>,</li>
+<li><code>is_zero</code>: evaluates <span><span class="MathJax_Preview">a = 0</span><script type="math/tex">a = 0</script></span>,</li>
+<li><code>geq</code>: evaluates <span><span class="MathJax_Preview">a \geq b</span><script type="math/tex">a \geq b</script></span>,</li>
+<li><code>leq</code>: evaluates <span><span class="MathJax_Preview">a \leq b</span><script type="math/tex">a \leq b</script></span>.</li>
+</ul>
+<p>The functions can be used as follows:</p>
+<pre><code class="c++">#include &lt;zeus/float.hpp&gt;
+
+float a{1.0f}, b{2.0f};
+
+auto res = zeus::are_equal(1.0f, 2.0f);
+res      = zeus::is_zero(a);
+res      = zeus::geq(a, b);
+res      = zeus::leq(a, b);
+</code></pre>
+
+<p>To use a custom epsilon function, use:</p>
+<pre><code class="c++">auto epsilon = []() { return 0.0001f; };
+
+auto res = zeus::are_equal&lt;float, epsilon&gt;(1.0f, 2.0f);
+</code></pre>
+
+<h2 id="functionalhpp"><code>functional.hpp</code><a class="headerlink" href="#functionalhpp" title="Permanent link">#</a></h2>
+<p>Provides a different version of <code>std::iota</code> that allows you to increment each
+entry in the list by a custom amount. It can be used as follows:</p>
+<pre><code class="c++">#include &lt;zeus/functional.hpp&gt;
+#include &lt;vector&gt;
+
+std::vector&lt;int&gt; list(10);
+
+zeus::iota(list.begin(), list.end(), 0, 2);   // List starting at 0 increasing by 2
+</code></pre>
+
+<h2 id="platformhpp"><code>platform.hpp</code><a class="headerlink" href="#platformhpp" title="Permanent link">#</a></h2>
+<p>Defines macros and variables that define the current platform and build
+configuration. These can be used for defining cross-platform behaviour both at
+the pre-processor level as well as through usage of <code>if constexpr</code>. The defined
+macros are:</p>
+<ul>
+<li><code>ZEUS_PLATFORM_WINDOWS</code>: defined in both 64-bit and 32-bit builds for windows
+  platforms.</li>
+<li><code>ZEUS_PLATFORM_LINUX</code>: defined in all Linux-based systems.</li>
+<li><code>ZEUS_BUILD_DEBUG</code>: defined for debug builds.</li>
+<li><code>ZEUS_BUILD_RELEASE</code>: defined for all non-debug builds.</li>
+</ul>
+<p>The constants are:</p>
+<ul>
+<li><code>current_platform</code>: defines the platform. Can be either <code>windows</code> or <code>linux</code>.</li>
+<li><code>current_build</code>: defines the build. Can be either <code>debug</code> or <code>release</code>.</li>
+</ul>
+<p>These can be used as follows:</p>
+<pre><code class="c++">#include &lt;zeus/platform.hpp&gt;
+
+#if defined(ZEUS_PLATFORM_WINDOWS)
+// Do something for Windows.
+#elif defined(ZEUS_PLATFORM_LINUX)
+// Do something for linux.
+#endif
+
+#if defined(ZEUS_BUILD_DEBUG)
+// Debug builds.
+#elif defined(ZEUS_BUILD_RELEASE)
+// Release builds.
+#endif
+
+if constexpr (current_platform == zeus::Platform::windows)
+{
+    // Windows.
+}
+
+if constexpr (current_build == zeus::BuildType::debug)
+{
+    // Debug.
+}
+</code></pre>
+
+<h2 id="timerhpp"><code>timer.hpp</code><a class="headerlink" href="#timerhpp" title="Permanent link">#</a></h2>
+<p>Provides a simple timer for use in performance analysis of code. The timer
+relies on <code>std::chrono</code> for timing purposes and its precision is therefore tied
+to the precision of the implementation of <code>std::chrono</code>. The timer is templated
+to allow for variable precision depending on the use case. It can be used as
+follows:</p>
+<pre><code class="c++">#include &lt;zeus/timer.hpp&gt;
+
+zeus::Timer&lt;float&gt; timer;
+
+timer.start();              // Starts the timer.
+auto t = timer.elapsed();   // Retrieved the elapsed time in seconds.
+
+timer.start();              // Starts the timer again.
+timer.reset();              // Clears the timer.
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
