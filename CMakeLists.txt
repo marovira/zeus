@@ -41,6 +41,9 @@ set(ZEUS_TEST_ROOT ${ZEUS_SOURCE_DIR}/test)
 # Add subdirectories.
 #================================
 add_subdirectory(${ZEUS_SOURCE_ROOT}/zeus)
+if (ZEUS_BUILD_TESTS)
+    add_subdirectory(${ZEUS_TEST_ROOT})
+endif()
 
 #================================
 # Source groups.
@@ -62,6 +65,7 @@ if (ZEUS_CLANG_FORMAT_TARGET)
         message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
         set(ZEUS_FILES
             ${ZEUS_HEADER_FILES}
+            ${ZEUS_TEST_LIST}
             )
         add_custom_target(clang-format
             COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${ZEUS_FILES}
@@ -196,7 +200,6 @@ if (ZEUS_BUILD_TESTS)
         set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${catch2_SOURCE_DIR}/contrib)
     endif()
 
-    add_subdirectory(${ZEUS_TEST_ROOT})
 
     source_group("source" FILES ${ZEUS_TEST_GROUP})
     add_executable(zeus_test ${ZEUS_TEST_LIST})
