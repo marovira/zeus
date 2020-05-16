@@ -6,6 +6,7 @@ set(ZEUS_TEST_FILES
     ${ZEUS_TEST_ROOT}/platform_test.cpp
     ${ZEUS_TEST_ROOT}/timer_test.cpp
     ${ZEUS_TEST_ROOT}/filesystem_test.cpp
+    ${ZEUS_TEST_ROOT}/compiler_test.cpp
     )
 
 set(ZEUS_TEST_GROUP ${ZEUS_TEST_FILES} PARENT_SCOPE)
