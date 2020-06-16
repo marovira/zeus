@@ -11,8 +11,7 @@
 namespace zeus
 {
     template<typename T>
-    constexpr std::vector<std::pair<T, T>>
-    find_unique_pairs(std::vector<T> const& list)
+    std::vector<std::pair<T, T>> find_unique_pairs(std::vector<T> const& list)
     {
         ASSERT(list.size() >= 2);
 
@@ -49,6 +48,7 @@ namespace zeus
         }
 
         std::vector<Pair> result(unique_pairs.size());
+
         result.assign(unique_pairs.begin(), unique_pairs.end());
         return result;
     }
