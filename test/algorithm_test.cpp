@@ -19,6 +19,7 @@ TEST_CASE("[algorithm] - find_unique_pairs: list of size 3", "[zeus]")
     std::vector<int> list{1, 2, 3};
 
     auto result = zeus::find_unique_pairs(list);
+    std::sort(result.begin(), result.end());
 
     std::vector<std::pair<int, int>> expected{{1, 2}, {1, 3}, {2, 3}};
 
