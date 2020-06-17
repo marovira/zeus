@@ -28,15 +28,9 @@ namespace zeus
     struct choose
     {
         static_assert(K <= N);
-        static constexpr std::size_t value{
+        static constexpr auto value{
             factorial<N>::value /
             (factorial<K>::value * factorial<N - K>::value)};
-    };
-
-    template<std::size_t N>
-    struct choose<N, 0>
-    {
-        static constexpr std::size_t value{1};
     };
 
     template<typename T, unsigned int N, unsigned int M = choose<N, 2>::value>
