@@ -2,54 +2,69 @@
 
 #include "assert.hpp"
 
+#include <array>
 #include <functional>
 #include <numeric>
+#include <type_traits>
 #include <unordered_set>
 #include <utility>
 #include <vector>
 
 namespace zeus
 {
-    template<typename T>
-    std::vector<std::pair<T, T>> find_unique_pairs(std::vector<T> const& list)
+    template<unsigned int N>
+    struct factorial
     {
-        ASSERT(list.size() >= 2);
+        static constexpr auto value{N * factorial<N - 1>::value};
+    };
 
-        if (list.size() == 2)
-        {
-            return {{list[0], list[1]}};
-        }
+    template<>
+    struct factorial<0>
+    {
+        static constexpr auto value{1u};
+    };
 
+    template<unsigned int N, unsigned int K>
+    struct choose
+    {
+        static_assert(K <= N);
+        static constexpr std::size_t value{
+            factorial<N>::value /
+            (factorial<K>::value * factorial<N - K>::value)};
+    };
+
+    template<std::size_t N>
+    struct choose<N, 0>
+    {
+        static constexpr std::size_t value{1};
+    };
+
+    template<typename T, unsigned int N, unsigned int M = choose<N, 2>::value>
+    constexpr std::array<std::pair<T, T>, M>
+    choose_pairs(std::array<T, N> const& list)
+    {
         using Pair = std::pair<T, T>;
 
-        auto pair_hash = [](Pair const& p) {
-            return std::hash<T>()(p.first) + std::hash<T>()(p.second);
-        };
+        static_assert(N > 1);
 
-        auto pair_equal = [](Pair const& left, Pair const& right) {
-            return (left.first == right.first && left.second == right.second) ||
-                   (left.first == right.second && left.second == right.first);
-        };
-
-        std::unordered_set<Pair, decltype(pair_hash), decltype(pair_equal)>
-            unique_pairs(0, pair_hash, pair_equal);
-
-        for (auto& val1 : list)
+        if constexpr (N == 2)
         {
-            for (auto& val2 : list)
-            {
-                if (val1 == val2)
-                {
-                    continue;
-                }
-
-                unique_pairs.insert({val1, val2});
-            }
+            return {{{list[0], list[1]}}};
         }
+        else
+        {
+            std::array<Pair, M> result;
+            std::size_t k{0};
+            for (std::size_t i{0}; i < N; ++i)
+            {
+                for (std::size_t j{i + 1}; j < N; ++j)
+                {
+                    result[k] = {list[i], list[j]};
+                    ++k;
+                }
+            }
 
-        std::vector<Pair> result(unique_pairs.size());
-
-        result.assign(unique_pairs.begin(), unique_pairs.end());
-        return result;
+            return result;
+        }
     }
 } // namespace zeus
