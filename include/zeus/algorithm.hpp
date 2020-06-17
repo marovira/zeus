@@ -33,7 +33,7 @@ namespace zeus
             (factorial<K>::value * factorial<N - K>::value)};
     };
 
-    template<typename T, unsigned int N, unsigned int M = choose<N, 2>::value>
+    template<typename T, std::size_t N, std::size_t M = choose<N, 2>::value>
     constexpr std::array<std::pair<T, T>, M>
     choose_pairs(std::array<T, N> const& list)
     {
