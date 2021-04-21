@@ -8,6 +8,7 @@ set(ZEUS_TEST_FILES
     ${ZEUS_TEST_ROOT}/filesystem_test.cpp
     ${ZEUS_TEST_ROOT}/compiler_test.cpp
     ${ZEUS_TEST_ROOT}/algorithm_test.cpp
+    ${ZEUS_TEST_ROOT}/type_traits_test.cpp
     )
 
 set(ZEUS_TEST_GROUP ${ZEUS_TEST_FILES} PARENT_SCOPE)
