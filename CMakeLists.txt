@@ -78,17 +78,18 @@ endif()
 #================================
 include(FetchContent)
 
-# Declare fetch content for all packages.
+# FMT tag 7.1.3
 FetchContent_Declare(
     fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-    GIT_TAG 5899267c47c12ce0be664d913440fd9be50f20b3
+    GIT_TAG 7bdf0628b1276379886c7f6dda2cef2b3b374f0b
     )
 
+# magic_enum tag v0.7.2
 FetchContent_Declare(
     magic_enum
     GIT_REPOSITORY https://github.com/Neargye/magic_enum
-    GIT_TAG c080a591ee9a9db5ff8ab04044a1857bbcd74e0b
+    GIT_TAG dc8660e2bc07ab4bea211fbcdc2ab06fe01c1b36
     )
 
 find_package(fmt QUIET)
@@ -187,10 +188,11 @@ endif()
 # Build the tests.
 #================================
 if (ZEUS_BUILD_TESTS)
+    # Catch tag v2.13.6
     FetchContent_Declare(
         catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG 5d32ce26f4c18588f9eac3342aea122a38b8fed3
+        GIT_TAG 5c88067bd339465513af4aec606bd2292f1b594a
         )
 
     find_package(Catch2 QUIET)
