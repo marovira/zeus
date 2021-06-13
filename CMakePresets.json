@@ -13,7 +13,7 @@
             "generator": "Visual Studio 16 2019",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
-                "CMAKE_CXX_FLAGS": "/W4 /WX /MP -DNOMINMAX",
+                "CMAKE_CXX_FLAGS": "/W4 /WX /MP /EHsc -DNOMINMAX",
                 "CMAKE_CXX_FLAGS_DEBUG": "/ZI"
             }
         },
