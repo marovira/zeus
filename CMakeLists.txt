@@ -1,7 +1,7 @@
 #================================
 # Project setup.
 #================================
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.20)
 project(zeus VERSION 1.0.0 LANGUAGES CXX C)
 
 if (APPLE)
@@ -27,7 +27,6 @@ endif()
 # Option variables.
 #================================
 option(ZEUS_BUILD_TESTS "Build Zeus unit tests" ON)
-option(ZEUS_CLANG_FORMAT_TARGET "Create clang-format target" ON)
 option(ZEUS_INSTALL_TARGET "Create install target" OFF)
 
 #================================
@@ -50,28 +49,6 @@ endif()
 #================================
 source_group("include" FILES)
 source_group("include\\zeus" FILES ${ZEUS_INCLUDE_GROUP})
-
-#================================
-# Clang targets.
-#================================
-if (ZEUS_CLANG_FORMAT_TARGET)
-    find_program(CLANG_FORMAT_EXE
-        NAMES "clang-format"
-        DOC "Path to clang-format executable"
-        )
-    if (NOT CLANG_FORMAT_EXE)
-        message(STATUS "clang-format not found.")
-    else()
-        message(STATUS "clang-format found: ${CLANG_FORMAT_EXE}")
-        set(ZEUS_FILES
-            ${ZEUS_HEADER_FILES}
-            ${ZEUS_TEST_LIST}
-            )
-        add_custom_target(clang-format
-            COMMAND ${CLANG_FORMAT_EXE} -i -style=file ${ZEUS_FILES}
-            )
-    endif()
-endif()
 
 #================================
 # Find Packages.
@@ -106,24 +83,6 @@ if (NOT magic_enum_FOUND AND NOT magic_enum_POPULATED)
 endif()
 
 #================================
-# Compiler flags.
-#================================
-if (MSVC)
-    set(ZEUS_COMPILER_FLAGS /W4 /WX /MP)
-    set(ZEUS_DEBUG_FLAGS "$<$<CONFIG:DEBUG>:/ZI>")
-    set(ZEUS_COMPILE_DEFINITIONS -DNOMINMAX)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL
-        "GNU")
-    set(ZEUS_COMMON_FLAGS -Wall -Wextra -pedantic -Werror)
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        set(ZEUS_COMPILER_FLAGS ${ZEUS_COMMON_FLAGS})
-    else()
-        set(ZEUS_COMPILER_FLAGS ${ZEUS_COMMON_FLAGS} -stdlib=libstdc++)
-    endif()
-    set(ZEUS_DEBUG_FLAGS "$<$<CONFIG:DEBUG>:-g>")
-endif()
-
-#================================
 # Main library.
 #================================
 add_library(zeus INTERFACE)
@@ -135,9 +94,6 @@ if (NOT MSVC)
     target_link_libraries(zeus INTERFACE stdc++fs)
 endif()
 target_compile_features(zeus INTERFACE cxx_std_17)
-target_compile_options(zeus INTERFACE ${ZEUS_COMPILER_FLAGS})
-target_compile_options(zeus INTERFACE ${ZEUS_DEBUG_FLAGS})
-target_compile_definitions(zeus INTERFACE ${ZEUS_COMPILE_DEFINITIONS})
 add_library(zeus::zeus ALIAS zeus)
 
 # Add a dummy target for MSVC so the files are visible.
@@ -201,7 +157,6 @@ if (ZEUS_BUILD_TESTS)
         add_subdirectory(${catch2_SOURCE_DIR} ${catch2_BINARY_DIR})
         set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${catch2_SOURCE_DIR}/contrib)
     endif()
-
 
     source_group("source" FILES ${ZEUS_TEST_GROUP})
     add_executable(zeus_test ${ZEUS_TEST_LIST})
