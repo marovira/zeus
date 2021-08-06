@@ -32,6 +32,7 @@ namespace zeus
 #    include <cstdio>
 #    include <cstdlib>
 #    include <fmt/printf.h>
+#    include <stdexcept>
 
 namespace zeus
 {
@@ -62,10 +63,15 @@ namespace zeus
             print_assert(fmt::format(
                 "error: in file {}({}): {}\n", file, line, message));
 
-#    if defined(ZEUS_PLATFORM_WINDOWS)
+#    if defined(ZEUS_PLATFORM_WINDOWS) && !defined(ZEUS_THROW_ASSERT)
             __debugbreak();
 #    endif
+
+#    if defined(ZEUS_THROW_ASSERT)
+            throw std::runtime_error{"Assert triggered."};
+#    else
             std::abort();
+#    endif
         }
     }
 } // namespace zeus
