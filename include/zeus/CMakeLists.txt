@@ -16,6 +16,7 @@ set(ZEUS_HEADER_LIST
     ${ZEUS_SOURCE_ROOT}/zeus/algorithm.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/crtp.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/type_traits.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/named_type.hpp
     )
 
 # Wrap each list for the source groups above.
