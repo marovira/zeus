@@ -9,128 +9,79 @@ inline constexpr T epsilon()
     return static_cast<T>(0.00001);
 }
 
-TEST_CASE("[float] - are_equal: default epsilon", "[zeus]")
+TEMPLATE_TEST_CASE("[float] - are_equal", "[zeus]", float, double)
 {
     using zeus::are_equal;
 
-    double d1 = 0.2;
-    double d2 = 1 / std::sqrt(5) / std::sqrt(5);
-    REQUIRE(are_equal(d1, d2) == true);
+    auto d1{static_cast<TestType>(0.2)};
+    auto d2 = static_cast<TestType>(1 / std::sqrt(5) / std::sqrt(5));
 
-    float f1 = 0.2f;
-    float f2 = 1.0f / std::sqrt(5.0f) / std::sqrt(5.0f);
-    REQUIRE(are_equal(f1, f2) == true);
+    SECTION("Default epsilon")
+    {
+        REQUIRE(are_equal(d1, d2));
+    }
+
+    SECTION("Custom epsilon")
+    {
+        REQUIRE(are_equal<TestType, epsilon>(d1, d2));
+    }
 }
 
-TEST_CASE("[float] - are_equal: custom epsilon", "[zeus]")
-{
-    using zeus::are_equal;
-
-    double d1 = 0.2;
-    double d2 = 1 / std::sqrt(5) / std::sqrt(5);
-    REQUIRE(are_equal<double, epsilon>(d1, d2) == true);
-
-    float f1 = 0.2f;
-    float f2 = 1.0f / std::sqrt(5.0f) / std::sqrt(5.0f);
-    REQUIRE(are_equal<float, epsilon>(f1, f2) == true);
-}
-
-TEST_CASE("[float] - is_zero: default epsilon", "[zeus]")
+TEMPLATE_TEST_CASE("[float] - is_zero", "[zeus]", float, double)
 {
     using zeus::is_zero;
 
-    double d1 = 1.0 - (std::sqrt(5.0) / std::sqrt(5.0));
-    REQUIRE(is_zero(d1) == true);
+    auto d1 = static_cast<TestType>(1.0 - (std::sqrt(5.0) / std::sqrt(5.0)));
 
-    float f1 = 1.0f - (std::sqrt(5.0f) / std::sqrt(5.0f));
-    REQUIRE(is_zero(f1) == true);
+    SECTION("Default epsilon")
+    {
+        REQUIRE(is_zero(d1));
+    }
 
-    REQUIRE(is_zero<double, epsilon>(d1));
-    REQUIRE(is_zero<float, epsilon>(f1));
+    SECTION("Custom epsilon")
+    {
+        REQUIRE(is_zero<TestType, epsilon>(d1));
+    }
 }
 
-TEST_CASE("[float] - is_zero: custom epsilon", "[zeus]")
-{
-    using zeus::is_zero;
-    double d1 = 1.0 - (std::sqrt(5.0) / std::sqrt(5.0));
-    REQUIRE(is_zero<double, epsilon>(d1));
-
-    float f1 = 1.0f - (std::sqrt(5.0f) / std::sqrt(5.0f));
-    REQUIRE(is_zero<float, epsilon>(f1));
-}
-
-TEST_CASE("[float] - geq: default epsilon", "[zeus]")
+TEMPLATE_TEST_CASE("[float] - geq", "[zeus]", float, double)
 {
     using zeus::geq;
 
-    double d1 = 0.2;
-    double d2 = 1 / std::sqrt(5) / std::sqrt(5);
-    double d3 = 1.0 + d2;
+    auto d1{static_cast<TestType>(0.2)};
+    auto d2 = static_cast<TestType>(1 / std::sqrt(5) / std::sqrt(5));
+    auto d3 = static_cast<TestType>(1.0 + d2);
 
-    REQUIRE(geq(d1, d2) == true);
-    REQUIRE(geq(d3, d2) == true);
+    SECTION("Default epsilon")
+    {
+        REQUIRE(geq(d1, d2));
+        REQUIRE(geq(d3, d2));
+    }
 
-    float f1 = 0.2f;
-    float f2 = 1 / std::sqrt(5.0f) / std::sqrt(5.0f);
-    float f3 = 1.0f + f2;
-
-    REQUIRE(geq(f1, f2) == true);
-    REQUIRE(geq(f3, f2) == true);
+    SECTION("Custom epsilon")
+    {
+        REQUIRE(geq<TestType, epsilon>(d1, d2));
+        REQUIRE(geq<TestType, epsilon>(d3, d2));
+    }
 }
 
-TEST_CASE("[float] - geq: custom epsilon", "[zeus]")
-{
-    using zeus::geq;
-
-    double d1 = 0.2;
-    double d2 = 1 / std::sqrt(5) / std::sqrt(5);
-    double d3 = 1.0 + d2;
-
-    REQUIRE(geq<double, epsilon>(d1, d2) == true);
-    REQUIRE(geq<double, epsilon>(d3, d2) == true);
-
-    float f1 = 0.2f;
-    float f2 = 1 / std::sqrt(5.0f) / std::sqrt(5.0f);
-    float f3 = 1.0f + f2;
-
-    REQUIRE(geq<float, epsilon>(f1, f2) == true);
-    REQUIRE(geq<float, epsilon>(f3, f2) == true);
-}
-
-TEST_CASE("[float] - leq: default epsilon", "[zeus]")
+TEMPLATE_TEST_CASE("[float] - leq", "[zeus]", float, double)
 {
     using zeus::leq;
 
-    double d1 = 0.2;
-    double d2 = 1 / std::sqrt(5) / std::sqrt(5);
-    double d3 = 1.0 + d2;
+    auto d1{static_cast<TestType>(0.2)};
+    auto d2 = static_cast<TestType>(1 / std::sqrt(5) / std::sqrt(5));
+    auto d3 = static_cast<TestType>(1.0 + d2);
 
-    REQUIRE(leq(d1, d2) == true);
-    REQUIRE(leq(d2, d3) == true);
+    SECTION("Default epsilon")
+    {
+        REQUIRE(leq(d1, d2));
+        REQUIRE(leq(d2, d3));
+    }
 
-    float f1 = 0.2f;
-    float f2 = 1 / std::sqrt(5.0f) / std::sqrt(5.0f);
-    float f3 = 1.0f + f2;
-
-    REQUIRE(leq(f1, f2) == true);
-    REQUIRE(leq(f2, f3) == true);
-}
-
-TEST_CASE("[float] - leq: custom epsilon", "[zeus]")
-{
-    using zeus::leq;
-
-    double d1 = 0.2;
-    double d2 = 1 / std::sqrt(5) / std::sqrt(5);
-    double d3 = 1.0 + d2;
-
-    REQUIRE(leq<double, epsilon>(d1, d2) == true);
-    REQUIRE(leq<double, epsilon>(d2, d3) == true);
-
-    float f1 = 0.2f;
-    float f2 = 1 / std::sqrt(5.0f) / std::sqrt(5.0f);
-    float f3 = 1.0f + f2;
-
-    REQUIRE(leq<float, epsilon>(f1, f2) == true);
-    REQUIRE(leq<float, epsilon>(f2, f3) == true);
+    SECTION("Custom epsilon")
+    {
+        REQUIRE(leq<TestType, epsilon>(d1, d2));
+        REQUIRE(leq<TestType, epsilon>(d2, d3));
+    }
 }
