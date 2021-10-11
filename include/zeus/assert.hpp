@@ -4,6 +4,13 @@
 
 #include <string>
 
+#if defined(ZEUS_ENABLE_TESTING_MACROS)
+#    define ZEUS_BUILD_DEBUG
+#    define ZEUS_THROW_ASSERT
+#    define ZEUS_NO_DEBUG_BREAK_ASSERT
+#    define ZEUS_NO_ASSERT_PRINT
+#endif
+
 namespace zeus
 {
     void assert_handler(bool condition,
@@ -12,10 +19,9 @@ namespace zeus
                         std::string message);
 } // namespace zeus
 
-#define ZEUS_BUILD_DEBUG
 #if defined(ZEUS_BUILD_DEBUG)
 #    define ASSERT(condition) \
-        zeus::assert_handler(condition, __FILE__, __LINE__, #condition);
+        zeus::assert_handler(condition, __FILE__, __LINE__, #condition)
 #    define ASSERT_MSG(condition, message) \
         zeus::assert_handler(condition, __FILE__, __LINE__, message)
 #else
@@ -60,15 +66,22 @@ namespace zeus
     {
         if (!condition)
         {
-            print_assert(fmt::format(
-                "error: in file {}({}): {}\n", file, line, message));
+            std::string assert_message =
+                fmt::format("error: in file {}({}): {}\n", file, line, message);
 
-#    if defined(ZEUS_PLATFORM_WINDOWS) && !defined(ZEUS_THROW_ASSERT)
+#    if !defined(ZEUS_NO_ASSERT_PRINT)
+            print_assert(assert_message);
+#    endif
+
+#    if defined(ZEUS_PLATFORM_WINDOWS) && !defined(ZEUS_NO_DEBUG_BREAK_ASSERT)
+            // Exceptions don't always trigger a break in program execution (and
+            // if they do they sometimes don't stop where you want), so I'm
+            // leaving this here so the break happens.
             __debugbreak();
 #    endif
 
 #    if defined(ZEUS_THROW_ASSERT)
-            throw std::runtime_error{"Assert triggered."};
+            throw std::runtime_error{message.c_str()};
 #    else
             std::abort();
 #    endif
