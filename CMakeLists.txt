@@ -55,18 +55,18 @@ source_group("include\\zeus" FILES ${ZEUS_INCLUDE_GROUP})
 #================================
 include(FetchContent)
 
-# FMT tag 7.1.3
+# FMT tag 8.0.1
 FetchContent_Declare(
     fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-    GIT_TAG 7bdf0628b1276379886c7f6dda2cef2b3b374f0b
+    GIT_TAG d141cdbeb0fb422a3fb7173b285fd38e0d1772dc
     )
 
-# magic_enum tag v0.7.2
+# magic_enum tag v0.7.3
 FetchContent_Declare(
     magic_enum
     GIT_REPOSITORY https://github.com/Neargye/magic_enum
-    GIT_TAG dc8660e2bc07ab4bea211fbcdc2ab06fe01c1b36
+    GIT_TAG 3d1f6a5a2a3fbcba077e00ad0ccc2dd9fefc2ca7
     )
 
 find_package(fmt QUIET)
@@ -93,7 +93,7 @@ target_link_libraries(zeus INTERFACE fmt::fmt magic_enum::magic_enum)
 if (NOT MSVC)
     target_link_libraries(zeus INTERFACE stdc++fs)
 endif()
-target_compile_features(zeus INTERFACE cxx_std_17)
+target_compile_features(zeus INTERFACE cxx_std_20)
 add_library(zeus::zeus ALIAS zeus)
 
 # Add a dummy target for MSVC so the files are visible.
