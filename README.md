@@ -23,15 +23,15 @@ library.
 
 The following are **core** requirements of Zeus:
 
-* CMake 3.12+
+* CMake 3.20+
 
 Zeus supports the following platforms and compilers:
 
 | Platform (Compiler) | Version |
 |---------------------|---------|
-| Windows (MSVC) | 19.25 |
-| Linux (GCC) | 9.2 |
-| Linux (LLVM Clang) | 9.0 |
+| Windows (MSVC) | 19.29 |
+| Linux (GCC) | 9.3 |
+| Linux (LLVM Clang) | 11.0 |
 
 Please note that macOS is **not** supported.
 

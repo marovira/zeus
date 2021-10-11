@@ -11,7 +11,7 @@ endif()
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Define version variables.
-set(ZEUS_VERSION_MAJOR "1")
+set(ZEUS_VERSION_MAJOR "2")
 set(ZEUS_VERSION_MINOR "0")
 set(ZEUS_VERSION_PATCH "0")
 set(ZEUS_VERSION_EXTRA "")
