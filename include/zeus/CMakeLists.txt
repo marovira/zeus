@@ -10,7 +10,6 @@ set(ZEUS_HEADER_LIST
     ${ZEUS_SOURCE_ROOT}/zeus/functional.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/platform.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/timer.hpp
-    ${ZEUS_SOURCE_ROOT}/zeus/constants.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/filesystem.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/compiler.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/algorithm.hpp
