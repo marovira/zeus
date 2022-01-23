@@ -13,27 +13,27 @@
 namespace zeus
 {
     template<unsigned int N>
-    struct factorial
+    struct Factorial
     {
-        static constexpr auto value{N * factorial<N - 1>::value};
+        static constexpr auto value{N * Factorial<N - 1>::value};
     };
 
     template<>
-    struct factorial<0>
+    struct Factorial<0>
     {
         static constexpr auto value{1u};
     };
 
     template<unsigned int N, unsigned int K>
-    struct choose
+    struct Choose
     {
         static_assert(K <= N);
         static constexpr auto value{
-            factorial<N>::value /
-            (factorial<K>::value * factorial<N - K>::value)};
+            Factorial<N>::value /
+            (Factorial<K>::value * Factorial<N - K>::value)};
     };
 
-    template<typename T, std::size_t N, std::size_t M = choose<N, 2>::value>
+    template<typename T, std::size_t N, std::size_t M = Choose<N, 2>::value>
     constexpr std::array<std::pair<T, T>, M>
     choose_pairs(std::array<T, N> const& list)
     {
