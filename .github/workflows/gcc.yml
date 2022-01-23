@@ -15,16 +15,16 @@ jobs:
             artifact: "linux_gcc_debug.tar.xz",
             os: ubuntu-latest,
             build_type: "Debug",
-            cc: "gcc",
-            cxx: "g++"
+            cc: "gcc-10",
+            cxx: "g++-10"
           }
         - {
             name: "Linux GCC Release",
             artifact: "linux_gcc_release.tar.xz",
             os: ubuntu-latest,
             build_type: "Release",
-            cc: "gcc",
-            cxx: "g++"
+            cc: "gcc-10",
+            cxx: "g++-10"
           }
     steps:
       - uses: actions/checkout@v2
