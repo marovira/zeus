@@ -3,7 +3,7 @@
 > A C++ utilities library
 
 [![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
-[![Generic badge](https://img.shields.io/badge/Language-C++17-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
+[![Generic badge](https://img.shields.io/badge/Language-C++20-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
 [![Clang](https://github.com/marovira/zeus/actions/workflows/clang.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/clang.yml)
 [![GCC](https://github.com/marovira/zeus/actions/workflows/gcc.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/gcc.yml)
 [![MSVC](https://github.com/marovira/zeus/actions/workflows/msvc.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/msvc.yml)
@@ -23,14 +23,14 @@ library.
 
 The following are **core** requirements of Zeus:
 
-* CMake 3.20+
+* CMake 3.22+
 
 Zeus supports the following platforms and compilers:
 
 | Platform (Compiler) | Version |
 |---------------------|---------|
 | Windows (MSVC) | 19.29 |
-| Linux (GCC) | 9.3 |
+| Linux (GCC) | 10.3 |
 | Linux (LLVM Clang) | 11.0 |
 
 Please note that macOS is **not** supported.
