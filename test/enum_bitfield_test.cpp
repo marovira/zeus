@@ -2,7 +2,7 @@
 
 #include <catch2/catch.hpp>
 
-enum class Bits
+enum class Bits : unsigned char
 {
     none = 0x0,
     a    = 0x01,

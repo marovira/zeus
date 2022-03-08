@@ -1,16 +1,11 @@
 #pragma once
 
-#include <concepts>
-#include <magic_enum.hpp>
-#include <type_traits>
+#include "concepts.hpp"
 
 namespace zeus
 {
     template<typename T>
-    concept is_enum = std::is_enum<T>::value;
-
-    template<typename T>
-    requires is_enum<T>
+    requires is_scoped_enum<T> && is_unsigned_enum<T>
     inline constexpr bool check_flag(T bit_field, T flag)
     {
         using namespace magic_enum::bitwise_operators;
