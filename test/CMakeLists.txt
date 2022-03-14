@@ -11,6 +11,7 @@ set(ZEUS_TEST_FILES
     ${ZEUS_TEST_ROOT}/type_traits_test.cpp
     ${ZEUS_TEST_ROOT}/named_type_test.cpp
     ${ZEUS_TEST_ROOT}/enum_bitfield_test.cpp
+    ${ZEUS_TEST_ROOT}/random_test.cpp
     )
 
 set(ZEUS_TEST_GROUP ${ZEUS_TEST_FILES} PARENT_SCOPE)

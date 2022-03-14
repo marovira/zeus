@@ -18,6 +18,7 @@ set(ZEUS_HEADER_LIST
     ${ZEUS_SOURCE_ROOT}/zeus/named_type.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/enum_bitfield.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/concepts.hpp
+    ${ZEUS_SOURCE_ROOT}/zeus/random.hpp
     )
 
 # Wrap each list for the source groups above.
