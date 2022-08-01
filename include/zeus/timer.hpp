@@ -43,8 +43,7 @@ namespace zeus
 
         constexpr T time_diff(TimePoint const& first) const
         {
-            return std::chrono::duration_cast<Duration>(Res::now() - first)
-                .count();
+            return std::chrono::duration_cast<Duration>(Res::now() - first).count();
         }
 
         TimePoint m_begin;

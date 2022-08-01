@@ -12,7 +12,8 @@ namespace zeus
     class NamedType : public Skills<NamedType<T, Parameter, Skills...>>...
     {
     public:
-        explicit NamedType(T val) : m_value{val}
+        explicit NamedType(T val) :
+            m_value{val}
         {}
 
         T& get()

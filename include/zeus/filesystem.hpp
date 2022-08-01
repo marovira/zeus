@@ -21,8 +21,7 @@ namespace zeus
         auto ftime = fs::last_write_time(file_path, code);
         if (code && current_build == BuildType::debug)
         {
-            fmt::print(
-                stderr, "warning: ({}): {}\n", code.value(), code.message());
+            fmt::print(stderr, "warning: ({}): {}\n", code.value(), code.message());
         }
 
         return decltype(ftime)::clock::to_time_t(ftime);

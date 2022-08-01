@@ -42,7 +42,8 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
     {
         constexpr std::array<int, 3> list{1, 2, 3};
         constexpr std::array<std::pair<int, int>, 3> expected{
-            {{1, 2}, {1, 3}, {2, 3}}};
+            {{1, 2}, {1, 3}, {2, 3}}
+        };
         auto result = zeus::choose_pairs(list);
 
         REQUIRE(result == expected);
@@ -51,21 +52,23 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
     SECTION("List of size n")
     {
         constexpr std::array<int, 6> list{1, 2, 3, 4, 5, 6};
-        constexpr std::array<std::pair<int, int>, 15> expected{{{1, 2},
-                                                                {1, 3},
-                                                                {1, 4},
-                                                                {1, 5},
-                                                                {1, 6},
-                                                                {2, 3},
-                                                                {2, 4},
-                                                                {2, 5},
-                                                                {2, 6},
-                                                                {3, 4},
-                                                                {3, 5},
-                                                                {3, 6},
-                                                                {4, 5},
-                                                                {4, 6},
-                                                                {5, 6}}};
+        constexpr std::array<std::pair<int, int>, 15> expected{
+            {{1, 2},
+             {1, 3},
+             {1, 4},
+             {1, 5},
+             {1, 6},
+             {2, 3},
+             {2, 4},
+             {2, 5},
+             {2, 6},
+             {3, 4},
+             {3, 5},
+             {3, 6},
+             {4, 5},
+             {4, 6},
+             {5, 6}}
+        };
         auto result = zeus::choose_pairs(list);
 
         REQUIRE(result == expected);

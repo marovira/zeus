@@ -16,6 +16,5 @@ namespace zeus
     concept is_unsigned_enum = std::is_unsigned_v<std::underlying_type_t<T>>;
 
     template<typename T>
-    concept is_arithmetic =
-        std::is_integral_v<T> || std::is_floating_point_v<T>;
+    concept is_arithmetic = std::is_integral_v<T> || std::is_floating_point_v<T>;
 } // namespace zeus

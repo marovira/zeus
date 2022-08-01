@@ -28,14 +28,11 @@ namespace zeus
     struct Choose
     {
         static_assert(K <= N);
-        static constexpr auto value{
-            Factorial<N>::value /
-            (Factorial<K>::value * Factorial<N - K>::value)};
+        static constexpr auto value{Factorial<N>::value / (Factorial<K>::value * Factorial<N - K>::value)};
     };
 
     template<typename T, std::size_t N, std::size_t M = Choose<N, 2>::value>
-    constexpr std::array<std::pair<T, T>, M>
-    choose_pairs(std::array<T, N> const& list)
+    constexpr std::array<std::pair<T, T>, M> choose_pairs(std::array<T, N> const& list)
     {
         using Pair = std::pair<T, T>;
 

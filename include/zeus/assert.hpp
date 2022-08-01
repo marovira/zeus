@@ -13,17 +13,16 @@
 
 namespace zeus
 {
-    void assert_handler(bool condition,
-                        std::string file,
-                        int line,
-                        std::string message);
+    void assert_handler(bool condition, std::string file, int line, std::string message);
 } // namespace zeus
 
 #if defined(ZEUS_BUILD_DEBUG)
-#    define ASSERT(condition) \
-        zeus::assert_handler(condition, __FILE__, __LINE__, #condition)
-#    define ASSERT_MSG(condition, message) \
-        zeus::assert_handler(condition, __FILE__, __LINE__, message)
+// clang-format off
+// There appears to be a bug in clang-format where it will cause an indent in #condition which is incorrect.
+// TODO: remove once issue is fixed.
+#    define ASSERT(condition)              zeus::assert_handler(condition, __FILE__, __LINE__, #condition)
+#    define ASSERT_MSG(condition, message) zeus::assert_handler(condition, __FILE__, __LINE__, message)
+// clang-format on
 #else
 #    define ASSERT(condition)
 #    define ASSERT_MSG(condition, message)
@@ -53,21 +52,16 @@ namespace zeus
         strncat_s(buffer, "\n", 3);
 
         WCHAR wide_buffer[max_message_length] = {0};
-        MultiByteToWideChar(
-            CP_UTF8, 0, buffer, -1, wide_buffer, sizeof(wide_buffer));
+        MultiByteToWideChar(CP_UTF8, 0, buffer, -1, wide_buffer, sizeof(wide_buffer));
         OutputDebugStringW(wide_buffer);
 #    endif
     }
 
-    void assert_handler(bool condition,
-                        std::string file,
-                        int line,
-                        std::string message)
+    void assert_handler(bool condition, std::string file, int line, std::string message)
     {
         if (!condition)
         {
-            std::string assert_message =
-                fmt::format("error: in file {}({}): {}\n", file, line, message);
+            std::string assert_message = fmt::format("error: in file {}({}): {}\n", file, line, message);
 
 #    if !defined(ZEUS_NO_ASSERT_PRINT)
             print_assert(assert_message);

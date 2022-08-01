@@ -9,11 +9,14 @@ namespace zeus
 {
     template<typename T, typename Engine = std::mt19937>
     requires is_arithmetic<T>
+
     class Random
     {
     public:
         Random() = default;
-        Random(typename Engine::result_type seed) : m_engine{seed}
+
+        Random(typename Engine::result_type seed) :
+            m_engine{seed}
         {}
 
         T get_random_in_range(T min, T max)
@@ -32,8 +35,7 @@ namespace zeus
 
         T get_random_zero_to_max()
         {
-            return get_random_in_range(static_cast<T>(0),
-                                       std::numeric_limits<T>::max());
+            return get_random_in_range(static_cast<T>(0), std::numeric_limits<T>::max());
         }
 
         T get_random_zero_to_one()
