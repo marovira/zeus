@@ -28,7 +28,8 @@ namespace zeus
     struct Choose
     {
         static_assert(K <= N);
-        static constexpr auto value{Factorial<N>::value / (Factorial<K>::value * Factorial<N - K>::value)};
+        static constexpr auto value{Factorial<N>::value
+                                    / (Factorial<K>::value * Factorial<N - K>::value)};
     };
 
     template<typename T, std::size_t N, std::size_t M = Choose<N, 2>::value>

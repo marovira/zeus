@@ -2,7 +2,8 @@
 
 #include <catch2/catch.hpp>
 
-#define MAKE_TEST_TYPE(TypeName, BaseType) using TypeName = zeus::NamedType<BaseType, struct BaseType##_param>
+#define MAKE_TEST_TYPE(TypeName, BaseType) \
+    using TypeName = zeus::NamedType<BaseType, struct BaseType##_param>
 
 #define MAKE_TEST_TYPE_V(TypeName, BaseType, ...) \
     using TypeName = zeus::NamedType<BaseType, struct BaseType##_param, __VA_ARGS__>

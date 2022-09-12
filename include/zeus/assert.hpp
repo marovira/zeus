@@ -61,7 +61,8 @@ namespace zeus
     {
         if (!condition)
         {
-            std::string assert_message = fmt::format("error: in file {}({}): {}\n", file, line, message);
+            std::string assert_message =
+                fmt::format("error: in file {}({}): {}\n", file, line, message);
 
 #    if !defined(ZEUS_NO_ASSERT_PRINT)
             print_assert(assert_message);
