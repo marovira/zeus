@@ -70,7 +70,3 @@ If you are submitting a pull request, the guidelines are the following:
 
 Zeus is published under the BSD-3 license and can be viewed
 [here](https://github.com/marovira/zeus/blob/master/LICENSE).
-
-## Documentation
-
-The documentation for the project can be seen [here](https://marovira.github.io/zeus/)
