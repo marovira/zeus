@@ -1,8 +1,8 @@
 #================================
 # Project setup.
 #================================
-cmake_minimum_required(VERSION 3.22)
-project(zeus VERSION 1.0.0 LANGUAGES CXX C)
+cmake_minimum_required(VERSION 3.24)
+project(zeus VERSION 2.0.0 LANGUAGES CXX C)
 
 if (APPLE)
     message(ERROR "Zeus does not support Apple platforms.")
@@ -18,10 +18,6 @@ set(ZEUS_VERSION_EXTRA "")
 set(ZEUS_VERSION "${ZEUS_VERSION_MAJOR}.${ZEUS_VERSION_MINOR}")
 set(ZEUS_VERSION_FULL
     "${ZEUS_VERSION}.${ZEUS_VERSION_PATCH}${ZEUS_VERSION_EXTRA}")
-
-if (POLICY CMP0072)
-    cmake_policy(SET CMP0072 NEW)
-endif()
 
 #================================
 # Option variables.
