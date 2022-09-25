@@ -51,18 +51,18 @@ source_group("include\\zeus" FILES ${ZEUS_INCLUDE_GROUP})
 #================================
 include(FetchContent)
 
-# FMT tag 8.0.1
+# FMT tag 9.0.1
 FetchContent_Declare(
     fmt
     GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-    GIT_TAG d141cdbeb0fb422a3fb7173b285fd38e0d1772dc
+    GIT_TAG a33701196adfad74917046096bf5a2aa0ab0bb50
     )
 
-# magic_enum tag v0.7.3
+# magic_enum tag v0.8.1
 FetchContent_Declare(
     magic_enum
     GIT_REPOSITORY https://github.com/Neargye/magic_enum
-    GIT_TAG 3d1f6a5a2a3fbcba077e00ad0ccc2dd9fefc2ca7
+    GIT_TAG 43a9272f450fd07e85868ed277ebd793e40806df
     )
 
 find_package(fmt QUIET)
