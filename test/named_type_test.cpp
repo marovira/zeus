@@ -1,6 +1,6 @@
 #include <zeus/named_type.hpp>
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 #define MAKE_TEST_TYPE(TypeName, BaseType) \
     using TypeName = zeus::NamedType<BaseType, struct BaseType##_param>

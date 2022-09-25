@@ -1,6 +1,6 @@
 #include <zeus/random.hpp>
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_template_test_macros.hpp>
 
 TEMPLATE_TEST_CASE("[random] - get_random_in_range", "[zeus]", int, float, double)
 {

@@ -2,7 +2,7 @@
 #define ZEUS_ENABLE_TESTING_MACROS
 #include <zeus/assert.hpp>
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 TEST_CASE("[assert] - assert macro", "[zeus]")
 {

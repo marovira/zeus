@@ -1,5 +1,4 @@
 set(ZEUS_TEST_FILES
-    ${ZEUS_TEST_ROOT}/test_main.cpp
     ${ZEUS_TEST_ROOT}/assert_test.cpp
     ${ZEUS_TEST_ROOT}/float_test.cpp
     ${ZEUS_TEST_ROOT}/functional_test.cpp

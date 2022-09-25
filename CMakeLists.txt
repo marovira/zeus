@@ -151,25 +151,25 @@ endif()
 # Build the tests.
 #================================
 if (ZEUS_BUILD_TESTS)
-    # Catch tag v2.13.6
+    # Catch tag v3.1.0
     FetchContent_Declare(
         catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG 5c88067bd339465513af4aec606bd2292f1b594a
+        GIT_TAG 97c48e0c343d26d50764fafdc90b1e630fbd10ce
         )
 
-    find_package(Catch2 QUIET)
+    find_package(Catch2 3 QUIET)
     if (NOT Catch2_FOUND AND NOT catch2_POPULATED)
         FetchContent_Populate(catch2)
         add_subdirectory(${catch2_SOURCE_DIR} ${catch2_BINARY_DIR})
-        set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${catch2_SOURCE_DIR}/contrib)
+        set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${catch2_SOURCE_DIR}/extras)
     endif()
 
     source_group("source" FILES ${ZEUS_TEST_GROUP})
     add_executable(zeus_test ${ZEUS_TEST_LIST})
-    target_link_libraries(zeus_test
+    target_link_libraries(zeus_test PRIVATE
         zeus
-        Catch2::Catch2)
+        Catch2::Catch2WithMain)
     set_target_properties(zeus_test PROPERTIES FOLDER "zeus")
 
     include(CTest)
