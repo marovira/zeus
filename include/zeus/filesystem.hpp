@@ -2,19 +2,16 @@
 
 #include "platform.hpp"
 
+#include <chrono>
+#include <filesystem>
 #include <fmt/printf.h>
-
-#if defined(ZEUS_PLATFORM_WINDOWS)
-#    define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
-#endif
-#include <experimental/filesystem>
 #include <string>
 
 namespace zeus
 {
     inline std::time_t get_file_last_write(std::string filename)
     {
-        namespace fs = std::experimental::filesystem;
+        namespace fs = std::filesystem;
 
         fs::path file_path{filename};
         [[maybe_unused]] std::error_code code;
@@ -24,12 +21,13 @@ namespace zeus
             fmt::print(stderr, "warning: ({}): {}\n", code.value(), code.message());
         }
 
-        return decltype(ftime)::clock::to_time_t(ftime);
+        auto system_time = std::chrono::clock_cast<std::chrono::system_clock>(ftime);
+        return std::chrono::system_clock::to_time_t(system_time);
     }
 
     inline std::string get_file_directory(std::string filename)
     {
-        namespace fs = std::experimental::filesystem;
+        namespace fs = std::filesystem;
 
         fs::path file_path{filename};
         std::string root_dir;
