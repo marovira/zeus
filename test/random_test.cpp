@@ -2,7 +2,7 @@
 
 #include <catch2/catch_template_test_macros.hpp>
 
-TEMPLATE_TEST_CASE("[random] - get_random_in_range", "[zeus]", int, float, double)
+TEMPLATE_TEST_CASE("[Random] - get_Random_in_range", "[zeus]", int, float, double)
 {
     zeus::Random<TestType> rand;
 
@@ -11,7 +11,7 @@ TEMPLATE_TEST_CASE("[random] - get_random_in_range", "[zeus]", int, float, doubl
     REQUIRE(r <= TestType{10});
 }
 
-TEMPLATE_TEST_CASE("[random] get_random_zero_to_max", "[zeus]", int, float, double)
+TEMPLATE_TEST_CASE("[Random] get_Random_zero_to_max", "[zeus]", int, float, double)
 {
     zeus::Random<TestType> rand;
 
@@ -19,7 +19,7 @@ TEMPLATE_TEST_CASE("[random] get_random_zero_to_max", "[zeus]", int, float, doub
     REQUIRE(r >= TestType{0});
 }
 
-TEMPLATE_TEST_CASE("[random] get_random_zero_to_one", "[zeus]", int, float, double)
+TEMPLATE_TEST_CASE("[Random] get_Random_zero_to_one", "[zeus]", int, float, double)
 {
     zeus::Random<TestType> rand;
 
