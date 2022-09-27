@@ -236,26 +236,29 @@ TEST_CASE("[ConfigParser] - insert", "[zeus]")
     }
 }
 
-bool operator==(ConfigParser::Section const& rhs, ConfigParser::Section const& lhs)
+namespace zeus
 {
-    auto rhs_keys = rhs.keys();
-    auto lhs_keys = lhs.keys();
-
-    if (rhs_keys != lhs_keys)
+    bool operator==(ConfigParser::Section const& rhs, ConfigParser::Section const& lhs)
     {
-        return false;
-    }
+        auto rhs_keys = rhs.keys();
+        auto lhs_keys = lhs.keys();
 
-    for (std::size_t i{0}; i < rhs_keys.size(); ++i)
-    {
-        if (rhs[rhs_keys[i]] != lhs[lhs_keys[i]])
+        if (rhs_keys != lhs_keys)
         {
             return false;
         }
-    }
 
-    return true;
-}
+        for (std::size_t i{0}; i < rhs_keys.size(); ++i)
+        {
+            if (rhs[rhs_keys[i]] != lhs[lhs_keys[i]])
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+} // namespace zeus
 
 TEST_CASE("[ConfigParser] - sections", "[zeus]")
 {
