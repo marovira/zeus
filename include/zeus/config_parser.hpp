@@ -69,7 +69,7 @@ namespace zeus
                 else if constexpr (std::is_same<T, bool>::value)
                 {
                     std::transform(val.begin(), val.end(), val.begin(), [](auto ch) {
-                        return std::tolower(ch);
+                        return static_cast<decltype(ch)>(std::tolower(ch));
                     });
                     if (val == "yes" || val == "on" || val == "true" || val == "1")
                     {
@@ -193,7 +193,7 @@ namespace zeus
                     trim(key);
                     trim(value);
                     std::transform(key.begin(), key.end(), key.begin(), [](auto ch) {
-                        return std::tolower(ch);
+                        return static_cast<decltype(ch)>(std::tolower(ch));
                     });
                     m_sections.at(current_section).insert(key, value);
                     continue;
