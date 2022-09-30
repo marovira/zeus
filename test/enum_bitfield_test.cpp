@@ -14,61 +14,85 @@ using zeus::EnumBitfield;
 
 TEST_CASE("[EnumBitfield] - constructors", "[zeus]")
 {
-    SECTION("Default constructor")
-    {
-        EnumBitfield<Bits> field;
-        REQUIRE(field.get() == 0);
-    }
-
     SECTION("Enum constructor")
     {
         EnumBitfield<Bits> field{Bits::a};
-        REQUIRE(field.get() == 1);
+        REQUIRE(field.bits() == 1);
     }
 
-    SECTION("Constexpr default constructor")
-    {
-        static constexpr auto val = []() {
-            EnumBitfield<Bits> field;
-            return field.get();
-        }();
-
-        REQUIRE(val == 0);
-    }
-
-    SECTION("Constexpr enum constructor")
+    SECTION("Compile-time enum constructor")
     {
         static constexpr auto val = []() {
             EnumBitfield<Bits> field{Bits::a};
-            return field.get();
+            return field.bits();
         }();
 
         REQUIRE(val == 1);
     }
 }
 
+TEST_CASE("[EnumBitfield] - operator=", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        EnumBitfield<Bits> a;
+        a = Bits::b;
+        REQUIRE(a.bits() == 2);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            EnumBitfield<Bits> a;
+            a = Bits::b;
+            return a.bits();
+        }();
+
+        REQUIRE(val == 2);
+    }
+}
+
+TEST_CASE("[EnumBitfield] - value", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        EnumBitfield<Bits> a{Bits::a};
+        REQUIRE(a.value() == Bits::a);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            EnumBitfield<Bits> a{Bits::a};
+            return a.value();
+        }();
+
+        REQUIRE(val == Bits::a);
+    }
+}
+
 TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> field{Bits::a};
 
         SECTION("&= Bitfield")
         {
             field &= EnumBitfield<Bits>{Bits::a};
-            REQUIRE(field.get() == 1);
+            REQUIRE(field.bits() == 1);
 
             field &= EnumBitfield<Bits>{Bits::b};
-            REQUIRE(field.get() == 0);
+            REQUIRE(field.bits() == 0);
         }
 
         SECTION("&= enum")
         {
             field &= Bits::a;
-            REQUIRE(field.get() == 1);
+            REQUIRE(field.bits() == 1);
 
             field &= Bits::b;
-            REQUIRE(field.get() == 0);
+            REQUIRE(field.bits() == 0);
         }
     }
 
@@ -80,7 +104,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field &= EnumBitfield<Bits>{Bits::a};
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -90,7 +114,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field &= EnumBitfield<Bits>{Bits::b};
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 0);
@@ -103,7 +127,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field &= Bits::a;
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -113,7 +137,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field &= Bits::b;
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 0);
@@ -124,26 +148,26 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
 
 TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> field{Bits::a};
 
         SECTION("|= Bitfield")
         {
             field |= EnumBitfield<Bits>{Bits::a};
-            REQUIRE(field.get() == 1);
+            REQUIRE(field.bits() == 1);
 
             field |= EnumBitfield<Bits>{Bits::b};
-            REQUIRE(field.get() == 3);
+            REQUIRE(field.bits() == 3);
         }
 
         SECTION("|= enum")
         {
             field |= Bits::a;
-            REQUIRE(field.get() == 1);
+            REQUIRE(field.bits() == 1);
 
             field |= Bits::b;
-            REQUIRE(field.get() == 3);
+            REQUIRE(field.bits() == 3);
         }
     }
 
@@ -155,7 +179,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field |= EnumBitfield<Bits>{Bits::a};
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -165,7 +189,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field |= EnumBitfield<Bits>{Bits::b};
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 3);
@@ -178,7 +202,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field |= Bits::a;
-                    return field.get();
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -188,7 +212,82 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
                     field |= Bits::b;
-                    return field.get();
+                    return field.bits();
+                }();
+
+                REQUIRE(val == 3);
+            }
+        }
+    }
+}
+
+TEST_CASE("[EnumBitfield] - operator^=", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        EnumBitfield<Bits> field{Bits::a};
+
+        SECTION("^= Bitfield")
+        {
+            field ^= EnumBitfield<Bits>{Bits::a};
+            REQUIRE(field.bits() == 0);
+
+            field ^= EnumBitfield<Bits>{Bits::b};
+            REQUIRE(field.bits() == 2);
+        }
+
+        SECTION("^= enum")
+        {
+            field ^= Bits::a;
+            REQUIRE(field.bits() == 0);
+
+            field ^= Bits::b;
+            REQUIRE(field.bits() == 2);
+        }
+    }
+
+    SECTION("Contexpr")
+    {
+        SECTION("^= Bitfield")
+        {
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    field ^= EnumBitfield<Bits>{Bits::a};
+                    return field.bits();
+                }();
+
+                REQUIRE(val == 0);
+            }
+
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    field ^= EnumBitfield<Bits>{Bits::b};
+                    return field.bits();
+                }();
+
+                REQUIRE(val == 3);
+            }
+        }
+
+        SECTION("^= enum")
+        {
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    field ^= Bits::a;
+                    return field.bits();
+                }();
+
+                REQUIRE(val == 0);
+            }
+
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    field ^= Bits::b;
+                    return field.bits();
                 }();
 
                 REQUIRE(val == 3);
@@ -199,26 +298,26 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
 
 TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> field{Bits::a};
 
         SECTION("& Bitfield")
         {
             auto val = field & EnumBitfield<Bits>{Bits::a};
-            REQUIRE(val.get() == 1);
+            REQUIRE(val.bits() == 1);
 
             val = field & EnumBitfield<Bits>{Bits::b};
-            REQUIRE(val.get() == 0);
+            REQUIRE(val.bits() == 0);
         }
 
         SECTION("& enum")
         {
             auto val = field & Bits::a;
-            REQUIRE(val.get() == 1);
+            REQUIRE(val.bits() == 1);
 
             val = field & Bits::b;
-            REQUIRE(val.get() == 0);
+            REQUIRE(val.bits() == 0);
         }
     }
 
@@ -229,7 +328,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field & EnumBitfield<Bits>{Bits::a}).get();
+                    return (field & EnumBitfield<Bits>{Bits::a}).bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -238,7 +337,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field & EnumBitfield<Bits>{Bits::b}).get();
+                    return (field & EnumBitfield<Bits>{Bits::b}).bits();
                 }();
 
                 REQUIRE(val == 0);
@@ -250,7 +349,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field & Bits::a).get();
+                    return (field & Bits::a).bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -259,7 +358,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field & Bits::b).get();
+                    return (field & Bits::b).bits();
                 }();
 
                 REQUIRE(val == 0);
@@ -270,26 +369,26 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
 
 TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> field{Bits::a};
 
         SECTION("| Bitfield")
         {
             auto val = field | EnumBitfield<Bits>{Bits::a};
-            REQUIRE(val.get() == 1);
+            REQUIRE(val.bits() == 1);
 
             val = field | EnumBitfield<Bits>{Bits::b};
-            REQUIRE(val.get() == 3);
+            REQUIRE(val.bits() == 3);
         }
 
         SECTION("| enum")
         {
             auto val = field | Bits::a;
-            REQUIRE(val.get() == 1);
+            REQUIRE(val.bits() == 1);
 
             val = field | Bits::b;
-            REQUIRE(val.get() == 3);
+            REQUIRE(val.bits() == 3);
         }
     }
 
@@ -300,7 +399,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field | EnumBitfield<Bits>{Bits::a}).get();
+                    return (field | EnumBitfield<Bits>{Bits::a}).bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -309,7 +408,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field | EnumBitfield<Bits>{Bits::b}).get();
+                    return (field | EnumBitfield<Bits>{Bits::b}).bits();
                 }();
 
                 REQUIRE(val == 3);
@@ -321,7 +420,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field | Bits::a).get();
+                    return (field | Bits::a).bits();
                 }();
 
                 REQUIRE(val == 1);
@@ -330,7 +429,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
             {
                 static constexpr auto val = []() {
                     EnumBitfield<Bits> field{Bits::a};
-                    return (field | Bits::b).get();
+                    return (field | Bits::b).bits();
                 }();
 
                 REQUIRE(val == 3);
@@ -339,15 +438,159 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
     }
 }
 
+TEST_CASE("[EnumBitfield] - opeartor^", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        EnumBitfield<Bits> field{Bits::a};
+
+        SECTION("^ Bitfield")
+        {
+            auto val = field ^ EnumBitfield<Bits>{Bits::a};
+            REQUIRE(val.bits() == 0);
+
+            val = field ^ EnumBitfield<Bits>{Bits::b};
+            REQUIRE(val.bits() == 3);
+        }
+
+        SECTION("^ enum")
+        {
+            auto val = field ^ Bits::a;
+            REQUIRE(val.bits() == 0);
+
+            val = field ^ Bits::b;
+            REQUIRE(val.bits() == 3);
+        }
+    }
+
+    SECTION("Contexpr")
+    {
+        SECTION("^ Bitfield")
+        {
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    return (field ^ EnumBitfield<Bits>{Bits::a}).bits();
+                }();
+
+                REQUIRE(val == 0);
+            }
+
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    return (field ^ EnumBitfield<Bits>{Bits::b}).bits();
+                }();
+
+                REQUIRE(val == 3);
+            }
+        }
+
+        SECTION("^ enum")
+        {
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    return (field ^ Bits::a).bits();
+                }();
+
+                REQUIRE(val == 0);
+            }
+
+            {
+                static constexpr auto val = []() {
+                    EnumBitfield<Bits> field{Bits::a};
+                    return (field ^ Bits::b).bits();
+                }();
+
+                REQUIRE(val == 3);
+            }
+        }
+    }
+}
+
+TEST_CASE("[EnumBitfield] - operator~", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        SECTION("Zero-bitfield")
+        {
+            auto val = ~EnumBitfield<Bits>{Bits::none};
+            REQUIRE(val.bits() == 255);
+        }
+
+        SECTION("Non-zero bitfield")
+        {
+            auto val = ~EnumBitfield<Bits>{Bits::a};
+            REQUIRE(val.bits() == 254);
+        }
+    }
+
+    SECTION("Compile-time")
+    {
+        SECTION("Zero-bitfield")
+        {
+            static constexpr auto val = []() {
+                return (~EnumBitfield<Bits>{Bits::none}).bits();
+            }();
+            REQUIRE(val == 255);
+        }
+
+        SECTION("Non-zero bitfield")
+        {
+            static constexpr auto val = []() {
+                return (~EnumBitfield<Bits>{Bits::a}).bits();
+            }();
+            REQUIRE(val == 254);
+        }
+    }
+}
+
+TEST_CASE("[EnumBitfield] - operator>>", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto val = EnumBitfield<Bits>{Bits::b} >> 1;
+        REQUIRE(val.bits() == 1);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (EnumBitfield<Bits>{Bits::b} >> 1).bits();
+        }();
+
+        REQUIRE(val == 1);
+    }
+}
+
+TEST_CASE("[EnumBitfield] - operator<<", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto val = EnumBitfield<Bits>{Bits::a} << 1;
+        REQUIRE(val.bits() == 2);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (EnumBitfield<Bits>{Bits::a} << 1).bits();
+        }();
+
+        REQUIRE(val == 2);
+    }
+}
+
 TEST_CASE("[EnumBitfield] - operator bool", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         REQUIRE(EnumBitfield<Bits>{Bits::a});
         REQUIRE_FALSE(EnumBitfield<Bits>{Bits::none});
     }
 
-    SECTION("Constexpr")
+    SECTION("Compile-time")
     {
         static constexpr auto true_val = []() -> bool {
             return EnumBitfield<Bits>{Bits::a};
@@ -364,7 +607,7 @@ TEST_CASE("[EnumBitfield] - operator bool", "[zeus]")
 
 TEST_CASE("[EnumBitfield] - operator==", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> val{Bits::a};
 
@@ -381,7 +624,7 @@ TEST_CASE("[EnumBitfield] - operator==", "[zeus]")
         }
     }
 
-    SECTION("Constexpr")
+    SECTION("Compile-time")
     {
         SECTION("== Bitfield")
         {
@@ -415,7 +658,7 @@ TEST_CASE("[EnumBitfield] - operator==", "[zeus]")
 
 TEST_CASE("[EnumBitfield] - opeartor!=", "[zeus]")
 {
-    SECTION("Non-constexpr")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> val{Bits::a};
 
@@ -432,7 +675,7 @@ TEST_CASE("[EnumBitfield] - opeartor!=", "[zeus]")
         }
     }
 
-    SECTION("Constexpr")
+    SECTION("Compile-time")
     {
         SECTION("!= Bitfield")
         {
@@ -461,5 +704,128 @@ TEST_CASE("[EnumBitfield] - opeartor!=", "[zeus]")
             REQUIRE(true_val);
             REQUIRE_FALSE(false_val);
         }
+    }
+}
+
+using namespace zeus::enum_bitwise_operators;
+
+TEST_CASE("[enum_bitwise_operators] - operator&", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto field = Bits::a & Bits::a;
+        REQUIRE(field.bits() == 1);
+
+        field = Bits::a & Bits::b;
+        REQUIRE(field.bits() == 0);
+    }
+
+    SECTION("Compile-time")
+    {
+        {
+            static constexpr auto val = []() {
+                return (Bits::a & Bits::a).bits();
+            }();
+
+            REQUIRE(val == 1);
+        }
+
+        {
+            static constexpr auto val = []() {
+                return (Bits::a & Bits::b).bits();
+            }();
+
+            REQUIRE(val == 0);
+        }
+    }
+}
+
+TEST_CASE("[enum_bitwise_operators] - operator|", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto field = Bits::a | Bits::b;
+        REQUIRE(field.bits() == 3);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (Bits::a | Bits::b).bits();
+        }();
+
+        REQUIRE(val == 3);
+    }
+}
+
+TEST_CASE("[enum_bitwise_operators] - operator^", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto field = Bits::a ^ Bits::b;
+        REQUIRE(field.bits() == 3);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (Bits::a ^ Bits::b).bits();
+        }();
+
+        REQUIRE(val == 3);
+    }
+}
+
+TEST_CASE("[enum_bitwise_operators] - operator~", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto field = ~Bits::a;
+        REQUIRE(field.bits() == 254);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (~Bits::a).bits();
+        }();
+
+        REQUIRE(val == 254);
+    }
+}
+
+TEST_CASE("[enum_bitwise_operators] - operator>>", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto field = Bits::b >> 1;
+        REQUIRE(field.bits() == 1);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (Bits::b >> 1).bits();
+        }();
+
+        REQUIRE(val == 1);
+    }
+}
+
+TEST_CASE("[enum_bitwise_operators] - operator<<", "[zeus]")
+{
+    SECTION("Runtime")
+    {
+        auto field = Bits::a << 1;
+        REQUIRE(field.bits() == 2);
+    }
+
+    SECTION("Compile-time")
+    {
+        static constexpr auto val = []() {
+            return (Bits::a << 1).bits();
+        }();
+
+        REQUIRE(val == 2);
     }
 }

@@ -5,7 +5,7 @@
 namespace zeus
 {
     template<typename T>
-    requires is_scoped_enum<T> && is_unsigned_enum<T>
+    requires is_unsigned_scoped_enum<T>
     class EnumBitfield
     {
     public:
@@ -16,9 +16,20 @@ namespace zeus
             m_field{static_cast<BaseType>(val)}
         {}
 
-        constexpr BaseType get() const
+        constexpr EnumBitfield& operator=(T val)
+        {
+            m_field = static_cast<BaseType>(val);
+            return *this;
+        }
+
+        constexpr BaseType bits() const
         {
             return m_field;
+        }
+
+        constexpr T value() const
+        {
+            return static_cast<T>(m_field);
         }
 
         constexpr EnumBitfield& operator&=(EnumBitfield const& rhs)
@@ -45,31 +56,82 @@ namespace zeus
             return *this;
         }
 
-        constexpr EnumBitfield operator&(EnumBitfield const& rhs)
+        constexpr EnumBitfield& operator^=(EnumBitfield const& rhs)
+        {
+            m_field ^= rhs.m_field;
+            return *this;
+        }
+
+        constexpr EnumBitfield& operator^=(T rhs)
+        {
+            m_field ^= static_cast<BaseType>(rhs);
+            return *this;
+        }
+
+        constexpr EnumBitfield operator&(EnumBitfield const& rhs) const
         {
             EnumBitfield tmp{*this};
             tmp &= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator&(T rhs)
+        constexpr EnumBitfield operator&(T rhs) const
         {
             EnumBitfield tmp{*this};
             tmp &= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator|(EnumBitfield const& rhs)
+        constexpr EnumBitfield operator|(EnumBitfield const& rhs) const
         {
             EnumBitfield tmp{*this};
             tmp |= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator|(T rhs)
+        constexpr EnumBitfield operator|(T rhs) const
         {
             EnumBitfield tmp{*this};
             tmp |= rhs;
+            return tmp;
+        }
+
+        constexpr EnumBitfield operator^(EnumBitfield const& rhs) const
+        {
+            EnumBitfield tmp{*this};
+            tmp ^= rhs;
+            return tmp;
+        }
+
+        constexpr EnumBitfield operator^(T rhs) const
+        {
+            EnumBitfield tmp{*this};
+            tmp ^= rhs;
+            return tmp;
+        }
+
+        constexpr EnumBitfield operator~() const
+        {
+            EnumBitfield tmp{*this};
+            tmp.m_field = ~m_field;
+            return tmp;
+        }
+
+        template<typename U>
+        requires std::integral<U>
+        constexpr EnumBitfield operator>>(U n) const
+        {
+            EnumBitfield tmp{*this};
+            tmp.m_field = m_field >> n;
+            return tmp;
+        }
+
+        template<typename U>
+        requires std::integral<U>
+        constexpr EnumBitfield operator<<(U n) const
+        {
+            EnumBitfield tmp{*this};
+            tmp.m_field = m_field << n;
             return tmp;
         }
 
@@ -101,6 +163,51 @@ namespace zeus
     private:
         BaseType m_field{0};
     };
+
+    namespace enum_bitwise_operators
+    {
+        template<typename T>
+        requires is_unsigned_scoped_enum<T>
+        constexpr EnumBitfield<T> operator&(T lhs, T rhs)
+        {
+            return EnumBitfield<T>{lhs} & EnumBitfield<T>{rhs};
+        }
+
+        template<typename T>
+        requires is_unsigned_scoped_enum<T>
+        constexpr EnumBitfield<T> operator|(T lhs, T rhs)
+        {
+            return EnumBitfield<T>{lhs} | EnumBitfield<T>{rhs};
+        }
+
+        template<typename T>
+        requires is_unsigned_scoped_enum<T>
+        constexpr EnumBitfield<T> operator^(T lhs, T rhs)
+        {
+            return EnumBitfield<T>{lhs} ^ EnumBitfield<T>{rhs};
+        }
+
+        template<typename T>
+        requires is_unsigned_scoped_enum<T>
+        constexpr EnumBitfield<T> operator~(T val)
+        {
+            return ~EnumBitfield<T>{val};
+        }
+
+        template<typename T, typename U>
+        requires is_unsigned_scoped_enum<T> && std::integral<U>
+        constexpr EnumBitfield<T> operator>>(T val, U n)
+        {
+            return EnumBitfield<T>{val} >> n;
+        }
+
+        template<typename T, typename U>
+        requires is_unsigned_scoped_enum<T> && std::integral<U>
+        constexpr EnumBitfield<T> operator<<(T val, U n)
+        {
+            return EnumBitfield<T>{val} << n;
+        }
+    } // namespace enum_bitwise_operators
 
     template<typename T>
     requires is_scoped_enum<T> && is_unsigned_enum<T>
