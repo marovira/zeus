@@ -14,7 +14,6 @@ using zeus::EnumBitfield;
 
 TEST_CASE("[EnumBitfield] - constructors", "[zeus]")
 {
-
     SECTION("Default constructor")
     {
         EnumBitfield<Bits> field;
