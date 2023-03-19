@@ -155,6 +155,7 @@ if (ZEUS_BUILD_TESTS)
             GIT_REPOSITORY https://github.com/catchorg/Catch2.git
             GIT_TAG 97c48e0c343d26d50764fafdc90b1e630fbd10ce
             )
+        set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${catch2_SOURCE_DIR}/contrib)
     endif()
 
     source_group("source" FILES ${ZEUS_TEST_GROUP})
