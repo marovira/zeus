@@ -11,27 +11,30 @@
 
 ## What is Zeus?
 
-Zeus is a C++ utility library that was born from the core modules shared across
-my three other projects: Atlas, Apollo, and Hermes. Since the modules are
-virtually identical and updates are generally shared across projects, it made
-updating them tedious. By separating them into their own project, these
-utilities can now be shared across multiple projects and simplify updating. In
-order to simplify and streamline dependencies, Zeus is shipped as a header-only
-library.
+Named after the Greek god of thunder and leader of the Olympic gods, Zeus is a C++ utility
+library that serves as the bedrock for all of my projects. It is built as a header-only
+library for ease of use that contains several utilities aimed at making coding in C++
+easier. Some notable features of Zeus are:
+
+* A simplified version of Python's `ConfigParser` that allows for easy loading of `.ini`
+  configuration files,
+* A type-safe wrapper for performing bitwise operations on `enum class` types,
+* A customizable, cross-platform `assert` macro,
+* Several concepts for template programming.
 
 ## Dependencies
 
 The following are **core** requirements of Zeus:
 
-* CMake 3.22+
+* CMake 3.24+
 
 Zeus supports the following platforms and compilers:
 
 | Platform (Compiler) | Version |
 |---------------------|---------|
-| Windows (MSVC) | 19.29 |
-| Linux (GCC) | 10.3 |
-| Linux (LLVM Clang) | 11.0 |
+| Windows (MSVC) | 19.34 |
+| Linux (GCC) | 10.4 |
+| Linux (LLVM Clang) | 14.0 |
 
 Please note that macOS is **not** supported.
 
