@@ -1,6 +1,7 @@
 #pragma once
 
-#include <algorithm>
+#include "string.hpp"
+
 #include <filesystem>
 #include <fmt/printf.h>
 #include <fstream>
@@ -204,23 +205,6 @@ namespace zeus
         }
 
     private:
-        void trim(std::string& str)
-        {
-            // Trim leading whitespace.
-            str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](auto ch) {
-                          return !std::isspace(ch);
-                      }));
-
-            // Trim trailing whitespace.
-            str.erase(std::find_if(str.rbegin(),
-                                   str.rend(),
-                                   [](auto ch) {
-                                       return !std::isspace(ch);
-                                   })
-                          .base(),
-                      str.end());
-        }
-
         std::map<std::string, Section> m_sections;
     };
 } // namespace zeus
