@@ -31,6 +31,7 @@ option(ZEUS_INSTALL_TARGET "Create install target" OFF)
 set(ZEUS_SOURCE_DIR ${PROJECT_SOURCE_DIR})
 set(ZEUS_SOURCE_ROOT ${ZEUS_SOURCE_DIR}/include)
 set(ZEUS_TEST_ROOT ${ZEUS_SOURCE_DIR}/test)
+set(ZEUS_CMAKE_ROOT ${ZEUS_SOURCE_DIR}/cmake)
 
 #================================
 # Add subdirectories.
@@ -49,33 +50,28 @@ source_group("include\\zeus" FILES ${ZEUS_INCLUDE_GROUP})
 #================================
 # Find Packages.
 #================================
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ZEUS_CMAKE_ROOT})
+
 include(FetchContent)
+include(FetchLibrary)
 
-# FMT tag 9.0.1
-FetchContent_Declare(
-    fmt
-    GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-    GIT_TAG a33701196adfad74917046096bf5a2aa0ab0bb50
-    )
+find_package(fmt 9.1.0 QUIET)
+find_package(magic_enum 0.8.2 QUIET)
 
-# magic_enum tag v0.8.1
-FetchContent_Declare(
-    magic_enum
-    GIT_REPOSITORY https://github.com/Neargye/magic_enum
-    GIT_TAG 43a9272f450fd07e85868ed277ebd793e40806df
-    )
-
-find_package(fmt QUIET)
-find_package(magic_enum QUIET)
-
-if (NOT fmt_FOUND AND NOT fmt_POPULATED)
-    FetchContent_Populate(fmt)
-    add_subdirectory(${fmt_SOURCE_DIR} ${fmt_BINARY_DIR})
+if (NOT fmt_FOUND)
+    fetch_library(
+        NAME fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+        GIT_TAG a33701196adfad74917046096bf5a2aa0ab0bb50
+        )
 endif()
 
-if (NOT magic_enum_FOUND AND NOT magic_enum_POPULATED)
-    FetchContent_Populate(magic_enum)
-    add_subdirectory(${magic_enum_SOURCE_DIR} ${magic_enum_BINARY_DIR})
+if (NOT magic_enum_FOUND)
+    fetch_library(
+        NAME magic_enum
+        GIT_REPOSITORY https://github.com/Neargye/magic_enum
+        GIT_TAG e1a68e9dd3d2e9180b04c8aeacd4975db745e6b8
+        )
 endif()
 
 #================================
@@ -151,18 +147,14 @@ endif()
 # Build the tests.
 #================================
 if (ZEUS_BUILD_TESTS)
-    # Catch tag v3.1.0
-    FetchContent_Declare(
-        catch2
-        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-        GIT_TAG 97c48e0c343d26d50764fafdc90b1e630fbd10ce
-        )
+    find_package(Catch2 3.3.2 QUIET)
 
-    find_package(Catch2 3 QUIET)
-    if (NOT Catch2_FOUND AND NOT catch2_POPULATED)
-        FetchContent_Populate(catch2)
-        add_subdirectory(${catch2_SOURCE_DIR} ${catch2_BINARY_DIR})
-        set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${catch2_SOURCE_DIR}/extras)
+    if (NOT Catch2_FOUND)
+        fetch_library(
+            NAME Catch2
+            GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+            GIT_TAG 97c48e0c343d26d50764fafdc90b1e630fbd10ce
+            )
     endif()
 
     source_group("source" FILES ${ZEUS_TEST_GROUP})
