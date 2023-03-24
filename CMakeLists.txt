@@ -22,7 +22,7 @@ set(ZEUS_VERSION_FULL
 #================================
 # Option variables.
 #================================
-option(ZEUS_BUILD_TESTS "Build Zeus unit tests" ON)
+option(ZEUS_BUILD_TESTS "Build Zeus unit tests" OFF)
 option(ZEUS_INSTALL_TARGET "Create install target" OFF)
 
 #================================
@@ -127,7 +127,7 @@ if (ZEUS_INSTALL_TARGET)
         )
 
     install(FILES
-        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/zeus-config.cmake"
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/zeusConfig.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/zeusConfigVersion.cmake"
         DESTINATION lib/cmake/zeus
         )
