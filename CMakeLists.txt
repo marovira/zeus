@@ -117,7 +117,8 @@ if (ZEUS_INSTALL_TARGET)
     write_basic_package_version_file(
         "${PROJECT_BINARY_DIR}/zeusConfigVersion.cmake"
         VERSION ${PACKAGE_VERSION}
-        COMPATIBILITY AnyNewerVersion
+        COMPATIBILITY SameMajorVersion
+        ARCH_INDEPENDENT
         )
 
     install(EXPORT zeus 
