@@ -129,6 +129,7 @@ if (ZEUS_INSTALL_TARGET)
 
     install(FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/cmake/zeusConfig.cmake"
+        "${CMAKE_CURRENT_SOURCE_DIR}/cmake/FetchLibrary.cmake"
         "${CMAKE_CURRENT_BINARY_DIR}/zeusConfigVersion.cmake"
         DESTINATION lib/cmake/zeus
         )
