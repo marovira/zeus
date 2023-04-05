@@ -33,6 +33,31 @@ namespace zeus
 
     template<typename T>
     requires is_string<T>
+    std::vector<T> split(T const& str, T const& delim)
+    {
+        if (delim.size() > str)
+        {
+            return {str};
+        }
+
+        std::vector<T> items;
+        std::size_t prev_item{0};
+        for (std::size_t i{0}; i < str.size() - delim.size(); ++i)
+        {
+            auto substr = str.substr(i, delim.size());
+            if (substr == delim)
+            {
+                auto item = str.substr(prev_item, prev_item - i);
+                items.push_back(item);
+                continue;
+            }
+        }
+
+        return items;
+    }
+
+    template<typename T>
+    requires is_string<T>
     void trim(T& str)
     {
         // Trim leading whitespace.
