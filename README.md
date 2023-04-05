@@ -11,10 +11,10 @@
 
 ## What is Zeus?
 
-Named after the Greek god of thunder and leader of the Olympic gods, Zeus is a C++ utility
-library that serves as the bedrock for all of my projects. It is built as a header-only
-library for ease of use that contains several utilities aimed at making coding in C++
-easier. Some notable features of Zeus are:
+Named after the Greek god of the sky and thunder and king of Olympus, Zeus is a C++
+utility library that serves as the bedrock for all of my projects. It is built as a
+header-only library for ease of use that contains several utilities aimed at making coding
+in C++ easier. Some notable features of Zeus are:
 
 * A simplified version of Python's `ConfigParser` that allows for easy loading of `.ini`
   configuration files,
