@@ -154,7 +154,7 @@ namespace zeus
                 }
 
                 // Strip out leading and trailing whitespace.
-                trim(line);
+                line = strip(line);
 
                 if (line[0] == '#' || line[0] == ';')
                 {
@@ -191,8 +191,8 @@ namespace zeus
                     std::string key   = line.substr(0, delim_pos);
                     std::string value = line.substr(delim_pos + 1);
 
-                    trim(key);
-                    trim(value);
+                    key   = strip(key);
+                    value = strip(value);
                     std::transform(key.begin(), key.end(), key.begin(), [](auto ch) {
                         return static_cast<decltype(ch)>(std::tolower(ch));
                     });

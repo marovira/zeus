@@ -27,6 +27,11 @@ jobs:
             cxx: "clang++"
           }
     steps:
+      - name: Setup Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: 15
+
       - uses: actions/checkout@v3
 
       - name: Setup
@@ -36,7 +41,7 @@ jobs:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
         run: |
-          cmake --preset=clang -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF
+          cmake --preset=clang-fetch -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF
 
       - name: Build
         shell: bash

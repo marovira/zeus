@@ -33,8 +33,8 @@ Zeus supports the following platforms and compilers:
 | Platform (Compiler) | Version |
 |---------------------|---------|
 | Windows (MSVC) | 19.34 |
-| Linux (GCC) | 10.4 |
-| Linux (LLVM Clang) | 14.0 |
+| Linux (GCC) | 12 |
+| Linux (LLVM Clang) | 15.0 |
 
 Please note that macOS is **not** supported.
 

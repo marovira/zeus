@@ -15,16 +15,16 @@ jobs:
             artifact: "linux_gcc_debug.tar.xz",
             os: ubuntu-latest,
             build_type: "Debug",
-            cc: "gcc-10",
-            cxx: "g++-10"
+            cc: "gcc-12",
+            cxx: "g++-12"
           }
         - {
             name: "Linux GCC Release",
             artifact: "linux_gcc_release.tar.xz",
             os: ubuntu-latest,
             build_type: "Release",
-            cc: "gcc-10",
-            cxx: "g++-10"
+            cc: "gcc-12",
+            cxx: "g++-12"
           }
     steps:
       - uses: actions/checkout@v3
@@ -36,7 +36,7 @@ jobs:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
         run: |
-          cmake --preset=gcc -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF
+          cmake --preset=gcc-fetch -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF
 
       - name: Build
         shell: bash
