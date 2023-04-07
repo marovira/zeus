@@ -23,8 +23,8 @@ jobs:
             artifact: "linux_gcc_release.tar.xz",
             os: ubuntu-latest,
             build_type: "Release",
-            cc: "gcc-10",
-            cxx: "g++-10"
+            cc: "gcc-12",
+            cxx: "g++-12"
           }
     steps:
       - uses: actions/checkout@v3

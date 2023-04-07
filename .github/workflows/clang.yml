@@ -27,6 +27,11 @@ jobs:
             cxx: "clang++"
           }
     steps:
+      - name: Setup Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+
       - uses: actions/checkout@v3
 
       - name: Setup
