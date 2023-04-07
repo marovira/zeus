@@ -509,3 +509,354 @@ TEST_CASE("[string] - strip", "[zeus]")
 #endif
     }
 }
+
+TEST_CASE("[string] - split_lines", "[zeus]")
+{
+    SECTION("Base split_lines function")
+    {
+        SECTION("Runtime")
+        {
+            SECTION("Empty string")
+            {
+                std::string s;
+                std::vector<std::string> expected;
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("No newlines")
+            {
+                std::string s = "some random text";
+                std::vector<std::string> expected{"some random text"};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Newline")
+            {
+                std::string s = "some\nrandom\ntext\n";
+                std::vector<std::string> expected{"some", "random", "text"};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Carriage return")
+            {
+                std::string s = "some\rrandom\rtext\r";
+                std::vector<std::string> expected{"some", "random", "text"};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("CRLF")
+            {
+                std::string s = "some\r\nrandom\r\ntext\r\n";
+                std::vector<std::string> expected{"some", "random", "text"};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Multiple newlines")
+            {
+                std::string s = "some\n\n\n";
+                std::vector<std::string> expected{"some", "", ""};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Multiple carriage returns")
+            {
+                std::string s = "some\r\r\r";
+                std::vector<std::string> expected{"some", "", ""};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Multiple CRLF")
+            {
+                std::string s = "some\r\n\r\n\r\n";
+                std::vector<std::string> expected{"some", "", ""};
+
+                auto lines = zeus::split_lines(s, false);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Keep newline")
+            {
+                std::string s = "some\nrandom\ntext\n";
+                std::vector<std::string> expected{"some\n", "random\n", "text\n"};
+
+                auto lines = zeus::split_lines(s, true);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Keep carriage return")
+            {
+                std::string s = "some\rrandom\rtext\r";
+                std::vector<std::string> expected{"some\r", "random\r", "text\r"};
+
+                auto lines = zeus::split_lines(s, true);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Keep CRLF")
+            {
+                std::string s = "some\r\nrandom\r\ntext\r\n";
+                std::vector<std::string> expected{"some\r\n", "random\r\n", "text\r\n"};
+
+                auto lines = zeus::split_lines(s, true);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Keep multiple newlines")
+            {
+                std::string s = "some\n\n\n";
+                std::vector<std::string> expected{"some\n", "\n", "\n"};
+
+                auto lines = zeus::split_lines(s, true);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Keep multiple carriage returns")
+            {
+                std::string s = "some\r\r\r";
+                std::vector<std::string> expected{"some\r", "\r", "\r"};
+
+                auto lines = zeus::split_lines(s, true);
+                REQUIRE(lines == expected);
+            }
+
+            SECTION("Keep multiple CRLF")
+            {
+                std::string s = "some\r\n\r\n\r\n";
+                std::vector<std::string> expected{"some\r\n", "\r\n", "\r\n"};
+
+                auto lines = zeus::split_lines(s, true);
+                REQUIRE(lines == expected);
+            }
+        }
+
+#if !defined(ZEUS_COMPILER_CLANG)
+        SECTION("Compile-time")
+        {
+            SECTION("Empty string")
+            {
+                constexpr bool res = []() {
+                    std::string s;
+                    std::vector<std::string> expected;
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("No newlines")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some random text";
+                    std::vector<std::string> expected{"some random text"};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Newline")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\nrandom\ntext\n";
+                    std::vector<std::string> expected{"some", "random", "text"};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Carriage return")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\rrandom\rtext\r";
+                    std::vector<std::string> expected{"some", "random", "text"};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("CRLF")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\r\nrandom\r\ntext\r\n";
+                    std::vector<std::string> expected{"some", "random", "text"};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Multiple newlines")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\n\n\n";
+                    std::vector<std::string> expected{"some", "", ""};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Multiple carriage returns")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\r\r\r";
+                    std::vector<std::string> expected{"some", "", ""};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Multiple CRLF")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\r\n\r\n\r\n";
+                    std::vector<std::string> expected{"some", "", ""};
+
+                    auto lines = zeus::split_lines(s, false);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Keep newline")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\nrandom\ntext\n";
+                    std::vector<std::string> expected{"some\n", "random\n", "text\n"};
+
+                    auto lines = zeus::split_lines(s, true);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Keep carriage return")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\rrandom\rtext\r";
+                    std::vector<std::string> expected{"some\r", "random\r", "text\r"};
+
+                    auto lines = zeus::split_lines(s, true);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Keep CRLF")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\r\nrandom\r\ntext\r\n";
+                    std::vector<std::string> expected{"some\r\n",
+                                                      "random\r\n",
+                                                      "text\r\n"};
+
+                    auto lines = zeus::split_lines(s, true);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Keep multiple newlines")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\n\n\n";
+                    std::vector<std::string> expected{"some\n", "\n", "\n"};
+
+                    auto lines = zeus::split_lines(s, true);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Keep multiple carriage returns")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\r\r\r";
+                    std::vector<std::string> expected{"some\r", "\r", "\r"};
+
+                    auto lines = zeus::split_lines(s, true);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+
+            SECTION("Keep multiple CRLF")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\r\n\r\n\r\n";
+                    std::vector<std::string> expected{"some\r\n", "\r\n", "\r\n"};
+
+                    auto lines = zeus::split_lines(s, true);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+        }
+#endif
+
+        SECTION("split_lines: str")
+        {
+            SECTION("Runtime")
+            {
+                std::string s = "some\nrandom\ntext\n";
+                std::vector<std::string> expected{"some", "random", "text"};
+
+                auto lines = zeus::split_lines(s);
+                REQUIRE(lines == expected);
+            }
+
+#if !defined(ZEUS_COMPILER_CLANG)
+            SECTION("Compile-time")
+            {
+                constexpr bool res = []() {
+                    std::string s = "some\nrandom\ntext\n";
+                    std::vector<std::string> expected{"some", "random", "text"};
+
+                    auto lines = zeus::split_lines(s);
+                    return lines == expected;
+                }();
+
+                REQUIRE(res);
+            }
+#endif
+        }
+    }
+}

@@ -124,4 +124,87 @@ namespace zeus
     {
         return strip(str, is_whitespace);
     }
+
+    inline constexpr std::vector<std::string> split_lines(std::string const& str,
+                                                          bool keep_line_breaks)
+    {
+        if (str.empty())
+        {
+            return {};
+        }
+
+        std::vector<std::string> lines;
+        std::string line;
+        bool check_crlf{false};
+        for (std::size_t i{0}; i < str.size(); ++i)
+        {
+            if (str[i] == '\r' && !check_crlf)
+            {
+                check_crlf = true;
+                continue;
+            }
+
+            if (str[i] == '\n')
+            {
+                if (keep_line_breaks)
+                {
+                    if (check_crlf)
+                    {
+                        line.push_back('\r');
+                    }
+
+                    line.push_back(str[i]);
+                }
+
+                lines.push_back(line);
+                line.clear();
+                check_crlf = false;
+                continue;
+            }
+
+            if (check_crlf)
+            {
+                // Split off the string, since we know for sure that we didn't see a \r\n
+                // sequence.
+                if (keep_line_breaks)
+                {
+                    line.push_back('\r');
+                }
+
+                lines.push_back(line);
+                line.clear();
+                check_crlf = false;
+
+                // Handle the case where we have consecutive \r symbols.
+                if (str[i] == '\r')
+                {
+                    check_crlf = true;
+                    continue;
+                }
+            }
+
+            line.push_back(str[i]);
+        }
+
+        // Don't add an empty line if the final character in the string is a newline.
+        if (line.empty() && (str.back() == '\n' || (str.back() == '\r' && !check_crlf)))
+        {
+            return lines;
+        }
+
+        // Ensure the final line keeps its carriage return if requested.
+        if (check_crlf && keep_line_breaks)
+        {
+            line.push_back('\r');
+        }
+
+        lines.push_back(line);
+        return lines;
+    }
+
+    inline constexpr std::vector<std::string> split_lines(std::string const& str)
+    {
+        return split_lines(str, false);
+    }
+
 } // namespace zeus
