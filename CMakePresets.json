@@ -60,7 +60,7 @@
             "displayName": "Clang with FetchContent",
             "description": "Default build for Clang with FetchContent",
             "cacheVariables": {
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -pedantic -Werror -stdlib=libstdc++ -Wno-unused-but-set-variable",
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -pedantic -Werror -stdlib=libstdc++ -Wno-unused-but-set-variable"
             }
         }
     ]
