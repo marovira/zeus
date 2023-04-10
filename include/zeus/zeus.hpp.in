@@ -2,6 +2,10 @@
 
 #include <string_view>
 
+#define ZEUS_VERSION_MAJOR @ZEUS_VERSION_MAJOR@
+#define ZEUS_VERSION_MINOR @ZEUS_VERSION_MINOR@
+#define ZEUS_VERSION_PATCH @ZEUS_VERSION_PATCH@
+
 namespace zeus
 {
     static constexpr auto zeus_version_major{@ZEUS_VERSION_MAJOR@};
