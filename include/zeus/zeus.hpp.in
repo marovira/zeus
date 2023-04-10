@@ -2,15 +2,15 @@
 
 #include <string_view>
 
-#define ZEUS_VERSION_MAJOR @ZEUS_VERSION_MAJOR@
-#define ZEUS_VERSION_MINOR @ZEUS_VERSION_MINOR@
-#define ZEUS_VERSION_PATCH @ZEUS_VERSION_PATCH@
+#define ZEUS_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
+#define ZEUS_VERSION_MINOR @PROJECT_VERSION_MINOR@
+#define ZEUS_VERSION_PATCH @PROJECT_VERSION_PATCH@
 
 namespace zeus
 {
-    static constexpr auto zeus_version_major{@ZEUS_VERSION_MAJOR@};
-    static constexpr auto zeus_version_minor{@ZEUS_VERSION_MINOR@};
-    static constexpr auto zeus_version_patch{@ZEUS_VERSION_PATCH@};
+    static constexpr auto zeus_version_major{@PROJECT_VERSION_MAJOR@};
+    static constexpr auto zeus_version_minor{@PROJECT_VERSION_MINOR@};
+    static constexpr auto zeus_version_patch{@PROJECT_VERSION_PATCH@};
 
-    static constexpr std::string_view zeus_version_string{"@ZEUS_VERSION_MAJOR@.@ZEUS_VERSION_MINOR@.@ZEUS_VERSION_PATCH@"};
+    static constexpr std::string_view zeus_version_string{"@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@"};
 }
