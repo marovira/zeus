@@ -1,5 +1,5 @@
 <a id="top"></a>
-![Zeus logo](data/artwork/logo-transparent.png)
+![Zeus logo](data/logo/logo-transparent.png)
 
 [![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
 [![Generic badge](https://img.shields.io/badge/Language-C++20-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
