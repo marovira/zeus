@@ -52,7 +52,6 @@ jobs:
 
       - name: Install dependencies
         shell: powershell
-        working-directory: C:/deps
         env:
           BUILD_TYPE: ${{ matrix.config.build_type }}
         run: |
@@ -60,13 +59,13 @@ jobs:
           if(-not (Test-Path $c))
           {
             git clone https://github.com/fmtlib/fmt.git --branch 9.1.0 --depth 1
-            cmake -G "Visual Studio 17 2022" -S fmt -B fmt/build -D FMT_INSTALL=ON
+            cmake -G "Visual Studio 17 2022" -S fmt -B fmt/build -DFMT_INSTALL=ON -DCMAKE_INSTALL_PREFIX=C:/deps/fmt
             cd ./fmt/build
             cmake --build . --config $env:BUILD_TYPE
             cmake --build . --target INSTALL
             cd ../..
             git clone https://github.com/catchorg/Catch2.git --branch v3.3.2 --depth 1
-            cmake -G "Visual Studio 17 2022" -S Catch2 -B Catch2/build -D INSTALL_DOCS=OFF -D INSTALL_EXTRAS=OFF
+            cmake -G "Visual Studio 17 2022" -S Catch2 -B Catch2/build -DINSTALL_DOCS=OFF -DINSTALL_EXTRAS=OFF -DCMAKE_INSTALL_PREFIX=C:/deps/Catch2
             cd ./Catch2/build
             cmake --build . --config $env:BUILD_TYPE
             cmake --build . --target INSTALL
@@ -77,7 +76,7 @@ jobs:
         env:
           BUILD_TYPE: ${{ matrix.config.build_type }}
         run: |
-          cmake --preset=msvc -DBUILD_SHARED_LIBS=OFF
+          cmake --preset=msvc -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=C:/deps
           cd ./build
           cmake --build . --config $env:BUILD_TYPE
 
