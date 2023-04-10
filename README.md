@@ -15,11 +15,10 @@ utility library that serves as the bedrock for all of my projects. It is built a
 header-only library for ease of use that contains several utilities aimed at making coding
 in C++ easier. Some notable features of Zeus are:
 
-* A simplified version of Python's `ConfigParser` that allows for easy loading of `.ini`
-  configuration files,
 * A type-safe wrapper for performing bitwise operations on `enum class` types,
 * A customizable, cross-platform `assert` macro,
-* Several concepts for template programming.
+* Several concepts for template programming,
+* Python-like functions for string operations.
 
 ## Dependencies
 
