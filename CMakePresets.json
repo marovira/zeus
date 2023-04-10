@@ -33,15 +33,6 @@
             }
         },
         {
-            "name": "gcc-fetch",
-            "inherits": "gcc",
-            "displayName": "GCC with FetchContent",
-            "description": "Default build for GCC with FetchContent",
-            "cacheVariables": {
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -pedantic -Werror -Wno-restrict"
-            }
-        },
-        {
             "name": "clang",
             "displayName": "Clang",
             "description": "Default build for Clang",
@@ -52,15 +43,6 @@
                 "CMAKE_CXX_FLAGS_DEBUG": "-g",
                 "CMAKE_CXX_STANDARD": "20",
                 "ZEUS_BUILD_TESTS": "ON"
-            }
-        },
-        {
-            "name": "clang-fetch",
-            "inherits": "clang",
-            "displayName": "Clang with FetchContent",
-            "description": "Default build for Clang with FetchContent",
-            "cacheVariables": {
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -pedantic -Werror -stdlib=libstdc++ -Wno-unused-but-set-variable"
             }
         }
     ]

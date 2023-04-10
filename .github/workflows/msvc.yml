@@ -46,7 +46,7 @@ jobs:
           cache-name: zeus_deps
         with:
           path: C:/deps
-          key: ${{ env.cache-name }}-build-${{ matrix.config.build_type }}
+          key: ${{ env.cache-name }}-msvc-${{ matrix.config.build_type }}
 
       - name: Install dependencies
         shell: powershell
