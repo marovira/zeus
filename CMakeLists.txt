@@ -2,7 +2,7 @@
 # Project setup.
 #================================
 cmake_minimum_required(VERSION 3.24)
-project(zeus VERSION 1.0.1 LANGUAGES CXX C)
+project(zeus VERSION 1.1.0 LANGUAGES CXX C)
 
 if (APPLE)
     message(ERROR "Zeus does not support Apple platforms.")
