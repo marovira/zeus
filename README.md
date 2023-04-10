@@ -1,6 +1,5 @@
-# Zeus
-
-> A C++ utilities library
+<a id="top"></a>
+![Zeus logo](data/artwork/logo-transparent.png)
 
 [![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
 [![Generic badge](https://img.shields.io/badge/Language-C++20-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
@@ -40,8 +39,10 @@ Please note that macOS is **not** supported.
 
 In addition, Zeus depends on the following libraries:
 
-* [FMT](https://github.com/fmtlib/fmt),
-* [magic_enum](https://github.com/Neargye/magic_enum).
+| Library | Version |
+|---------|---------|
+| [FMT](https://github.com/fmtlib/fmt) | 9.1.0 |
+| [magic_enum](https://github.com/Neargye/magic_enum) | 0.8.2 |
 
 ## Contributing
 
