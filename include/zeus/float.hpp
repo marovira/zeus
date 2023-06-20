@@ -1,72 +1,52 @@
 #pragma once
 
+#include "concepts.hpp"
+
 #include <cmath>
-#include <concepts>
 #include <cstdlib>
 #include <functional>
 #include <limits>
 
 namespace zeus
 {
+    // Note: To be removed in C++23. Superseded by std::abs
     template<typename T>
-    requires std::floating_point<T>
-    using EpsilonFun = T (*)();
-
-    template<typename T>
-    requires std::floating_point<T>
-    inline constexpr bool are_equal(T a, T b)
+    requires is_arithmetic<T>
+    constexpr T abs(T x)
     {
-        const T scale = (std::abs(a) + std::abs(b)) / static_cast<T>(2.0);
-        return std::abs(a - b) <= std::numeric_limits<T>::epsilon() * scale;
-    }
-
-    template<typename T, EpsilonFun<T> epsilon>
-    requires std::floating_point<T>
-    inline constexpr bool are_equal(T a, T b)
-    {
-        const T scale = (std::abs(a) + std::abs(b)) / static_cast<T>(2.0);
-        return std::abs(a - b) <= epsilon() * scale;
+        return x < T{0} ? -x : x;
     }
 
     template<typename T>
     requires std::floating_point<T>
-    inline constexpr bool is_zero(T a)
+    constexpr bool almost_equal(T a, T b, T eps)
     {
-        return are_equal<T>(a, static_cast<T>(0));
-    }
+        if (abs(a - b) <= eps)
+        {
+            return true;
+        }
 
-    template<typename T, EpsilonFun<T> epsilon>
-    requires std::floating_point<T>
-    inline constexpr bool is_zero(T a)
-    {
-        return are_equal<T, epsilon>(a, static_cast<T>(0));
-    }
-
-    template<typename T>
-    requires std::floating_point<T>
-    inline constexpr bool geq(T a, T b)
-    {
-        return (a > b) || are_equal<T>(a, b);
-    }
-
-    template<typename T, EpsilonFun<T> epsilon>
-    requires std::floating_point<T>
-    inline constexpr bool geq(T a, T b)
-    {
-        return (a > b) || are_equal<T, epsilon>(a, b);
+        return abs(a - b) <= eps * std::max(abs(a), abs(b));
     }
 
     template<typename T>
     requires std::floating_point<T>
-    inline constexpr bool leq(T a, T b)
+    constexpr bool almost_equal(T a, T b)
     {
-        return (a < b) || are_equal<T>(a, b);
+        return almost_equal<T>(a, b, std::numeric_limits<T>::epsilon());
     }
 
-    template<typename T, EpsilonFun<T> epsilon>
+    template<typename T>
     requires std::floating_point<T>
-    inline constexpr bool leq(T a, T b)
+    constexpr bool almost_zero(T a, T eps)
     {
-        return (a < b) || are_equal<T, epsilon>(a, b);
+        return abs(a) <= eps;
+    }
+
+    template<typename T>
+    requires std::floating_point<T>
+    constexpr bool almost_zero(T a)
+    {
+        return almost_zero(a, std::numeric_limits<T>::epsilon());
     }
 } // namespace zeus
