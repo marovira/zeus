@@ -7,7 +7,6 @@ set(ZEUS_HEADER_LIST
     ${ZEUS_VERSION_HEADER}
     ${ZEUS_SOURCE_ROOT}/zeus/assert.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/float.hpp
-    ${ZEUS_SOURCE_ROOT}/zeus/functional.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/platform.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/timer.hpp
     ${ZEUS_SOURCE_ROOT}/zeus/filesystem.hpp
