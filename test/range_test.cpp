@@ -688,7 +688,6 @@ TEMPLATE_TEST_CASE("[Range] - usability", "[zeus]", int, float)
     {
         Range r{5};
         std::vector<int> res(r.begin(), r.end());
-        auto it = res.begin();
         REQUIRE(res == expected);
     }
 
