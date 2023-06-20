@@ -8,13 +8,13 @@
 TEST_CASE("[platform] - template flags: windows", "[zeus]")
 {
     using zeus::current_platform;
-    REQUIRE(magic_enum::enum_name(current_platform) == "windows");
+    STATIC_REQUIRE(magic_enum::enum_name(current_platform) == "windows");
 }
 #else
 TEST_CASE("[platform] - template flags: linux", "[zeus]")
 {
     using zeus::current_platform;
-    REQUIRE(magic_enum::enum_name(current_platform) == "linux");
+    STATIC_REQUIRE(magic_enum::enum_name(current_platform) == "linux");
 }
 #endif
 
@@ -22,12 +22,12 @@ TEST_CASE("[platform] - template flags: linux", "[zeus]")
 TEST_CASE("[platform] - build flags: debug", "[zeus]")
 {
     using zeus::current_build;
-    REQUIRE(magic_enum::enum_name(current_build) == "debug");
+    STATIC_REQUIRE(magic_enum::enum_name(current_build) == "debug");
 }
 #else
 TEST_CASE("[platform] - build flags: release", "[zeus]")
 {
     using zeus::current_build;
-    REQUIRE(magic_enum::enum_name(current_build) == "release");
+    STATIC_REQUIRE(magic_enum::enum_name(current_build) == "release");
 }
 #endif

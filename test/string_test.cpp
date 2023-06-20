@@ -112,7 +112,7 @@ TEST_CASE("[string] - split", "[zeus]")
                     return items == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("No delimiters")
@@ -130,7 +130,7 @@ TEST_CASE("[string] - split", "[zeus]")
                     return items == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("All chars are delimiters")
@@ -148,7 +148,7 @@ TEST_CASE("[string] - split", "[zeus]")
                     return items == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Specific delimiter")
@@ -166,7 +166,7 @@ TEST_CASE("[string] - split", "[zeus]")
                     return items == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Return max_split")
@@ -184,7 +184,7 @@ TEST_CASE("[string] - split", "[zeus]")
                     return items == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
         }
 #endif
@@ -212,7 +212,7 @@ TEST_CASE("[string] - split", "[zeus]")
                 return items == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -239,7 +239,7 @@ TEST_CASE("[string] - split", "[zeus]")
                 return items == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -270,7 +270,7 @@ TEST_CASE("[string] - split", "[zeus]")
                     -1);
                 return items == expected;
             }();
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -309,7 +309,7 @@ TEST_CASE("[string] - split", "[zeus]")
                 return items == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -345,7 +345,7 @@ TEST_CASE("[string] - rstrip", "[zeus]")
                 return res == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -374,7 +374,7 @@ TEST_CASE("[string] - rstrip", "[zeus]")
                 return res == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -410,7 +410,7 @@ TEST_CASE("[string] - lstrip", "[zeus]")
                 return res == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -439,7 +439,7 @@ TEST_CASE("[string] - lstrip", "[zeus]")
                 return res == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -475,7 +475,7 @@ TEST_CASE("[string] - strip", "[zeus]")
                 return res == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -504,7 +504,7 @@ TEST_CASE("[string] - strip", "[zeus]")
                 return res == expected;
             }();
 
-            REQUIRE(res);
+            STATIC_REQUIRE(res);
         }
 #endif
     }
@@ -656,7 +656,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("No newlines")
@@ -669,7 +669,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Newline")
@@ -682,7 +682,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Carriage return")
@@ -695,7 +695,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("CRLF")
@@ -708,7 +708,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Multiple newlines")
@@ -721,7 +721,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Multiple carriage returns")
@@ -734,7 +734,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Multiple CRLF")
@@ -747,7 +747,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Keep newline")
@@ -760,7 +760,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Keep carriage return")
@@ -773,7 +773,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Keep CRLF")
@@ -788,7 +788,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Keep multiple newlines")
@@ -801,7 +801,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Keep multiple carriage returns")
@@ -814,7 +814,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 
             SECTION("Keep multiple CRLF")
@@ -827,7 +827,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
         }
 #endif
@@ -854,7 +854,7 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                     return lines == expected;
                 }();
 
-                REQUIRE(res);
+                STATIC_REQUIRE(res);
             }
 #endif
         }

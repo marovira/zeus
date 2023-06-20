@@ -14,20 +14,20 @@ using zeus::EnumBitfield;
 
 TEST_CASE("[EnumBitfield] - constructors", "[zeus]")
 {
-    SECTION("Enum constructor")
+    SECTION("Runtime")
     {
         EnumBitfield<Bits> field{Bits::a};
         REQUIRE(field.bits() == 1);
     }
 
-    SECTION("Compile-time enum constructor")
+    SECTION("Compile-time")
     {
         static constexpr auto val = []() {
             EnumBitfield<Bits> field{Bits::a};
             return field.bits();
         }();
 
-        REQUIRE(val == 1);
+        STATIC_REQUIRE(val == 1);
     }
 }
 
@@ -48,7 +48,7 @@ TEST_CASE("[EnumBitfield] - operator=", "[zeus]")
             return a.bits();
         }();
 
-        REQUIRE(val == 2);
+        STATIC_REQUIRE(val == 2);
     }
 }
 
@@ -67,7 +67,7 @@ TEST_CASE("[EnumBitfield] - value", "[zeus]")
             return a.value();
         }();
 
-        REQUIRE(val == Bits::a);
+        STATIC_REQUIRE(val == Bits::a);
     }
 }
 
@@ -96,7 +96,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
         }
     }
 
-    SECTION("Contexpr")
+    SECTION("Compile-time")
     {
         SECTION("&= Bitfield")
         {
@@ -107,7 +107,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -117,7 +117,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
         }
 
@@ -130,7 +130,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -140,7 +140,7 @@ TEST_CASE("[EnumBitfield] - operator&=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
         }
     }
@@ -171,7 +171,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
         }
     }
 
-    SECTION("Contexpr")
+    SECTION("Compile-time")
     {
         SECTION("|= Bitfield")
         {
@@ -182,7 +182,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -192,7 +192,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
 
@@ -205,7 +205,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -215,7 +215,7 @@ TEST_CASE("[EnumBitfield] - operator|=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
     }
@@ -246,7 +246,7 @@ TEST_CASE("[EnumBitfield] - operator^=", "[zeus]")
         }
     }
 
-    SECTION("Contexpr")
+    SECTION("Compile-time")
     {
         SECTION("^= Bitfield")
         {
@@ -257,7 +257,7 @@ TEST_CASE("[EnumBitfield] - operator^=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
 
             {
@@ -267,7 +267,7 @@ TEST_CASE("[EnumBitfield] - operator^=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
 
@@ -280,7 +280,7 @@ TEST_CASE("[EnumBitfield] - operator^=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
 
             {
@@ -290,7 +290,7 @@ TEST_CASE("[EnumBitfield] - operator^=", "[zeus]")
                     return field.bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
     }
@@ -321,7 +321,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
         }
     }
 
-    SECTION("Contexpr")
+    SECTION("Compile-time")
     {
         SECTION("& Bitfield")
         {
@@ -331,7 +331,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
                     return (field & EnumBitfield<Bits>{Bits::a}).bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -340,7 +340,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
                     return (field & EnumBitfield<Bits>{Bits::b}).bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
         }
 
@@ -352,7 +352,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
                     return (field & Bits::a).bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -361,7 +361,7 @@ TEST_CASE("[EnumBitfield] - opeartor&", "[zeus]")
                     return (field & Bits::b).bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
         }
     }
@@ -392,7 +392,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
         }
     }
 
-    SECTION("Contexpr")
+    SECTION("Compile-time")
     {
         SECTION("| Bitfield")
         {
@@ -402,7 +402,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
                     return (field | EnumBitfield<Bits>{Bits::a}).bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -411,7 +411,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
                     return (field | EnumBitfield<Bits>{Bits::b}).bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
 
@@ -423,7 +423,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
                     return (field | Bits::a).bits();
                 }();
 
-                REQUIRE(val == 1);
+                STATIC_REQUIRE(val == 1);
             }
 
             {
@@ -432,7 +432,7 @@ TEST_CASE("[EnumBitfield] - operator|", "[zeus]")
                     return (field | Bits::b).bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
     }
@@ -463,7 +463,7 @@ TEST_CASE("[EnumBitfield] - opeartor^", "[zeus]")
         }
     }
 
-    SECTION("Contexpr")
+    SECTION("Compile-time")
     {
         SECTION("^ Bitfield")
         {
@@ -473,7 +473,7 @@ TEST_CASE("[EnumBitfield] - opeartor^", "[zeus]")
                     return (field ^ EnumBitfield<Bits>{Bits::a}).bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
 
             {
@@ -482,7 +482,7 @@ TEST_CASE("[EnumBitfield] - opeartor^", "[zeus]")
                     return (field ^ EnumBitfield<Bits>{Bits::b}).bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
 
@@ -494,7 +494,7 @@ TEST_CASE("[EnumBitfield] - opeartor^", "[zeus]")
                     return (field ^ Bits::a).bits();
                 }();
 
-                REQUIRE(val == 0);
+                STATIC_REQUIRE(val == 0);
             }
 
             {
@@ -503,7 +503,7 @@ TEST_CASE("[EnumBitfield] - opeartor^", "[zeus]")
                     return (field ^ Bits::b).bits();
                 }();
 
-                REQUIRE(val == 3);
+                STATIC_REQUIRE(val == 3);
             }
         }
     }
@@ -533,7 +533,7 @@ TEST_CASE("[EnumBitfield] - operator~", "[zeus]")
             static constexpr auto val = []() {
                 return (~EnumBitfield<Bits>{Bits::none}).bits();
             }();
-            REQUIRE(val == 255);
+            STATIC_REQUIRE(val == 255);
         }
 
         SECTION("Non-zero bitfield")
@@ -541,7 +541,7 @@ TEST_CASE("[EnumBitfield] - operator~", "[zeus]")
             static constexpr auto val = []() {
                 return (~EnumBitfield<Bits>{Bits::a}).bits();
             }();
-            REQUIRE(val == 254);
+            STATIC_REQUIRE(val == 254);
         }
     }
 }
@@ -560,7 +560,7 @@ TEST_CASE("[EnumBitfield] - operator>>", "[zeus]")
             return (EnumBitfield<Bits>{Bits::b} >> 1).bits();
         }();
 
-        REQUIRE(val == 1);
+        STATIC_REQUIRE(val == 1);
     }
 }
 
@@ -578,7 +578,7 @@ TEST_CASE("[EnumBitfield] - operator<<", "[zeus]")
             return (EnumBitfield<Bits>{Bits::a} << 1).bits();
         }();
 
-        REQUIRE(val == 2);
+        STATIC_REQUIRE(val == 2);
     }
 }
 
@@ -600,8 +600,8 @@ TEST_CASE("[EnumBitfield] - operator bool", "[zeus]")
             return EnumBitfield<Bits>{Bits::none};
         }();
 
-        REQUIRE(true_val);
-        REQUIRE_FALSE(false_val);
+        STATIC_REQUIRE(true_val);
+        STATIC_REQUIRE_FALSE(false_val);
     }
 }
 
@@ -636,8 +636,8 @@ TEST_CASE("[EnumBitfield] - operator==", "[zeus]")
                 return EnumBitfield<Bits>{Bits::a} == EnumBitfield<Bits>{Bits::b};
             }();
 
-            REQUIRE(true_val);
-            REQUIRE_FALSE(false_val);
+            STATIC_REQUIRE(true_val);
+            STATIC_REQUIRE_FALSE(false_val);
         }
 
         SECTION("== enum")
@@ -650,8 +650,8 @@ TEST_CASE("[EnumBitfield] - operator==", "[zeus]")
                 return EnumBitfield<Bits>{Bits::a} == Bits::b;
             }();
 
-            REQUIRE(true_val);
-            REQUIRE_FALSE(false_val);
+            STATIC_REQUIRE(true_val);
+            STATIC_REQUIRE_FALSE(false_val);
         }
     }
 }
@@ -687,8 +687,8 @@ TEST_CASE("[EnumBitfield] - opeartor!=", "[zeus]")
                 return EnumBitfield<Bits>{Bits::a} != EnumBitfield<Bits>{Bits::b};
             }();
 
-            REQUIRE(true_val);
-            REQUIRE_FALSE(false_val);
+            STATIC_REQUIRE(true_val);
+            STATIC_REQUIRE_FALSE(false_val);
         }
 
         SECTION("!= enum")
@@ -701,8 +701,8 @@ TEST_CASE("[EnumBitfield] - opeartor!=", "[zeus]")
                 return EnumBitfield<Bits>{Bits::a} != Bits::b;
             }();
 
-            REQUIRE(true_val);
-            REQUIRE_FALSE(false_val);
+            STATIC_REQUIRE(true_val);
+            STATIC_REQUIRE_FALSE(false_val);
         }
     }
 }
@@ -727,7 +727,7 @@ TEST_CASE("[enum_bitwise_operators] - operator&", "[zeus]")
                 return (Bits::a & Bits::a).bits();
             }();
 
-            REQUIRE(val == 1);
+            STATIC_REQUIRE(val == 1);
         }
 
         {
@@ -735,7 +735,7 @@ TEST_CASE("[enum_bitwise_operators] - operator&", "[zeus]")
                 return (Bits::a & Bits::b).bits();
             }();
 
-            REQUIRE(val == 0);
+            STATIC_REQUIRE(val == 0);
         }
     }
 }
@@ -754,7 +754,7 @@ TEST_CASE("[enum_bitwise_operators] - operator|", "[zeus]")
             return (Bits::a | Bits::b).bits();
         }();
 
-        REQUIRE(val == 3);
+        STATIC_REQUIRE(val == 3);
     }
 }
 
@@ -772,7 +772,7 @@ TEST_CASE("[enum_bitwise_operators] - operator^", "[zeus]")
             return (Bits::a ^ Bits::b).bits();
         }();
 
-        REQUIRE(val == 3);
+        STATIC_REQUIRE(val == 3);
     }
 }
 
@@ -790,7 +790,7 @@ TEST_CASE("[enum_bitwise_operators] - operator~", "[zeus]")
             return (~Bits::a).bits();
         }();
 
-        REQUIRE(val == 254);
+        STATIC_REQUIRE(val == 254);
     }
 }
 
@@ -808,7 +808,7 @@ TEST_CASE("[enum_bitwise_operators] - operator>>", "[zeus]")
             return (Bits::b >> 1).bits();
         }();
 
-        REQUIRE(val == 1);
+        STATIC_REQUIRE(val == 1);
     }
 }
 
@@ -826,6 +826,6 @@ TEST_CASE("[enum_bitwise_operators] - operator<<", "[zeus]")
             return (Bits::a << 1).bits();
         }();
 
-        REQUIRE(val == 2);
+        STATIC_REQUIRE(val == 2);
     }
 }
