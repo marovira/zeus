@@ -239,7 +239,7 @@ TEMPLATE_TEST_CASE("[Range] - empty", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range::Iterator] - constructor", "[zeus]", int, float)
 {
-    using It = Range<TestType>::Iterator;
+    using It = typename Range<TestType>::Iterator;
 
     SECTION("Runtime")
     {
@@ -259,7 +259,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - constructor", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
 {
-    using It = Range<TestType>::Iterator;
+    using It = typename Range<TestType>::Iterator;
 
     SECTION("Unit step")
     {
@@ -327,7 +327,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range::Iterator] - operator==", "[zeus]", int, float)
 {
-    using It = Range<TestType>::Iterator;
+    using It = typename Range<TestType>::Iterator;
 
     SECTION("Equal iterators")
     {
@@ -374,7 +374,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator==", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range::Iterator] - operator!=", "[zeus]", int, float)
 {
-    using It = Range<TestType>::Iterator;
+    using It = typename Range<TestType>::Iterator;
 
     SECTION("Equal iterators")
     {
@@ -421,7 +421,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator!=", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range::Iterator] - operator*", "[zeus]", int, float)
 {
-    using It = Range<TestType>::Iterator;
+    using It = typename Range<TestType>::Iterator;
 
     SECTION("Runtime")
     {

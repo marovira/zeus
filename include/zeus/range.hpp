@@ -64,7 +64,11 @@ namespace zeus
         class Iterator
         {
         public:
-            using value_type = T;
+            using value_type        = T;
+            using difference_type   = std::ptrdiff_t;
+            using reference         = T&;
+            using pointer           = T*;
+            using iterator_category = std::forward_iterator_tag;
 
             constexpr Iterator() :
                 m_val{0},
@@ -96,7 +100,7 @@ namespace zeus
             {
                 Iterator r{*this};
                 ++r;
-                return;
+                return r;
             }
 
             constexpr bool operator==(Iterator const& rhs) const
