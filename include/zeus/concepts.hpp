@@ -19,6 +19,6 @@ namespace zeus
     concept is_unsigned_scoped_enum = is_scoped_enum<T> && is_unsigned_enum<T>;
 
     template<typename T>
-    concept is_arithmetic =
-        std::is_integral_v<T> || std::is_floating_point_v<T> && !std::is_same_v<bool, T>;
+    concept is_arithmetic = (std::is_integral_v<T> && !std::is_same_v<bool, T>)
+                            || std::is_floating_point_v<T>;
 } // namespace zeus
