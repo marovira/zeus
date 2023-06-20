@@ -8,24 +8,24 @@ namespace zeus
     class Timer
     {
     public:
-        constexpr void start()
+        void start()
         {
             m_begin = Res::now();
             m_split = m_begin;
         }
 
-        constexpr void reset()
+        void reset()
         {
             m_begin = {};
             m_split = {};
         }
 
-        constexpr T elapsed() const
+        T elapsed() const
         {
             return time_diff(m_begin);
         }
 
-        constexpr T split() const
+        T split() const
         {
             if (m_split == TimePoint{})
             {
@@ -41,7 +41,7 @@ namespace zeus
         using Duration  = std::chrono::duration<T>;
         using TimePoint = std::chrono::time_point<Res>;
 
-        constexpr T time_diff(TimePoint const& first) const
+        T time_diff(TimePoint const& first) const
         {
             return std::chrono::duration_cast<Duration>(Res::now() - first).count();
         }
