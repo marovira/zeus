@@ -5,6 +5,7 @@
 
 #include <cmath>
 #include <stdexcept>
+#include <vector>
 
 namespace zeus
 {
@@ -149,6 +150,11 @@ namespace zeus
         constexpr bool operator!=(Range const& rhs) const
         {
             return !(*this == rhs);
+        }
+
+        constexpr explicit operator std::vector<T>() const
+        {
+            return std::vector<T>{begin(), end()};
         }
 
     private:

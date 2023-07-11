@@ -691,6 +691,59 @@ TEMPLATE_TEST_CASE("[range] - range", "[zeus]", int, float)
     }
 }
 
+TEMPLATE_TEST_CASE("[Range] - vector conversion", "[zeus]", int, float)
+{
+    SECTION("Divisible stride")
+    {
+        SECTION("Runtime")
+        {
+            const std::vector<TestType> exp{0, 2, 4, 6, 8};
+            Range<TestType> r{0, 10, 2};
+            auto res = std::vector<TestType>{r};
+
+            REQUIRE(res == exp);
+        }
+
+        SECTION("Compile-time")
+        {
+            static constexpr auto res = []() {
+                std::vector<TestType> exp{0, 2, 4, 6, 8};
+                Range<TestType> r{0, 10, 2};
+                auto vec = std::vector<TestType>{r};
+
+                return vec == exp;
+            }();
+
+            STATIC_REQUIRE(res);
+        }
+    }
+
+    SECTION("Uneven stride")
+    {
+        SECTION("Runtime")
+        {
+            const std::vector<TestType> exp{0, 3, 6, 9};
+            Range<TestType> r{0, 10, 3};
+            auto res = std::vector<TestType>{r};
+
+            REQUIRE(res == exp);
+        }
+
+        SECTION("Compile-time")
+        {
+            static constexpr auto res = []() {
+                std::vector<TestType> exp{0, 3, 6, 9};
+                Range<TestType> r{0, 10, 3};
+                auto vec = std::vector<TestType>{r};
+
+                return vec == exp;
+            }();
+
+            STATIC_REQUIRE(res);
+        }
+    }
+}
+
 TEMPLATE_TEST_CASE("[Range] - usability", "[zeus]", int, float)
 {
     const std::vector<int> expected{0, 1, 2, 3, 4};
