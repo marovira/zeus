@@ -461,20 +461,42 @@ TEMPLATE_TEST_CASE("[Range] - begin", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range] - end", "[zeus]", int, float)
 {
-    SECTION("Runtime")
+    SECTION("Divisible stride")
     {
-        Range<TestType> r{10};
-        REQUIRE(*r.end() == 10);
+        SECTION("Runtime")
+        {
+            Range<TestType> r{10};
+            REQUIRE(*r.end() == 10);
+        }
+
+        SECTION("Compile-time")
+        {
+            static constexpr auto val = []() {
+                Range<TestType> r{10};
+                return *r.end();
+            }();
+
+            STATIC_REQUIRE(val == 10);
+        }
     }
 
-    SECTION("Compile-time")
+    SECTION("Non-divisible stride")
     {
-        static constexpr auto val = []() {
-            Range<TestType> r{10};
-            return *r.end();
-        }();
+        SECTION("Runtime")
+        {
+            Range<TestType> r{0, 10, 3};
+            REQUIRE(*r.end() == 12);
+        }
 
-        STATIC_REQUIRE(val == 10);
+        SECTION("Compile-time")
+        {
+            static constexpr auto val = []() {
+                Range<TestType> r{0, 10, 3};
+                return *r.end();
+            }();
+
+            STATIC_REQUIRE(val == 12);
+        }
     }
 }
 
@@ -699,5 +721,13 @@ TEMPLATE_TEST_CASE("[Range] - usability", "[zeus]", int, float)
             return a / 2;
         });
         REQUIRE(res == expected);
+    }
+
+    SECTION("Uneven range")
+    {
+        const std::vector<int> exp{0, 3, 6, 9};
+        Range r{0, 10, 3};
+        std::vector<int> res(r.begin(), r.end());
+        REQUIRE(res == exp);
     }
 }

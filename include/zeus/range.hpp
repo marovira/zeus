@@ -22,9 +22,9 @@ namespace zeus
         {}
 
         constexpr Range(T begin, T end, T step) :
-            m_start{begin},
+            m_begin{begin},
             m_end{end},
-            m_step{step}
+            m_stride{step}
         {
             if (step == T{0})
             {
@@ -35,17 +35,17 @@ namespace zeus
         constexpr std::size_t size() const
         {
             T hi, lo, step;
-            if (m_step > T{0})
+            if (m_stride > T{0})
             {
-                lo   = m_start;
+                lo   = m_begin;
                 hi   = m_end;
-                step = m_step;
+                step = m_stride;
             }
             else
             {
-                hi   = m_start;
+                hi   = m_begin;
                 lo   = m_end;
-                step = -m_step;
+                step = -m_stride;
             }
 
             if (lo >= hi)
@@ -72,12 +72,12 @@ namespace zeus
 
             constexpr Iterator() :
                 m_val{0},
-                m_step{0}
+                m_stride{0}
             {}
 
             constexpr Iterator(T val, T step) :
                 m_val{val},
-                m_step{step}
+                m_stride{step}
             {}
 
             constexpr const T operator*() const
@@ -92,7 +92,7 @@ namespace zeus
 
             constexpr Iterator& operator++()
             {
-                m_val += m_step;
+                m_val += m_stride;
                 return *this;
             }
 
@@ -114,17 +114,17 @@ namespace zeus
             }
 
         private:
-            T m_val, m_step;
+            T m_val, m_stride;
         };
 
         constexpr Iterator begin() const
         {
-            return Iterator{m_start, m_step};
+            return Iterator{m_begin, m_stride};
         }
 
         constexpr Iterator end() const
         {
-            return Iterator{m_end, m_step};
+            return Iterator{m_begin + ((static_cast<T>(size())) * m_stride), m_stride};
         }
 
         constexpr bool operator==(Range const& rhs) const
@@ -152,7 +152,7 @@ namespace zeus
         }
 
     private:
-        T m_start{0}, m_end{0}, m_step{0};
+        T m_begin{0}, m_end{0}, m_stride{0};
     };
 
     template<typename T>
