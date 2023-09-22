@@ -46,14 +46,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ZEUS_CMAKE_ROOT})
 include(FetchContent)
 include(FetchLibrary)
 
-find_package(fmt 9.1.0 QUIET)
-find_package(magic_enum 0.8.2 QUIET)
+find_package(fmt 10.1.1 QUIET)
+find_package(magic_enum 0.9.3 QUIET)
 
 if (NOT fmt_FOUND)
     fetch_library(
         NAME fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        GIT_TAG a33701196adfad74917046096bf5a2aa0ab0bb50
+        GIT_TAG 6379251554cd18e20853c552722527fefc72080e
         )
 endif()
 
@@ -61,7 +61,7 @@ if (NOT magic_enum_FOUND)
     fetch_library(
         NAME magic_enum
         GIT_REPOSITORY https://github.com/Neargye/magic_enum
-        GIT_TAG e1a68e9dd3d2e9180b04c8aeacd4975db745e6b8
+        GIT_TAG e1ea11a93d0bdf6aae415124ded6126220fa4f28
         )
 endif()
 
@@ -69,7 +69,7 @@ endif()
 # Main library.
 #================================
 add_library(zeus INTERFACE)
-target_include_directories(zeus INTERFACE 
+target_include_directories(zeus INTERFACE
     $<BUILD_INTERFACE:${ZEUS_SOURCE_ROOT}>
     $<INSTALL_INTERFACE:include>)
 target_link_libraries(zeus INTERFACE fmt::fmt magic_enum::magic_enum)
@@ -112,7 +112,7 @@ if (ZEUS_INSTALL_TARGET)
         ARCH_INDEPENDENT
         )
 
-    install(EXPORT zeus 
+    install(EXPORT zeus
         FILE zeusTargets.cmake
         NAMESPACE zeus::
         DESTINATION lib/cmake/zeus
