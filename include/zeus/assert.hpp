@@ -17,12 +17,10 @@ namespace zeus
 } // namespace zeus
 
 #if defined(ZEUS_BUILD_DEBUG)
-// clang-format off
-// There appears to be a bug in clang-format where it will cause an indent in #condition which is incorrect.
-// TODO: remove once issue is fixed.
-#    define ASSERT(condition)              zeus::assert_handler(condition, __FILE__, __LINE__, #condition)
-#    define ASSERT_MSG(condition, message) zeus::assert_handler(condition, __FILE__, __LINE__, message)
-// clang-format on
+#    define ASSERT(condition) \
+        zeus::assert_handler(condition, __FILE__, __LINE__, #condition)
+#    define ASSERT_MSG(condition, message) \
+        zeus::assert_handler(condition, __FILE__, __LINE__, message)
 #else
 #    define ASSERT(condition)
 #    define ASSERT_MSG(condition, message)
@@ -46,7 +44,7 @@ namespace zeus
         fmt::print(stderr, "{}\n", message);
 
 #    if defined(ZEUS_PLATFORM_WINDOWS)
-        static constexpr auto max_message_length{16 * 1024};
+        static constexpr auto max_message_length{16 * 1'024};
         char buffer[max_message_length];
         memcpy(buffer, message.c_str(), message.size() + 1);
         strncat_s(buffer, "\n", 3);

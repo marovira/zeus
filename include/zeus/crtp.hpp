@@ -4,11 +4,11 @@ namespace zeus
 {
     // A CRTP base class taken from FluentC++
     // https://www.fluentcpp.com/2017/05/19/crtp-helper/
-    template<typename T, template<typename> class crtpType>
+    template<typename T, template<typename> class CRTPType>
     class CRTPBase
     {
         CRTPBase() = default;
-        friend crtpType<T>;
+        friend CRTPType<T>;
 
     public:
         constexpr T& self()

@@ -12,6 +12,7 @@ namespace zeus
         using BaseType = std::underlying_type_t<T>;
 
         constexpr EnumBitfield() = default;
+
         constexpr explicit EnumBitfield(T val) :
             m_field{static_cast<BaseType>(val)}
         {}
@@ -211,7 +212,8 @@ namespace zeus
 
     template<typename T>
     requires is_scoped_enum<T> && is_unsigned_enum<T>
-    [[deprecated]] inline constexpr bool check_flag(T bit_field, T flag)
+    [[deprecated]]
+    inline constexpr bool check_flag(T bit_field, T flag)
     {
         using namespace magic_enum::bitwise_operators;
 
