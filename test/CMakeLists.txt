@@ -1,4 +1,4 @@
-set(ZEUS_TEST_FILES
+set(TEST_SOURCE
     ${ZEUS_TEST_ROOT}/assert_test.cpp
     ${ZEUS_TEST_ROOT}/float_test.cpp
     ${ZEUS_TEST_ROOT}/platform_test.cpp
@@ -14,5 +14,11 @@ set(ZEUS_TEST_FILES
     ${ZEUS_TEST_ROOT}/range_test.cpp
     )
 
-set(ZEUS_TEST_GROUP ${ZEUS_TEST_FILES} PARENT_SCOPE)
-set(ZEUS_TEST_LIST ${ZEUS_TEST_FILES} PARENT_SCOPE)
+source_group("source" FILES ${TEST_SOURCE})
+add_executable(zeus_test ${TEST_SOURCE})
+target_link_libraries(zeus_test PRIVATE
+    zeus
+    Catch2::Catch2WithMain)
+set_target_properties(zeus_test PROPERTIES FOLDER "zeus")
+
+catch_discover_tests(zeus_test)

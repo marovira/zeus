@@ -25,20 +25,6 @@ set(ZEUS_TEST_ROOT ${ZEUS_SOURCE_DIR}/test)
 set(ZEUS_CMAKE_ROOT ${ZEUS_SOURCE_DIR}/cmake)
 
 #================================
-# Add subdirectories.
-#================================
-add_subdirectory(${ZEUS_SOURCE_ROOT}/zeus)
-if (ZEUS_BUILD_TESTS)
-    add_subdirectory(${ZEUS_TEST_ROOT})
-endif()
-
-#================================
-# Source groups.
-#================================
-source_group("include" FILES)
-source_group("include\\zeus" FILES ${ZEUS_INCLUDE_GROUP})
-
-#================================
 # Find Packages.
 #================================
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ZEUS_CMAKE_ROOT})
@@ -66,24 +52,9 @@ if (NOT magic_enum_FOUND)
 endif()
 
 #================================
-# Main library.
+# Add subdirectories.
 #================================
-add_library(zeus INTERFACE)
-target_include_directories(zeus INTERFACE
-    $<BUILD_INTERFACE:${ZEUS_SOURCE_ROOT}>
-    $<INSTALL_INTERFACE:include>)
-target_link_libraries(zeus INTERFACE fmt::fmt magic_enum::magic_enum)
-if (NOT MSVC)
-    target_link_libraries(zeus INTERFACE stdc++fs)
-endif()
-target_compile_features(zeus INTERFACE cxx_std_20)
-add_library(zeus::zeus ALIAS zeus)
-
-# Add a dummy target for MSVC so the files are visible.
-if (MSVC)
-    add_custom_target(_zeus SOURCES ${ZEUS_INCLUDE_GROUP})
-    set_target_properties(_zeus PROPERTIES FOLDER "zeus")
-endif()
+add_subdirectory(${ZEUS_SOURCE_ROOT}/zeus)
 
 #================================
 # Install targets.
@@ -131,7 +102,7 @@ if (ZEUS_INSTALL_TARGET)
         set(INCLUDE_INSTALL_DEST "${CMAKE_INSTALL_INCLUDEDIR}/libzeus/zeus")
     endif()
     install(FILES
-        ${ZEUS_INCLUDE_GROUP}
+        ${ZEUS_INSTALL_FILES}
         DESTINATION ${INCLUDE_INSTALL_DEST}
         )
 endif()
@@ -151,14 +122,8 @@ if (ZEUS_BUILD_TESTS)
         list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
     endif()
 
-    source_group("source" FILES ${ZEUS_TEST_GROUP})
-    add_executable(zeus_test ${ZEUS_TEST_LIST})
-    target_link_libraries(zeus_test PRIVATE
-        zeus
-        Catch2::Catch2WithMain)
-    set_target_properties(zeus_test PROPERTIES FOLDER "zeus")
-
     include(CTest)
     include(Catch)
-    catch_discover_tests(zeus_test)
+
+    add_subdirectory(${ZEUS_TEST_ROOT})
 endif()
