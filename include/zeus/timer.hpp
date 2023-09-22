@@ -1,10 +1,12 @@
 #pragma once
 
+#include "concepts.hpp"
+
 #include <chrono>
 
 namespace zeus
 {
-    template<typename T, typename Res = std::chrono::high_resolution_clock>
+    template<ArithmeticType T, typename Res = std::chrono::high_resolution_clock>
     class Timer
     {
     public:

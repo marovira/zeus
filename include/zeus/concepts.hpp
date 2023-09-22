@@ -6,19 +6,21 @@
 namespace zeus
 {
     template<typename T>
-    concept is_enum = std::is_enum_v<T>;
+    concept Enum = std::is_enum_v<T>;
 
-    // Note: To be removed in C++23. Superseded by std::is_scoped_enum.
+    // Note: to be removed in C++23. Superseded by std::is_scoped_enum
     template<typename T>
-    concept is_scoped_enum = magic_enum::is_scoped_enum<T>::value;
-
-    template<typename T>
-    concept is_unsigned_enum = std::is_unsigned_v<std::underlying_type_t<T>>;
+    concept ScopedEnum = magic_enum::is_scoped_enum<T>::value;
 
     template<typename T>
-    concept is_unsigned_scoped_enum = is_scoped_enum<T> && is_unsigned_enum<T>;
+    concept UnsignedEnum = Enum<T> && std::is_unsigned_v<std::underlying_type_t<T>>;
 
     template<typename T>
-    concept is_arithmetic = (std::is_integral_v<T> && !std::is_same_v<bool, T>)
-                            || std::is_floating_point_v<T>;
+    concept UnsignedScopedEnum = ScopedEnum<T> && UnsignedEnum<T>;
+
+    template<typename T>
+    concept IntegralType = std::is_integral_v<T> && !std::is_same_v<bool, T>;
+
+    template<typename T>
+    concept ArithmeticType = IntegralType<T> || std::is_floating_point_v<T>;
 } // namespace zeus

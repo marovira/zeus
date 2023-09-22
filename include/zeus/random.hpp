@@ -7,9 +7,7 @@
 
 namespace zeus
 {
-    template<typename T, typename Engine = std::mt19937>
-    requires is_arithmetic<T>
-
+    template<ArithmeticType T, typename Engine = std::mt19937>
     class Random
     {
     public:

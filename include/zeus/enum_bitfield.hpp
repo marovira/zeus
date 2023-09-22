@@ -4,8 +4,7 @@
 
 namespace zeus
 {
-    template<typename T>
-    requires is_unsigned_scoped_enum<T>
+    template<UnsignedScopedEnum T>
     class EnumBitfield
     {
     public:
@@ -167,51 +166,44 @@ namespace zeus
 
     namespace enum_bitwise_operators
     {
-        template<typename T>
-        requires is_unsigned_scoped_enum<T>
+        template<UnsignedScopedEnum T>
         constexpr EnumBitfield<T> operator&(T lhs, T rhs)
         {
             return EnumBitfield<T>{lhs} & EnumBitfield<T>{rhs};
         }
 
-        template<typename T>
-        requires is_unsigned_scoped_enum<T>
+        template<UnsignedScopedEnum T>
         constexpr EnumBitfield<T> operator|(T lhs, T rhs)
         {
             return EnumBitfield<T>{lhs} | EnumBitfield<T>{rhs};
         }
 
-        template<typename T>
-        requires is_unsigned_scoped_enum<T>
+        template<UnsignedScopedEnum T>
         constexpr EnumBitfield<T> operator^(T lhs, T rhs)
         {
             return EnumBitfield<T>{lhs} ^ EnumBitfield<T>{rhs};
         }
 
-        template<typename T>
-        requires is_unsigned_scoped_enum<T>
+        template<UnsignedScopedEnum T>
         constexpr EnumBitfield<T> operator~(T val)
         {
             return ~EnumBitfield<T>{val};
         }
 
-        template<typename T, typename U>
-        requires is_unsigned_scoped_enum<T> && std::integral<U>
+        template<UnsignedScopedEnum T, IntegralType U>
         constexpr EnumBitfield<T> operator>>(T val, U n)
         {
             return EnumBitfield<T>{val} >> n;
         }
 
-        template<typename T, typename U>
-        requires is_unsigned_scoped_enum<T> && std::integral<U>
+        template<UnsignedScopedEnum T, IntegralType U>
         constexpr EnumBitfield<T> operator<<(T val, U n)
         {
             return EnumBitfield<T>{val} << n;
         }
     } // namespace enum_bitwise_operators
 
-    template<typename T>
-    requires is_scoped_enum<T> && is_unsigned_enum<T>
+    template<UnsignedScopedEnum T>
     [[deprecated]]
     inline constexpr bool check_flag(T bit_field, T flag)
     {
