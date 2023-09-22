@@ -16,9 +16,16 @@ namespace zeus
         });
     }
 
-    template<typename DelimFun>
+    template<typename T>
+    concept DelimiterFunctor = requires(T t, char c) {
+        // clang-format off
+        {t(c)} -> std::same_as<bool>;
+        // clang-format on
+    };
+
+    template<DelimiterFunctor T>
     constexpr std::vector<std::string>
-    split(std::string const& str, DelimFun&& is_delim, int max_split)
+    split(std::string const& str, T&& is_delim, int max_split)
     {
         if (str.empty())
         {
@@ -74,7 +81,7 @@ namespace zeus
             max_split);
     }
 
-    template<typename TrailingFun>
+    template<DelimiterFunctor TrailingFun>
     constexpr std::string rstrip(std::string const& str, TrailingFun&& is_trailing)
     {
         std::string ret{str};
@@ -93,7 +100,7 @@ namespace zeus
         return rstrip(str, is_whitespace);
     }
 
-    template<typename LeadingFun>
+    template<DelimiterFunctor LeadingFun>
     constexpr std::string lstrip(std::string const& str, LeadingFun&& is_leading)
     {
         std::string ret{str};
@@ -111,7 +118,7 @@ namespace zeus
         return lstrip(str, is_whitespace);
     }
 
-    template<typename LeadingTrailingFun>
+    template<DelimiterFunctor LeadingTrailingFun>
     constexpr std::string strip(std::string const& str,
                                 LeadingTrailingFun&& is_leading_trailing)
     {
