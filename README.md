@@ -41,8 +41,8 @@ In addition, Zeus depends on the following libraries:
 
 | Library | Version |
 |---------|---------|
-| [FMT](https://github.com/fmtlib/fmt) | 9.1.0 |
-| [magic_enum](https://github.com/Neargye/magic_enum) | 0.8.2 |
+| [FMT](https://github.com/fmtlib/fmt) | 10.1.1 |
+| [magic_enum](https://github.com/Neargye/magic_enum) | 0.9.3 |
 
 ## Contributing
 
@@ -67,7 +67,7 @@ If you are submitting a pull request, the guidelines are the following:
    rejected.
 2. Ensure that *all* unit tests are working prior to submitting the pull
    request. If you are adding a new feature that has been approved, it is your
-   responsibility to provide the corresponding unit tests (if applicable). 
+   responsibility to provide the corresponding unit tests (if applicable).
 
 ## License
 
