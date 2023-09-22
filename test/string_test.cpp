@@ -15,6 +15,28 @@ TEST_CASE("[string] - is_whitespace", "[zeus]")
     REQUIRE_FALSE(zeus::is_whitespace('c'));
 }
 
+TEST_CASE("[string] DelimiterFunctor concept", "[zeus]")
+{
+    SECTION("Valid functor")
+    {
+        constexpr auto fun = [](char) {
+            return false;
+        };
+        STATIC_REQUIRE(zeus::DelimiterFunctor<decltype(fun)>);
+    }
+
+    SECTION("Invalid functors")
+    {
+        constexpr auto void_fun = [](char) {};
+        STATIC_REQUIRE_FALSE(zeus::DelimiterFunctor<decltype(void_fun)>);
+
+        constexpr auto str_fun = [](std::string) {
+            return false;
+        };
+        STATIC_REQUIRE_FALSE(zeus::DelimiterFunctor<decltype(str_fun)>);
+    }
+}
+
 TEST_CASE("[string] - split", "[zeus]")
 {
     static constexpr char delim{'_'};
