@@ -25,7 +25,7 @@ in C++ easier. Some notable features of Zeus are:
 
 The following are **core** requirements of Zeus:
 
-* CMake 3.24+
+* CMake 3.27+
 
 Zeus supports the following platforms and compilers:
 
@@ -41,8 +41,8 @@ In addition, Zeus depends on the following libraries:
 
 | Library | Version |
 |---------|---------|
-| [FMT](https://github.com/fmtlib/fmt) | 10.1.1 |
-| [magic_enum](https://github.com/Neargye/magic_enum) | 0.9.3 |
+| [FMT](https://github.com/fmtlib/fmt) | 10.2.0 |
+| [magic_enum](https://github.com/Neargye/magic_enum) | 0.9.5 |
 
 ## Contributing
 
