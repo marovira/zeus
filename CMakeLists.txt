@@ -1,7 +1,7 @@
 #================================
 # Project setup.
 #================================
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.27)
 project(zeus VERSION 1.3.0 LANGUAGES CXX C)
 
 if (APPLE)
