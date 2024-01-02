@@ -32,14 +32,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ZEUS_CMAKE_ROOT})
 include(FetchContent)
 include(FetchLibrary)
 
-find_package(fmt 10.1.1 QUIET)
-find_package(magic_enum 0.9.3 QUIET)
+find_package(fmt 10.2.0 QUIET)
+find_package(magic_enum 0.9.5 QUIET)
 
 if (NOT fmt_FOUND)
     fetch_library(
         NAME fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        GIT_TAG 6379251554cd18e20853c552722527fefc72080e
+        GIT_TAG 67c0c0c09cf74d407d71a29c194761981614df3e
         )
 endif()
 
@@ -47,7 +47,7 @@ if (NOT magic_enum_FOUND)
     fetch_library(
         NAME magic_enum
         GIT_REPOSITORY https://github.com/Neargye/magic_enum
-        GIT_TAG e1ea11a93d0bdf6aae415124ded6126220fa4f28
+        GIT_TAG e55b9b54d5cf61f8e117cafb17846d7d742dd3b4
         )
 endif()
 
@@ -111,13 +111,13 @@ endif()
 # Build the tests.
 #================================
 if (ZEUS_BUILD_TESTS)
-    find_package(Catch2 3.3.2 QUIET)
+    find_package(Catch2 3.5.1 QUIET)
 
     if (NOT Catch2_FOUND)
         fetch_library(
             NAME Catch2
             GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-            GIT_TAG 97c48e0c343d26d50764fafdc90b1e630fbd10ce
+            GIT_TAG f981c9cbcac07a2690e5a86767eba490b5465463
             )
         list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
     endif()
