@@ -2,6 +2,7 @@
 
 #include "platform.hpp"
 
+#include <source_location>
 #include <string>
 
 #if defined(ZEUS_ENABLE_TESTING_MACROS)
@@ -13,14 +14,15 @@
 
 namespace zeus
 {
-    void assert_handler(bool condition, std::string file, int line, std::string message);
+    void
+    assert_handler(bool condition, std::source_location const& loc, std::string message);
 } // namespace zeus
 
 #if defined(ZEUS_BUILD_DEBUG)
 #    define ASSERT(condition) \
-        zeus::assert_handler(condition, __FILE__, __LINE__, #condition)
+        zeus::assert_handler(condition, std::source_location::current(), #condition)
 #    define ASSERT_MSG(condition, message) \
-        zeus::assert_handler(condition, __FILE__, __LINE__, message)
+        zeus::assert_handler(condition, std::source_location::current(), message)
 #else
 #    define ASSERT(condition)
 #    define ASSERT_MSG(condition, message)
@@ -55,12 +57,18 @@ namespace zeus
 #    endif
     }
 
-    void assert_handler(bool condition, std::string file, int line, std::string message)
+    void
+    assert_handler(bool condition, std::source_location const& loc, std::string message)
     {
         if (!condition)
         {
             std::string assert_message =
-                fmt::format("error: in file {}({}): {}\n", file, line, message);
+                fmt::format("error: in file {}({}:{}) \'{}\': {}\n",
+                            loc.file_name(),
+                            loc.line(),
+                            loc.column(),
+                            loc.function_name(),
+                            message);
 
 #    if !defined(ZEUS_NO_ASSERT_PRINT)
             print_assert(assert_message);
