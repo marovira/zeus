@@ -13,6 +13,7 @@ set(TEST_SOURCE
     ${ZEUS_TEST_ROOT}/string_test.cpp
     ${ZEUS_TEST_ROOT}/range_test.cpp
     ${ZEUS_TEST_ROOT}/concepts_test.cpp
+    ${ZEUS_TEST_ROOT}/container_traits_test.cpp
     )
 
 source_group("source" FILES ${TEST_SOURCE})
