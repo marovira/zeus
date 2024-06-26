@@ -35,7 +35,7 @@ jobs:
         env:
           BUILD_TYPE: ${{ matrix.config }}
         run: |
-          cmake --preset=msvc -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=C:/deps
+          cmake --preset=msvc --parallel -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=C:/deps
           cd ./build
           cmake --build . --config $env:BUILD_TYPE
 
