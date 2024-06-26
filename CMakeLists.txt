@@ -32,8 +32,15 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ZEUS_CMAKE_ROOT})
 include(FetchContent)
 include(FetchLibrary)
 
-find_package(fmt 10.2.0 QUIET)
-find_package(magic_enum 0.9.5 QUIET)
+#================================
+# SDK Versions.
+#================================
+set(ZEUS_FMT_VERSION 10.2.0)
+set(ZEUS_MAGIC_ENUM_VERSION 0.9.5)
+set(ZEUS_CATCH_VERSION 3.5.1)
+
+find_package(fmt ${ZEUS_FMT_VERSION} QUIET)
+find_package(magic_enum ${ZEUS_MAGIC_ENUM_VERSION} QUIET)
 
 if (NOT fmt_FOUND)
     fetch_library(
@@ -111,7 +118,7 @@ endif()
 # Build the tests.
 #================================
 if (ZEUS_BUILD_TESTS)
-    find_package(Catch2 3.5.1 QUIET)
+    find_package(Catch2 ${ZEUS_CATCH_VERSION} QUIET)
 
     if (NOT Catch2_FOUND)
         fetch_library(
