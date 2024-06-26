@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+      - 'LICENSE'
+      - 'data/**'
+      - '**/release-*.yml'
+    tags-ignore:
+      - "*.*.*"
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+      - 'LICENSE'
+      - '**/release-*.yml'
+    tags-ignore:
+      - "*.*.*"
+  workflow_dispatch:
+
+jobs:
+  format:
+    uses: ./.github/workflows/clang-format.yml
+  build-linux:
+    needs: format
+    uses: ./.github/workflows/build-linux.yml
+  build-msvc:
+    needs: format
+    uses: ./.github/workflows/build-msvc.yml
