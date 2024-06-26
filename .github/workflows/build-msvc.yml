@@ -21,13 +21,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: C:/deps
-          key: deps-${{ runner.os }}-${{ hashfiles('dependencies.txt') }}
+          key: deps-${{ runner.os }}-${{ matrix.config}}-${{ hashfiles('dependencies.txt') }}
 
       - name: Install dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
         shell: powershell
         env:
-          BUILD_TYPE: Release
+          BUILD_TYPE: ${{ matrix.config }}
         run: ./.github/workflows/scripts/install_deps.ps1
 
       - name: Build
