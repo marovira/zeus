@@ -16,6 +16,10 @@ namespace zeus
             m_field{static_cast<BaseType>(val)}
         {}
 
+        constexpr explicit EnumBitfield(BaseType field) :
+            m_field{field}
+        {}
+
         constexpr EnumBitfield& operator=(T val)
         {
             m_field = static_cast<BaseType>(val);

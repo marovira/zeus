@@ -16,18 +16,42 @@ TEST_CASE("[EnumBitfield] - constructors", "[zeus]")
 {
     SECTION("Runtime")
     {
-        EnumBitfield<Bits> field{Bits::a};
-        REQUIRE(field.bits() == 1);
+        SECTION("From enum")
+        {
+            EnumBitfield<Bits> field{Bits::a};
+            REQUIRE(field.bits() == 1);
+        }
+
+        SECTION("From base type")
+        {
+            std::uint8_t flags = 0x01;
+            EnumBitfield<Bits> field{flags};
+            REQUIRE(field.bits() == flags);
+        }
     }
 
     SECTION("Compile-time")
     {
-        static constexpr auto val = []() {
-            EnumBitfield<Bits> field{Bits::a};
-            return field.bits();
-        }();
+        SECTION("From enum")
+        {
+            static constexpr auto val = []() {
+                EnumBitfield<Bits> field{Bits::a};
+                return field.bits();
+            }();
 
-        STATIC_REQUIRE(val == 1);
+            STATIC_REQUIRE(val == 1);
+        }
+
+        SECTION("From base type")
+        {
+            static constexpr auto val = []() {
+                std::uint8_t flags = 0x01;
+                EnumBitfield<Bits> field{flags};
+                return field.bits();
+            }();
+
+            STATIC_REQUIRE(val == 1);
+        }
     }
 }
 
@@ -38,6 +62,8 @@ TEST_CASE("[EnumBitfield] - operator=", "[zeus]")
         EnumBitfield<Bits> a;
         a = Bits::b;
         REQUIRE(a.bits() == 2);
+
+        auto b = EnumBitfield<Bits>{Bits::b};
     }
 
     SECTION("Compile-time")
