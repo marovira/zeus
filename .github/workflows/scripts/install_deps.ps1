@@ -1,4 +1,4 @@
-c="C:/deps"
+$c="C:/deps"
 if(-not (Test-Path $c))
 {
     python .github/workflows/scripts/generate_versions.py

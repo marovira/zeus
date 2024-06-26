@@ -7,13 +7,13 @@ on:
 jobs:
   build:
     name: ${{ matrix.config.preset }}-${{ matrix.build }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {cxx: "clang++-15", cc: "clang-15", preset: "clang"}
-          - {cxx: "g++-13", cc: "gcc-13", preset: "gcc"}
+          - {cxx: "clang++-18", cc: "clang-18", preset: "clang"}
+          - {cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
         build: ["Debug", "Release"]
     steps:
       - uses: actions/checkout@v4
@@ -29,8 +29,8 @@ jobs:
         if: steps.cache-deps.outputs.cache-hit != 'true'
         shell: bash
         env:
-          CC: gcc-13
-          CXX: g++-13
+          CC: gcc-14
+          CXX: g++-14
         run: |
           chmod +x .github/workflows/scripts/install_deps.sh
           ./.github/workflows/scripts/install_deps.sh
