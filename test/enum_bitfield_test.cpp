@@ -62,8 +62,6 @@ TEST_CASE("[EnumBitfield] - operator=", "[zeus]")
         EnumBitfield<Bits> a;
         a = Bits::b;
         REQUIRE(a.bits() == 2);
-
-        auto b = EnumBitfield<Bits>{Bits::b};
     }
 
     SECTION("Compile-time")
