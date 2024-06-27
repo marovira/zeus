@@ -1,7 +1,6 @@
 #include <zeus/string.hpp>
 
 #include <catch2/catch_test_macros.hpp>
-#include <zeus/compiler.hpp>
 
 TEST_CASE("[string] - is_whitespace", "[zeus]")
 {
@@ -116,7 +115,6 @@ TEST_CASE("[string] - split", "[zeus]")
             }
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             SECTION("Empty string")
@@ -209,7 +207,6 @@ TEST_CASE("[string] - split", "[zeus]")
                 STATIC_REQUIRE(res);
             }
         }
-#endif
     }
 
     SECTION("Split: str")
@@ -223,7 +220,6 @@ TEST_CASE("[string] - split", "[zeus]")
             REQUIRE(items == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -236,7 +232,6 @@ TEST_CASE("[string] - split", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 
     SECTION("Split: str, int")
@@ -250,7 +245,6 @@ TEST_CASE("[string] - split", "[zeus]")
             REQUIRE(items == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -263,7 +257,6 @@ TEST_CASE("[string] - split", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 
     SECTION("Split: str, char")
@@ -277,7 +270,6 @@ TEST_CASE("[string] - split", "[zeus]")
             REQUIRE(items == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -294,7 +286,6 @@ TEST_CASE("[string] - split", "[zeus]")
             }();
             STATIC_REQUIRE(res);
         }
-#endif
     }
 
     SECTION("Split: str, char, int")
@@ -314,7 +305,6 @@ TEST_CASE("[string] - split", "[zeus]")
             REQUIRE(items == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -333,7 +323,6 @@ TEST_CASE("[string] - split", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 }
 
@@ -353,7 +342,6 @@ TEST_CASE("[string] - rstrip", "[zeus]")
             REQUIRE(res == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -369,7 +357,6 @@ TEST_CASE("[string] - rstrip", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 
     SECTION("rstrip: str")
@@ -384,7 +371,6 @@ TEST_CASE("[string] - rstrip", "[zeus]")
             REQUIRE(res == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -398,7 +384,6 @@ TEST_CASE("[string] - rstrip", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 }
 
@@ -418,7 +403,6 @@ TEST_CASE("[string] - lstrip", "[zeus]")
             REQUIRE(res == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -434,7 +418,6 @@ TEST_CASE("[string] - lstrip", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 
     SECTION("lstrip: str")
@@ -449,7 +432,6 @@ TEST_CASE("[string] - lstrip", "[zeus]")
             REQUIRE(res == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -463,7 +445,6 @@ TEST_CASE("[string] - lstrip", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 }
 
@@ -483,7 +464,6 @@ TEST_CASE("[string] - strip", "[zeus]")
             REQUIRE(res == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -499,7 +479,6 @@ TEST_CASE("[string] - strip", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 
     SECTION("strip: str")
@@ -514,7 +493,6 @@ TEST_CASE("[string] - strip", "[zeus]")
             REQUIRE(res == expected);
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
@@ -528,7 +506,6 @@ TEST_CASE("[string] - strip", "[zeus]")
 
             STATIC_REQUIRE(res);
         }
-#endif
     }
 }
 
@@ -665,7 +642,6 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             }
         }
 
-#if !defined(ZEUS_COMPILER_CLANG)
         SECTION("Compile-time")
         {
             SECTION("Empty string")
@@ -852,7 +828,6 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                 STATIC_REQUIRE(res);
             }
         }
-#endif
 
         SECTION("split_lines: str")
         {
@@ -865,7 +840,6 @@ TEST_CASE("[string] - split_lines", "[zeus]")
                 REQUIRE(lines == expected);
             }
 
-#if !defined(ZEUS_COMPILER_CLANG)
             SECTION("Compile-time")
             {
                 constexpr bool res = []() {
@@ -878,7 +852,6 @@ TEST_CASE("[string] - split_lines", "[zeus]")
 
                 STATIC_REQUIRE(res);
             }
-#endif
         }
     }
 }
