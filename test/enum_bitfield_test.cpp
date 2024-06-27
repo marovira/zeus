@@ -59,20 +59,44 @@ TEST_CASE("[EnumBitfield] - operator=", "[zeus]")
 {
     SECTION("Runtime")
     {
-        EnumBitfield<Bits> a;
-        a = Bits::b;
-        REQUIRE(a.bits() == 2);
+        SECTION("From enum")
+        {
+            EnumBitfield<Bits> a;
+            a = Bits::b;
+            REQUIRE(a.bits() == 2);
+        }
+
+        SECTION("From base type")
+        {
+            EnumBitfield<Bits> a;
+            a = 2;
+            REQUIRE(a.bits() == 2);
+        }
     }
 
     SECTION("Compile-time")
     {
-        static constexpr auto val = []() {
-            EnumBitfield<Bits> a;
-            a = Bits::b;
-            return a.bits();
-        }();
+        SECTION("From enum")
+        {
+            static constexpr auto val = []() {
+                EnumBitfield<Bits> a;
+                a = Bits::b;
+                return a.bits();
+            }();
 
-        STATIC_REQUIRE(val == 2);
+            STATIC_REQUIRE(val == 2);
+        }
+
+        SECTION("From base type")
+        {
+            static constexpr auto val = []() {
+                EnumBitfield<Bits> a;
+                a = 2;
+                return a.bits();
+            }();
+
+            STATIC_REQUIRE(val == 2);
+        }
     }
 }
 

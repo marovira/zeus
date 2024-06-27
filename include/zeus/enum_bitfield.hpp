@@ -26,6 +26,12 @@ namespace zeus
             return *this;
         }
 
+        constexpr EnumBitfield& operator=(BaseType field)
+        {
+            m_field = field;
+            return *this;
+        }
+
         constexpr BaseType bits() const
         {
             return m_field;
