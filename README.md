@@ -3,9 +3,7 @@
 
 [![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
 [![Generic badge](https://img.shields.io/badge/Language-C++20-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
-[![Clang](https://github.com/marovira/zeus/actions/workflows/clang.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/clang.yml)
-[![GCC](https://github.com/marovira/zeus/actions/workflows/gcc.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/gcc.yml)
-[![MSVC](https://github.com/marovira/zeus/actions/workflows/msvc.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/msvc.yml)
+[![Build](https://github.com/marovira/zeus/actions/workflows/build.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/build.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/marovira/zeus/badge/master)](https://www.codefactor.io/repository/github/marovira/zeus/overview/master)
 
 ## What is Zeus?
