@@ -35,9 +35,9 @@ include(FetchLibrary)
 #================================
 # SDK Versions.
 #================================
-set(ZEUS_FMT_VERSION 10.2.0)
-set(ZEUS_MAGIC_ENUM_VERSION 0.9.5)
-set(ZEUS_CATCH_VERSION 3.5.1)
+set(ZEUS_FMT_VERSION 11.0.0)
+set(ZEUS_MAGIC_ENUM_VERSION 0.9.6)
+set(ZEUS_CATCH_VERSION 3.6.0)
 
 find_package(fmt ${ZEUS_FMT_VERSION} QUIET)
 find_package(magic_enum ${ZEUS_MAGIC_ENUM_VERSION} QUIET)
