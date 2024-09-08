@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+      - 'LICENSE'
+      - 'data/**'
+      - '**/release-*.yml'
+    tags-ignore:
+      - "*.*.*"
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+      - 'LICENSE'
+      - '**/release-*.yml'
+    tags-ignore:
+      - "*.*.*"
+  workflow_dispatch:
+
+jobs:
+  format:
+    uses: ./.github/workflows/clang-format.yml
+  build:
+    uses: ./.github/workflows/build.yml
