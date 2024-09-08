@@ -1,10 +1,10 @@
 <a id="top"></a>
 ![Zeus logo](data/logo/logo-transparent.png)
 
-[![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
-[![Generic badge](https://img.shields.io/badge/Language-C++20-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
 [![Build](https://github.com/marovira/zeus/actions/workflows/build.yml/badge.svg)](https://github.com/marovira/zeus/actions/workflows/build.yml)
 [![CodeFactor](https://www.codefactor.io/repository/github/marovira/zeus/badge/master)](https://www.codefactor.io/repository/github/marovira/zeus/overview/master)
+[![Generic badge](https://img.shields.io/badge/Language-C++20-red.svg)](https://en.wikipedia.org/wiki/C%2B%2B17)
+[![Generic badge](https://img.shields.io/badge/License-BSD3-blue)](LICENSE)
 
 ## What is Zeus?
 
@@ -29,18 +29,17 @@ Zeus supports the following platforms and compilers:
 
 | Platform (Compiler) | Version |
 |---------------------|---------|
-| Windows (MSVC) | 19.34 |
-| Linux (GCC) | 12 |
-| Linux (LLVM Clang) | 15.0 |
-
-Please note that macOS is **not** supported.
+| Windows (MSVC) | 19.41 |
+| Linux (GCC) | 14 |
+| Linux (LLVM Clang) | 18.0 |
+| Apple (Apple Clang) | 15.0 |
 
 In addition, Zeus depends on the following libraries:
 
 | Library | Version |
 |---------|---------|
-| [FMT](https://github.com/fmtlib/fmt) | 10.2.0 |
-| [magic_enum](https://github.com/Neargye/magic_enum) | 0.9.5 |
+| [FMT](https://github.com/fmtlib/fmt) | 11.0.0 |
+| [magic_enum](https://github.com/Neargye/magic_enum) | 0.9.6 |
 
 ## Contributing
 
