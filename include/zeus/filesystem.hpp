@@ -23,7 +23,6 @@ namespace zeus
 #    endif
 
         fs::path file_path{filename};
-        [[maybe_unused]]
         std::error_code code;
         auto ftime = fs::last_write_time(file_path, code);
         if (code && current_build == BuildType::debug)
