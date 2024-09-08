@@ -11,3 +11,5 @@ site/
 generated/
 doc/html
 include/zeus/zeus.hpp
+
+compile_commands.json

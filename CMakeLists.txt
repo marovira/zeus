@@ -6,6 +6,11 @@ project(zeus VERSION 1.5.0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
+# Generate compilation database on all Unix systems
+if (NOT MSVC)
+    set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+endif()
+
 #================================
 # Option variables.
 #================================
@@ -129,4 +134,12 @@ if (ZEUS_BUILD_TESTS)
     include(Catch)
 
     add_subdirectory(${ZEUS_TEST_ROOT})
+endif()
+
+# Make a symlink for the compile_commands.json file
+if (NOT MSVC)
+    file(CREATE_LINK
+        "${CMAKE_BINARY_DIR}/compile_commands.json"
+        "${ZEUS_SOURCE_DIR}/compile_commands.json"
+        SYMBOLIC)
 endif()
