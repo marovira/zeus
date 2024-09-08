@@ -55,7 +55,7 @@
             "description": "Default build for Apple platforms",
             "inherits": "unix_base",
             "cacheVariables": {
-                "CMAKE_CXX_FLAGS": "-Wall -Wextra -pedantic -Werror -stdlib=libstdc++"
+                "CMAKE_CXX_FLAGS": "-Wall -Wextra -pedantic -Werror -stdlib=libc++"
             }
         }
     ]
