@@ -63,7 +63,7 @@ jobs:
         run: |
           if [[ "$OSTYPE" == "msys" ]]; then
             python tools/build_dependencies.py ~/deps -b $BUILD_TYPE
-          elif [[ "$OSTYPE" == "darwin" ]]; then
+          elif [[ "$OSTYPE" == "darwin"* ]]; then
             python3 tools/build_dependencies.py ~/deps
           else
             # Clang and GCC binaries are compatible, so only compile with GCC.
