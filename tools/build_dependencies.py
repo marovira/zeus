@@ -97,7 +97,8 @@ def get_cmake_config(project_root: pathlib.Path) -> CMakeConfig:
 
 def execute_command(proc_name: str, args: list[str]) -> None:
     try:
-        subprocess.run(args, check=True)
+        env = os.environ.copy()
+        subprocess.run(args, check=True, env=env)
     except subprocess.CalledProcessError as exc:
         raise RuntimeError(f"{proc_name} finised with a non-zero exit code") from exc
 
