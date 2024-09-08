@@ -25,6 +25,7 @@ repos:
     rev: v18.1.8
     hooks:
       - id: clang-format
+        exclude: \.json
 
   - repo: local
     hooks:
