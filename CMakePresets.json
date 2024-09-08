@@ -23,7 +23,6 @@
             "name": "unix_base",
             "hidden": true,
             "generator": "Unix Makefiles",
-            "generator": "Unix Makefiles",
             "binaryDir": "${sourceDir}/build",
             "cacheVariables": {
                 "CMAKE_CXX_STANDARD": "20",

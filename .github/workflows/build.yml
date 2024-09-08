@@ -26,7 +26,7 @@ jobs:
   format:
     uses: ./.github/workflows/clang-format.yml
   build:
-    name: ${{ matrix.config.os }}-${{ matrix.config.preset }}
+    name: ${{ matrix.config.os }}-${{ matrix.config.preset }}-${{ matrix.build }}
     runs-on: ${{ matrix.config.os }}
     needs: format
     strategy:
@@ -35,7 +35,7 @@ jobs:
         config:
           - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
           - {os: "ubuntu-24.04", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
-          - {os: "ubuntu-24.04", cxx: "gcc-14", cc: "gcc-14", preset: "gcc"}
+          - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
         build: ["Debug", "Release"]
     steps:
       - name: Chekout
@@ -54,17 +54,18 @@ jobs:
           path: ~/deps
           key: deps_${{ matrix.config.os }}_${{ matrix.build }}_${{ hashfiles('dependencies.txt') }}
 
-      - name: Install dependencies
+      - name: Build dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
         shell: bash
         env:
-          CC: ${{ matrix.config.cc }}
-          CXX: ${{ matrix.config.cxx }}
           BUILD_TYPE: ${{ matrix.build }}
         run: |
           if [[ "$OSTYPE" == "msys" ]]; then
             python tools/build_dependencies.py ~/deps $BUILD_TYPE
           else
+            # Clang and GCC binaries are compatible, so only compile with GCC.
+            export CC="gcc-14"
+            export CXX="g++-14"
             python3 tools/build_dependencies.py ~/deps $BUILD_TYPE
           fi
 
