@@ -61,12 +61,12 @@ jobs:
           BUILD_TYPE: ${{ matrix.build }}
         run: |
           if [[ "$OSTYPE" == "msys" ]]; then
-            python tools/build_dependencies.py ~/deps $BUILD_TYPE
+            python tools/build_dependencies.py ~/deps -b $BUILD_TYPE
           else
             # Clang and GCC binaries are compatible, so only compile with GCC.
             export CC="gcc-14"
             export CXX="g++-14"
-            python3 tools/build_dependencies.py ~/deps $BUILD_TYPE
+            python3 tools/build_dependencies.py ~/deps
           fi
 
       - name: Build Zeus
