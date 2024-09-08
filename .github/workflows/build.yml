@@ -25,9 +25,75 @@ on:
 jobs:
   format:
     uses: ./.github/workflows/clang-format.yml
-  build-linux:
-    needs: format
-    uses: ./.github/workflows/build-linux.yml
-  build-msvc:
-    needs: format
-    uses: ./.github/workflows/build-msvc.yml
+  build:
+    name: ${{ matrix.config.os }}-${{ matrix.config.preset }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
+          - {os: "ubuntu-latest", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
+          - {os: "ubuntu-latest", cxx: "gcc-14", cc: "gcc-14", preset: "gcc"}
+        build: ["Debug", "Release"]
+    steps:
+      - name: Chekout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        id: setup_python
+        with:
+          python-version: "3.12"
+
+      - name: Cache dependencies
+        id: cache-deps
+        uses: actions/cache@v4
+        with:
+          path: ~/deps
+          key: deps_${{ matrix.config.os }}_${{ matrix.build }}_${{ hashfiles('dependencies.txt') }}
+
+      - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        shell: bash
+        env:
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+          BUILD_TYPE: ${{ matrix.build }}
+        run: |
+          if [[ "$OSTYPE" == "msys" ]]; then
+            python tools/build_dependencies.py ~/deps $BUILD_TYPE
+          else
+            python3 tools/build_dependencies.py ~/deps $BUILD_TYPE
+          fi
+
+      - name: Build Zeus
+        shell: bash
+        env:
+          BUILD_TYPE: ${{ matrix.build }}
+          CONFIG_TYPE: ${{ matrix.config.preset }}
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+        run: |
+          cmake --preset=$CONFIG_TYPE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps
+          cd ./build
+          if [[ "$OSTYPE" == "msys" ]]; then
+            cmake --build . --config $BUILD_TYPE
+          else
+            make
+          fi
+
+      - name: Run tests
+        shell: bash
+        working-directory: ./build
+        env:
+          BUILD_TYPE: ${{ matrix.build }}
+          CONFIG_TYPE: ${{ matrix.config.preset }}
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+        run: |
+          if [[ "$OSTYPE" == "msys" ]]; then
+            cmake --build . --target RUN_TESTS --config $BUILD_TYPE
+          else
+            make test
+          fi
