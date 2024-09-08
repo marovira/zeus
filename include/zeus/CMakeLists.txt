@@ -33,7 +33,7 @@ target_include_directories(zeus INTERFACE
     $<BUILD_INTERFACE:${ZEUS_SOURCE_ROOT}>
     $<INSTALL_INTERFACE:include>)
 target_link_libraries(zeus INTERFACE fmt::fmt magic_enum::magic_enum)
-if (NOT MSVC)
+if (NOT MSVC AND NOT APPLE)
     target_link_libraries(zeus INTERFACE stdc++fs)
 endif()
 target_compile_features(zeus INTERFACE cxx_std_20)
