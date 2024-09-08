@@ -4,10 +4,6 @@
 cmake_minimum_required(VERSION 3.27)
 project(zeus VERSION 1.5.0 LANGUAGES CXX C)
 
-if (APPLE)
-    message(ERROR "Zeus does not support Apple platforms.")
-endif()
-
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 #================================

@@ -9,7 +9,8 @@ namespace zeus
     enum class Platform
     {
         windows = 0,
-        linux
+        linux,
+        apple,
     };
 
     enum class BuildType
@@ -22,7 +23,8 @@ namespace zeus
 #    define ZEUS_PLATFORM_WINDOWS
     static constexpr Platform current_platform{Platform::windows};
 #elif defined(__APPLE__)
-#    error "Support for Apple is deprecated"
+#    define ZEUS_PLATFORM_APPLE
+    static constexpr Platform current_platform{Platform::apple};
 #elif defined(__linux__)
 #    define ZEUS_PLATFORM_LINUX
     static constexpr Platform current_platform{Platform::linux};

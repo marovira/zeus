@@ -10,11 +10,17 @@ TEST_CASE("[platform] - template flags: windows", "[zeus]")
     using zeus::current_platform;
     STATIC_REQUIRE(magic_enum::enum_name(current_platform) == "windows");
 }
-#else
+#elif defined(ZEUS_PLATFORM_LINUX)
 TEST_CASE("[platform] - template flags: linux", "[zeus]")
 {
     using zeus::current_platform;
     STATIC_REQUIRE(magic_enum::enum_name(current_platform) == "linux");
+}
+#elif defined(ZEUS_PLATFORM_APPLE)
+TEST_CASE("[platform] - template flags: apple", "[zeus]")
+{
+    using zeus::current_platform;
+    STATIC_REQUIRE(magic_enum::enum_name(current_platform) == "apple");
 }
 #endif
 
