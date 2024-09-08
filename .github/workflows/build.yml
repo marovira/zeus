@@ -1,20 +1,41 @@
 name: Build
 
 on:
-  workflow_call:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+      - 'LICENSE'
+      - 'data/**'
+      - '**/release-*.yml'
+    tags-ignore:
+      - "*.*.*"
+  pull_request:
+    branches: [ master ]
+    paths-ignore:
+      - '**.md'
+      - '**.rst'
+      - 'LICENSE'
+      - '**/release-*.yml'
+    tags-ignore:
+      - "*.*.*"
   workflow_dispatch:
 
 jobs:
+  format:
+    uses: ./.github/workflows/clang-format.yml
   build:
     name: ${{ matrix.config.os }}-${{ matrix.config.preset }}
     runs-on: ${{ matrix.config.os }}
+    needs: format
     strategy:
       fail-fast: false
       matrix:
         config:
           - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
-          - {os: "ubuntu-latest", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
-          - {os: "ubuntu-latest", cxx: "gcc-14", cc: "gcc-14", preset: "gcc"}
+          - {os: "ubuntu-24.04", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
+          - {os: "ubuntu-24.04", cxx: "gcc-14", cc: "gcc-14", preset: "gcc"}
         build: ["Debug", "Release"]
     steps:
       - name: Chekout
