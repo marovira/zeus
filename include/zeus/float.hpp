@@ -2,9 +2,7 @@
 
 #include "concepts.hpp"
 
-#include <cmath>
-#include <cstdlib>
-#include <functional>
+#include <algorithm>
 #include <limits>
 
 namespace zeus

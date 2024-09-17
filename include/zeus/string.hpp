@@ -25,7 +25,7 @@ namespace zeus
 
     template<DelimiterFunctor T>
     constexpr std::vector<std::string>
-    split(std::string const& str, T&& is_delim, int max_split)
+    split(std::string const& str, T is_delim, int max_split)
     {
         if (str.empty())
         {
@@ -82,7 +82,7 @@ namespace zeus
     }
 
     template<DelimiterFunctor TrailingFun>
-    constexpr std::string rstrip(std::string const& str, TrailingFun&& is_trailing)
+    constexpr std::string rstrip(std::string const& str, TrailingFun is_trailing)
     {
         std::string ret{str};
         ret.erase(std::find_if(ret.rbegin(),
@@ -101,7 +101,7 @@ namespace zeus
     }
 
     template<DelimiterFunctor LeadingFun>
-    constexpr std::string lstrip(std::string const& str, LeadingFun&& is_leading)
+    constexpr std::string lstrip(std::string const& str, LeadingFun is_leading)
     {
         std::string ret{str};
         ret.erase(ret.begin(),
@@ -120,7 +120,7 @@ namespace zeus
 
     template<DelimiterFunctor LeadingTrailingFun>
     constexpr std::string strip(std::string const& str,
-                                LeadingTrailingFun&& is_leading_trailing)
+                                LeadingTrailingFun is_leading_trailing)
     {
         auto ret = lstrip(str, is_leading_trailing);
         ret      = rstrip(ret, is_leading_trailing);

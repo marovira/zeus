@@ -1,14 +1,7 @@
 #pragma once
 
-#include "assert.hpp"
-
 #include <array>
-#include <functional>
-#include <numeric>
-#include <type_traits>
-#include <unordered_set>
 #include <utility>
-#include <vector>
 
 namespace zeus
 {

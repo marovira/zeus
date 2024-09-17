@@ -1,9 +1,7 @@
 #pragma once
 
 #include "concepts.hpp"
-#include "float.hpp"
 
-#include <cmath>
 #include <stdexcept>
 #include <vector>
 

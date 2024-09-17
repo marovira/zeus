@@ -1,9 +1,8 @@
 #pragma once
 
-#include "concepts.hpp"
-
 #include <array>
 #include <string>
+#include <type_traits>
 #include <vector>
 
 namespace zeus

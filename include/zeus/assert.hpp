@@ -2,6 +2,7 @@
 
 #include "platform.hpp"
 
+#include <array>
 #include <source_location>
 #include <string>
 
@@ -19,8 +20,10 @@ namespace zeus
 } // namespace zeus
 
 #if defined(ZEUS_BUILD_DEBUG)
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #    define ASSERT(condition) \
         zeus::assert_handler(condition, std::source_location::current(), #condition)
+// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #    define ASSERT_MSG(condition, message) \
         zeus::assert_handler(condition, std::source_location::current(), message)
 #else
@@ -47,13 +50,18 @@ namespace zeus
 
 #    if defined(ZEUS_PLATFORM_WINDOWS)
         static constexpr auto max_message_length{16 * 1'024};
-        char buffer[max_message_length];
-        memcpy(buffer, message.c_str(), message.size() + 1);
-        strncat_s(buffer, "\n", 3);
+        std::array<char, max_message_length> buffer{};
+        memcpy(buffer.data(), message.c_str(), message.size() + 1);
+        strncat_s(buffer.data(), buffer.size(), "\n", 3);
 
-        WCHAR wide_buffer[max_message_length] = {0};
-        MultiByteToWideChar(CP_UTF8, 0, buffer, -1, wide_buffer, sizeof(wide_buffer));
-        OutputDebugStringW(wide_buffer);
+        std::array<WCHAR, max_message_length> wide_buffer{};
+        MultiByteToWideChar(CP_UTF8,
+                            0,
+                            buffer.data(),
+                            -1,
+                            wide_buffer.data(),
+                            static_cast<int>(wide_buffer.size() * sizeof(WCHAR)));
+        OutputDebugStringW(wide_buffer.data());
 #    endif
     }
 
@@ -82,7 +90,7 @@ namespace zeus
 #    endif
 
 #    if defined(ZEUS_THROW_ASSERT)
-            throw std::runtime_error{message.c_str()};
+            throw std::runtime_error{assert_message.c_str()};
 #    else
             std::abort();
 #    endif
