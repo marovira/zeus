@@ -86,7 +86,7 @@ def get_cmake_config(project_root: pathlib.Path) -> CMakeConfig:
         config = CMakeConfig()
         if platform.system() == "Windows":
             base_preset = find_preset(presets, "msvc")
-        elif platform.system() == "Darwin" or platform.system() == "Linux":
+        else:
             base_preset = find_preset(presets, "unix_base")
 
         config.generator = base_preset["generator"]
