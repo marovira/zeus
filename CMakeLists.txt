@@ -43,7 +43,7 @@ include(FetchLibrary)
 #================================
 set(ZEUS_FMT_VERSION 11.0.0)
 set(ZEUS_MAGIC_ENUM_VERSION 0.9.6)
-set(ZEUS_CATCH_VERSION 3.7.0)
+set(ZEUS_CATCH_VERSION 3.7.1)
 
 find_package(fmt ${ZEUS_FMT_VERSION} QUIET)
 find_package(magic_enum ${ZEUS_MAGIC_ENUM_VERSION} QUIET)
