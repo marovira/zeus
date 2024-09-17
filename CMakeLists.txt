@@ -1,7 +1,7 @@
 #================================
 # Project setup.
 #================================
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.30)
 project(zeus VERSION 1.5.0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
