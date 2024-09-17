@@ -1,15 +1,13 @@
-# Build folders #
+# Build folders
 build/
-doc/
-bin/
-html/
-lib/
-gh-pages/
-site/
 
-# Generated files #
-generated/
-doc/html
+# Generated files
 include/zeus/zeus.hpp
 
+# Python
+.ruff_cache/
+.mypy_cache/
+.venv/
+
+# C++
 compile_commands.json
