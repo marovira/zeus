@@ -23,16 +23,15 @@ in C++ easier. Some notable features of Zeus are:
 
 The following are **core** requirements of Zeus:
 
-* CMake 3.27+
+* CMake 3.30+
 
 Zeus supports the following platforms and compilers:
 
 | Platform (Compiler) | Version |
 |---------------------|---------|
 | Windows (MSVC) | 19.41 |
-| Linux (GCC) | 14 |
-| Linux (LLVM Clang) | 18.0 |
-| Apple (Apple Clang) | 15.0 |
+| Linux (GCC) | 14.0.1 |
+| Linux (LLVM Clang) | 18.1 |
 
 In addition, Zeus depends on the following libraries:
 
