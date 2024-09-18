@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - "*.*.*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -61,7 +62,7 @@ jobs:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
         run: |
-          cmake --preset=$CONFIG_TYPE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps -DCMAKE_INSTALL_PREFIX=install/zeus
+          cmake --preset=$CONFIG_TYPE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps -DCMAKE_INSTALL_PREFIX=install/zeus -DZEUS_INSTALL_TARGET=ON
           cd ./build
           if [[ "$OSTYPE" == "msys" ]]; then
             cmake --build . --config $BUILD_TYPE
@@ -96,7 +97,7 @@ jobs:
           if [[ "$OSTYPE" == "msys" ]]; then
             cmake --build . --target INSTALL --config $BUILD_TYPE
           else
-            make test
+            make install
           fi
 
       - name: Package
@@ -105,10 +106,17 @@ jobs:
         env:
           CONFIG_TYPE: ${{ matrix.config.preset }}
 
-        run: tar cfv - zeus -P | zstd > zeus-$CONFIG_TYPE-x64.tar.zst
+        run: |
+          if [[ "$OSTYPE" == "msys" ]]; then
+            7z a zeus-$CONFIG_TYPE-x64.zip -r zeus
+          else
+            tar cfv - zeus -P | zstd > zeus-$CONFIG_TYPE-x64.tar.zst
+          fi
 
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
-          files: "./install/*.tar.zst"
           draft: true
+          files: |
+            "./install/*.tar.zst"
+            "./install/*.zip"
