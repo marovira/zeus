@@ -73,18 +73,12 @@ add_subdirectory(${ZEUS_SOURCE_ROOT}/zeus)
 # Install targets.
 #================================
 if (ZEUS_INSTALL_TARGET)
-    if (MSVC)
-        set(INCLUDE_INSTALL_PATH "include")
-    else()
-        set(INCLUDE_INSTALL_PATH "include/libzeus")
-    endif()
-
     install(TARGETS zeus
         EXPORT zeus
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib
         RUNTIME DESTINATION lib
-        INCLUDES DESTINATION ${INCLUDE_INSTALL_PATH}
+        INCLUDES DESTINATION include
         )
 
     include(CMakePackageConfigHelpers)
@@ -109,14 +103,9 @@ if (ZEUS_INSTALL_TARGET)
         DESTINATION lib/cmake/zeus
         )
 
-    if (MSVC)
-        set(INCLUDE_INSTALL_DEST "${CMAKE_INSTALL_INCLUDEDIR}/zeus")
-    else()
-        set(INCLUDE_INSTALL_DEST "${CMAKE_INSTALL_INCLUDEDIR}/libzeus/zeus")
-    endif()
     install(FILES
         ${ZEUS_INSTALL_FILES}
-        DESTINATION ${INCLUDE_INSTALL_DEST}
+        DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/zeus"
         )
 endif()
 
