@@ -107,9 +107,9 @@ jobs:
           CONFIG_TYPE: ${{ matrix.config.preset }}
         run: |
           if [[ "$OSTYPE" == "msys" ]]; then
-            7z a zeus-$CONFIG_TYPE-x64.zip -r zeus
+            7z a zeus-$GITHUB_REF_NAME-$CONFIG_TYPE-x64.zip -r zeus
           else
-            zip zeus-$CONFIG_TYPE-x64.zip -r zeus
+            zip zeus-$GITHUB_REF_NAME-$CONFIG_TYPE-x64.zip -r zeus
           fi
 
       - name: Publish
