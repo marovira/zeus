@@ -106,10 +106,14 @@ jobs:
         env:
           CONFIG_TYPE: ${{ matrix.config.preset }}
         run: |
-          tar cfv - zeus -P | zstd > zeus-$CONFIG_TYPE-x64.tar.zst
+          if [[ "$OSTYPE" == "msys" ]]; then
+            7z a zeus-$CONFIG_TYPE-x64.zip -r zeus
+          else
+            zip zeus-$CONFIG_TYPE-x64.zip -r zeus
+          fi
 
       - name: Publish
         uses: softprops/action-gh-release@v2
         with:
           draft: true
-          files: "./install/*.tar.zst"
+          files: "./install/*.zip"
