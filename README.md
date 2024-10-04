@@ -33,6 +33,9 @@ Zeus supports the following platforms and compilers:
 | Linux (GCC) | 14.0.1 |
 | Linux (LLVM Clang) | 18.1 |
 
+> [!WARNING]
+> Zeus does not support Apple platforms.
+
 In addition, Zeus depends on the following libraries:
 
 | Library | Version |
