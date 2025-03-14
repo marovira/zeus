@@ -41,9 +41,9 @@ include(FetchLibrary)
 #================================
 # SDK Versions.
 #================================
-set(ZEUS_FMT_VERSION 11.0.0)
-set(ZEUS_MAGIC_ENUM_VERSION 0.9.6)
-set(ZEUS_CATCH_VERSION 3.7.1)
+set(ZEUS_FMT_VERSION 11.1.4)
+set(ZEUS_MAGIC_ENUM_VERSION 0.9.7)
+set(ZEUS_CATCH_VERSION 3.8.0)
 
 find_package(fmt ${ZEUS_FMT_VERSION} QUIET)
 find_package(magic_enum ${ZEUS_MAGIC_ENUM_VERSION} QUIET)
@@ -52,7 +52,7 @@ if (NOT fmt_FOUND)
     fetch_library(
         NAME fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        GIT_TAG 67c0c0c09cf74d407d71a29c194761981614df3e
+        GIT_TAG 123913715afeb8a437e6388b4473fcc4753e1c9a
         )
 endif()
 
@@ -60,7 +60,7 @@ if (NOT magic_enum_FOUND)
     fetch_library(
         NAME magic_enum
         GIT_REPOSITORY https://github.com/Neargye/magic_enum
-        GIT_TAG e55b9b54d5cf61f8e117cafb17846d7d742dd3b4
+        GIT_TAG e046b69a3736d314fad813e159b1c192eaef92cd
         )
 endif()
 
@@ -119,7 +119,7 @@ if (ZEUS_BUILD_TESTS)
         fetch_library(
             NAME Catch2
             GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-            GIT_TAG f981c9cbcac07a2690e5a86767eba490b5465463
+            GIT_TAG 914aeecfe23b1e16af6ea675a4fb5dbd5a5b8d0a
             )
         list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
     endif()

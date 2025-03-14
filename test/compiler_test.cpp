@@ -1,8 +1,7 @@
 #include <zeus/compiler.hpp>
 
 #include <catch2/catch_test_macros.hpp>
-#include <magic_enum.hpp>
-#include <string>
+#include <magic_enum/magic_enum.hpp>
 
 #if defined(ZEUS_COMPILER_MSVC)
 TEST_CASE("[compiler] - compiler flags: msvc", "[zeus]")

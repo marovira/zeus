@@ -1,8 +1,7 @@
 #include <zeus/platform.hpp>
 
 #include <catch2/catch_test_macros.hpp>
-#include <magic_enum.hpp>
-#include <string>
+#include <magic_enum/magic_enum.hpp>
 
 #if defined(ZEUS_PLATFORM_WINDOWS)
 TEST_CASE("[platform] - template flags: windows", "[zeus]")
