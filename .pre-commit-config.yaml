@@ -32,5 +32,5 @@ repos:
       - id: generate_dependencies.py
         name: generate_dependencies.py
         language: system
-        entry: python tools/generate_dependencies.py
+        entry: uv run tools/generate_dependencies.py
         files: "CMakeLists.txt|dependencies.txt|tools/generate_dependencies.py"
