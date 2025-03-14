@@ -26,9 +26,8 @@ jobs:
       - name: Chekout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        id: setup_python
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.12"
 
@@ -46,12 +45,12 @@ jobs:
           BUILD_TYPE: Release
         run: |
           if [[ "$OSTYPE" == "msys" ]]; then
-            python tools/build_dependencies.py ~/deps -b $BUILD_TYPE
+            uv run tools/build_dependencies.py ~/deps -b $BUILD_TYPE
           else
             # Clang and GCC binaries are compatible, so only compile with GCC.
             export CC="gcc-14"
             export CXX="g++-14"
-            python3 tools/build_dependencies.py ~/deps
+            uv run tools/build_dependencies.py ~/deps
           fi
 
       - name: Build Zeus
