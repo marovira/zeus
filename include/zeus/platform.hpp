@@ -35,5 +35,4 @@ namespace zeus
 #    define ZEUS_BUILD_RELEASE
     static constexpr BuildType current_build{BuildType::release};
 #endif
-
 } // namespace zeus

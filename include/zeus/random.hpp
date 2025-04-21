@@ -44,5 +44,4 @@ namespace zeus
     private:
         Engine m_engine{std::random_device{}()};
     };
-
 } // namespace zeus

@@ -20,9 +20,7 @@ namespace zeus
 
     template<typename T>
     concept DelimiterFunctor = requires(T t, char c) {
-        // clang-format off
-        {t(c)} -> std::same_as<bool>;
-        // clang-format on
+        { t(c) } -> std::same_as<bool>;
     };
 
     template<DelimiterFunctor T>
@@ -215,5 +213,4 @@ namespace zeus
     {
         return split_lines(str, false);
     }
-
 } // namespace zeus

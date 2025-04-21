@@ -19,5 +19,4 @@ namespace zeus
 #    define ZEUS_COMPILER_GCC
     static constexpr Compiler current_compiler{Compiler::gcc};
 #endif
-
 } // namespace zeus

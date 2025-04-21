@@ -179,5 +179,4 @@ namespace zeus
     {
         return Range<T>{begin, end, step};
     }
-
 } // namespace zeus
