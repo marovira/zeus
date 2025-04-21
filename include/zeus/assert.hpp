@@ -1,8 +1,8 @@
 #pragma once
 
-#include "platform.hpp"
+// NOLINTNEXTLINE(misc-include-cleaner)
+#include "platform.hpp" // IWYU pragma: keep
 
-#include <array>
 #include <source_location>
 #include <string>
 
@@ -20,10 +20,8 @@ namespace zeus
 } // namespace zeus
 
 #if defined(ZEUS_BUILD_DEBUG)
-// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #    define ASSERT(condition) \
         zeus::assert_handler(condition, std::source_location::current(), #condition)
-// NOLINTNEXTLINE(cppcoreguidelines-macro-usage)
 #    define ASSERT_MSG(condition, message) \
         zeus::assert_handler(condition, std::source_location::current(), message)
 #else
@@ -37,6 +35,7 @@ namespace zeus
 #        include <windows.h>
 #    endif
 
+#    include <array>
 #    include <cstdio>
 #    include <cstdlib>
 #    include <fmt/printf.h>

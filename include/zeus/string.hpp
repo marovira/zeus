@@ -2,8 +2,10 @@
 
 #include <algorithm>
 #include <array>
-#include <cctype>
+#include <concepts>
+#include <cstddef>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace zeus
@@ -11,7 +13,7 @@ namespace zeus
     inline constexpr bool is_whitespace(char c)
     {
         std::array matches = {' ', '\f', '\n', '\r', '\t', '\v'};
-        return std::any_of(matches.begin(), matches.end(), [c](char opt) {
+        return std::ranges::any_of(matches, [c](char opt) {
             return c == opt;
         });
     }
@@ -37,7 +39,7 @@ namespace zeus
         for (auto ch : str)
         {
             if (is_delim(ch)
-                && (max_split == -1 || static_cast<int>(items.size()) < max_split))
+                && (max_split == -1 || std::cmp_less(items.size(), max_split)))
             {
                 items.push_back(cur);
                 cur.clear();

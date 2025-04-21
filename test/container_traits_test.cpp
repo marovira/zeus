@@ -2,7 +2,10 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+#include <array>
 #include <list>
+#include <string>
+#include <vector>
 
 TEST_CASE("[container_traits] - ContiguousContainer", "[zeus]")
 {

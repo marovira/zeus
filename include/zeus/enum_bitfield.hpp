@@ -2,6 +2,9 @@
 
 #include "concepts.hpp"
 
+#include <concepts>
+#include <type_traits>
+
 namespace zeus
 {
     template<UnsignedScopedEnum T>

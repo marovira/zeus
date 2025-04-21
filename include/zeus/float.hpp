@@ -3,6 +3,7 @@
 #include "concepts.hpp"
 
 #include <algorithm>
+#include <concepts>
 #include <limits>
 
 namespace zeus

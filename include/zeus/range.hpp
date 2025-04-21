@@ -2,6 +2,8 @@
 
 #include "concepts.hpp"
 
+#include <cstddef>
+#include <iterator>
 #include <stdexcept>
 #include <vector>
 
@@ -30,6 +32,7 @@ namespace zeus
             }
         }
 
+        [[nodiscard]]
         constexpr std::size_t size() const
         {
             T hi, lo, step;
@@ -54,6 +57,7 @@ namespace zeus
             return static_cast<std::size_t>((hi - lo - 1) / step + 1);
         }
 
+        [[nodiscard]]
         constexpr bool empty() const
         {
             return size() == 0;

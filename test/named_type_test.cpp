@@ -1,12 +1,16 @@
 #include <zeus/named_type.hpp>
 
 #include <catch2/catch_template_test_macros.hpp>
+#include <catch2/catch_test_macros.hpp>
 
+// NOLINTBEGIN(bugprone-macro-parentheses)
 #define MAKE_TEST_TYPE(TypeName, BaseType) \
     using TypeName = zeus::NamedType<BaseType, struct BaseType##_param>
 
 #define MAKE_TEST_TYPE_V(TypeName, BaseType, ...) \
     using TypeName = zeus::NamedType<BaseType, struct BaseType##_param, __VA_ARGS__>
+
+// NOLINTEND(bugprone-macro-parentheses)
 
 TEMPLATE_TEST_CASE("[NamedType] - get", "[zeus]", int, double)
 {
@@ -29,7 +33,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Addable", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Addable);
 
-    Type t1{1}, t2{2};
+    Type t1{1};
+    const Type t2{2};
 
     SECTION("Operator +=")
     {
@@ -48,7 +53,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Subtractable", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Subtractable);
 
-    Type t1{1}, t2{2};
+    const Type t1{1};
+    Type t2{2};
 
     SECTION("Operator -=")
     {
@@ -67,7 +73,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Multiplicable", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Multiplicable);
 
-    Type t1{2}, t2{3};
+    Type t1{2};
+    const Type t2{3};
 
     SECTION("Operator *=")
     {
@@ -86,7 +93,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Divisible", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Divisible);
 
-    Type t1{4}, t2{2};
+    Type t1{4};
+    const Type t2{2};
 
     SECTION("Operator /=")
     {
