@@ -40,6 +40,11 @@ jobs:
           path: ~/deps
           key: deps_${{ matrix.config.os }}_Release_${{ hashfiles('dependencies.txt') }}
 
+      - name: Install Python packages
+        shell: bash
+        run: |
+          uv sync
+
       - name: Build dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
         shell: bash
