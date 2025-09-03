@@ -72,8 +72,10 @@ jobs:
             uv run tools/build_dependencies.py ~/deps -b $BUILD_TYPE
           else
             # Clang and GCC binaries are compatible, so only compile with GCC.
-            export CC="gcc-14"
-            export CXX="g++-14"
+            if [[ "$OSTYPE" == "linux-gnu" ]]; then
+              export CC="gcc-14"
+              export CXX="g++-14"
+            fi
             uv run tools/build_dependencies.py ~/deps
           fi
 
