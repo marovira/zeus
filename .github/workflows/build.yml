@@ -36,8 +36,8 @@ jobs:
           - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
           - {os: "ubuntu-24.04", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
           - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
-          - {os: "macos-13", cxx: "clang++", cc: "clang", preset: "clang"}
-          - {os: "macos-latest", cxx: "clang++", cc: "clang", preset: "clang"}
+          - {os: "macos-13", cxx: "clang++", cc: "clang", preset: "apple"}
+          - {os: "macos-latest", cxx: "clang++", cc: "clang", preset: "apple"}
         build: ["Debug", "Release"]
     steps:
       - name: Chekout
@@ -86,11 +86,10 @@ jobs:
           CXX: ${{ matrix.config.cxx }}
         run: |
           cmake --preset=$CONFIG_TYPE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps
-          cd ./build
           if [[ "$OSTYPE" == "msys" ]]; then
-            cmake --build . --config $BUILD_TYPE
+            cmake --build build --config $BUILD_TYPE
           else
-            make
+            cmake --build build --parallel
           fi
 
       - name: Run tests

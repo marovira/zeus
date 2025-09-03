@@ -22,6 +22,7 @@ jobs:
         config:
           - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
           - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
+          - {os: "macos-latest", cxx: "clang++", cc: "clang", preset: "apple"}
     steps:
       - name: Chekout
         uses: actions/checkout@v4
@@ -55,8 +56,10 @@ jobs:
             uv run tools/build_dependencies.py ~/deps -b $BUILD_TYPE
           else
             # Clang and GCC binaries are compatible, so only compile with GCC.
-            export CC="gcc-14"
-            export CXX="g++-14"
+            if [[ "$OSTYPE" == "linux-gnu" ]]; then
+              export CC="gcc-14"
+              export CXX="g++-14"
+            fi
             uv run tools/build_dependencies.py ~/deps
           fi
 
@@ -69,11 +72,10 @@ jobs:
           CXX: ${{ matrix.config.cxx }}
         run: |
           cmake --preset=$CONFIG_TYPE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps -DCMAKE_INSTALL_PREFIX=install/zeus -DZEUS_INSTALL_TARGET=ON
-          cd ./build
           if [[ "$OSTYPE" == "msys" ]]; then
-            cmake --build . --config $BUILD_TYPE
+            cmake --build build --config $BUILD_TYPE
           else
-            make
+            cmake --build build --config $BUILD_TYPE --parallel
           fi
 
       - name: Run tests
