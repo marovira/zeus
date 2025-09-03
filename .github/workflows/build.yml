@@ -38,7 +38,6 @@ jobs:
           - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
           - {os: "macos-13", cxx: "clang++", cc: "clang", preset: "apple"}
           - {os: "macos-14", cxx: "clang++", cc: "clang", preset: "apple"}
-          - {os: "macos-15", cxx: "clang++", cc: "clang", preset: "apple"}
         build: ["Debug", "Release"]
     steps:
       - name: Chekout

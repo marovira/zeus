@@ -22,7 +22,7 @@ jobs:
         config:
           - {os: "windows-2025", cxx: "msvc", cc: "msvc", preset: "msvc"}
           - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
-          - {os: "macos-15", cxx: "clang++", cc: "clang", preset: "apple"}
+          - {os: "macos-14", cxx: "clang++", cc: "clang", preset: "apple"}
     steps:
       - name: Chekout
         uses: actions/checkout@v4
