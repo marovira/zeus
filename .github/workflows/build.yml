@@ -36,6 +36,8 @@ jobs:
           - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
           - {os: "ubuntu-24.04", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
           - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
+          - {os: "macos-13", cxx: "clang++", cc: "clang", preset: "clang"}
+          - {os: "macos-latest", cxx: "clang++", cc: "clang", preset: "clang"}
         build: ["Debug", "Release"]
     steps:
       - name: Chekout

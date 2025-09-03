@@ -6,11 +6,6 @@ project(zeus VERSION 1.6.0 LANGUAGES CXX C)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-# Don't allow builds for Apple.
-if (APPLE)
-    message(ERROR "Zeus does not support Apple platforms")
-endif()
-
 # Generate compilation database on all Unix systems
 if (NOT MSVC)
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
