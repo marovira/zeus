@@ -36,9 +36,9 @@ include(FetchLibrary)
 #================================
 # SDK Versions.
 #================================
-set(ZEUS_FMT_VERSION 11.1.4)
+set(ZEUS_FMT_VERSION 11.2.0)
 set(ZEUS_MAGIC_ENUM_VERSION 0.9.7)
-set(ZEUS_CATCH_VERSION 3.8.0)
+set(ZEUS_CATCH_VERSION 3.10.0)
 
 find_package(fmt ${ZEUS_FMT_VERSION} QUIET)
 find_package(magic_enum ${ZEUS_MAGIC_ENUM_VERSION} QUIET)
@@ -47,7 +47,7 @@ if (NOT fmt_FOUND)
     fetch_library(
         NAME fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        GIT_TAG 123913715afeb8a437e6388b4473fcc4753e1c9a
+        GIT_TAG 40626af88bd7df9a5fb80be7b25ac85b122d6c21
         )
 endif()
 
@@ -114,7 +114,7 @@ if (ZEUS_BUILD_TESTS)
         fetch_library(
             NAME Catch2
             GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-            GIT_TAG 914aeecfe23b1e16af6ea675a4fb5dbd5a5b8d0a
+            GIT_TAG 25319fd3047c6bdcf3c0170e76fa526c77f99ca9
             )
         list(APPEND CMAKE_MODULE_PATH ${Catch2_SOURCE_DIR}/extras)
     endif()
