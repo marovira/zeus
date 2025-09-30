@@ -14,25 +14,25 @@
 #include <string>
 
 #if defined(ZEUS_PLATFORM_WINDOWS) || defined(ZEUS_PLATFORM_APPLE)
-#    include <filesystem>
+#    include <filesystem> // IWYU pragma: export
 #else
-#    include <experimental/filesystem>
+#    include <experimental/filesystem> // IWYU pragma: export
 #endif
 
 namespace zeus
 {
+#if defined(ZEUS_PLATFORM_WINDOWS) || defined(ZEUS_PLATFORM_APPLE)
+    namespace zeus_fs = std::filesystem;
+#else
+    namespace zeus_fs = std::experimental::filesystem;
+#endif
+
 #if !defined(ZEUS_PLATFORM_APPLE)
     inline std::time_t get_file_last_write(std::string filename)
     {
-#    if defined(ZEUS_PLATFORM_WINDOWS)
-        namespace fs = std::filesystem;
-#    else
-        namespace fs = std::experimental::filesystem;
-#    endif
-
-        const fs::path file_path{filename};
+        const zeus_fs::path file_path{filename};
         std::error_code code;
-        auto ftime = fs::last_write_time(file_path, code);
+        auto ftime = zeus_fs::last_write_time(file_path, code);
         if (code && current_build == BuildType::debug)
         {
             fmt::print(stderr, "warning: ({}): {}\n", code.value(), code.message());
@@ -49,13 +49,7 @@ namespace zeus
 
     inline std::string get_file_directory(std::string filename)
     {
-#if defined(ZEUS_PLATFORM_WINDOWS) || defined(ZEUS_PLATFORM_APPLE)
-        namespace fs = std::filesystem;
-#else
-        namespace fs = std::experimental::filesystem;
-#endif
-
-        const fs::path file_path{filename};
+        const zeus_fs::path file_path{filename};
         std::string root_dir;
         if (file_path.has_parent_path())
         {
@@ -64,4 +58,35 @@ namespace zeus
 
         return root_dir;
     }
+
+    class ChdirScope
+    {
+    public:
+        ChdirScope(zeus_fs::path const& target_path)
+        {
+            m_start_path = zeus_fs::current_path();
+            zeus_fs::current_path(target_path);
+        }
+
+        ChdirScope(ChdirScope const&) = delete;
+        ChdirScope(ChdirScope&&)      = default;
+
+        ~ChdirScope()
+        {
+            try
+            {
+                zeus_fs::current_path(m_start_path);
+            }
+            catch (zeus_fs::filesystem_error const&) // NOLINT(bugprone-empty-catch)
+            {
+                fmt::print("error: unable to switch back to {}", m_start_path.string());
+            }
+        }
+
+        ChdirScope& operator=(ChdirScope const&) = delete;
+        ChdirScope& operator=(ChdirScope&&)      = default;
+
+    private:
+        zeus_fs::path m_start_path;
+    };
 } // namespace zeus
