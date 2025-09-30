@@ -16,12 +16,12 @@ namespace zeus
             m_value{val}
         {}
 
-        T& get()
+        auto get() -> T&
         {
             return m_value;
         }
 
-        T const& get() const
+        auto get() const -> T const&
         {
             return m_value;
         }
@@ -33,13 +33,13 @@ namespace zeus
     template<typename T>
     struct Addable : CRTPBase<T, Addable>
     {
-        T& operator+=(T const& other)
+        auto operator+=(T const& other) -> T&
         {
             this->self().get() += other.get();
             return this->self();
         }
 
-        T operator+(T const& other) const
+        auto operator+(T const& other) const -> T
         {
             return T{this->self().get() + other.get()};
         }
@@ -48,13 +48,13 @@ namespace zeus
     template<typename T>
     struct Subtractable : CRTPBase<T, Subtractable>
     {
-        T& operator-=(T const& other)
+        auto operator-=(T const& other) -> T&
         {
             this->self().get() -= other.get();
             return this->self();
         }
 
-        T operator-(T const& other) const
+        auto operator-(T const& other) const -> T
         {
             return T{this->self().get() - other.get()};
         }
@@ -63,13 +63,13 @@ namespace zeus
     template<typename T>
     struct Multiplicable : CRTPBase<T, Multiplicable>
     {
-        T& operator*=(T const& other)
+        auto operator*=(T const& other) -> T&
         {
             this->self().get() *= other.get();
             return this->self();
         }
 
-        T operator*(T const& other) const
+        auto operator*(T const& other) const -> T
         {
             return T{this->self().get() * other.get()};
         }
@@ -78,13 +78,13 @@ namespace zeus
     template<typename T>
     struct Divisible : CRTPBase<T, Divisible>
     {
-        T& operator/=(T const& other)
+        auto operator/=(T const& other) -> T&
         {
             this->self().get() /= other.get();
             return this->self();
         }
 
-        T operator/(T const& other) const
+        auto operator/(T const& other) const -> T
         {
             return T{this->self().get() / other.get()};
         }

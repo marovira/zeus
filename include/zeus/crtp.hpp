@@ -11,12 +11,12 @@ namespace zeus
         friend CRTPType<T>;
 
     public:
-        constexpr T& self()
+        constexpr auto self() -> T&
         {
             return static_cast<T&>(*this);
         }
 
-        constexpr T const& self() const
+        constexpr auto self() const -> T const&
         {
             return static_cast<T const&>(*this);
         }

@@ -23,107 +23,107 @@ namespace zeus
             m_field{field}
         {}
 
-        constexpr EnumBitfield& operator=(T val)
+        constexpr auto operator=(T val) -> EnumBitfield&
         {
             m_field = static_cast<BaseType>(val);
             return *this;
         }
 
-        constexpr EnumBitfield& operator=(BaseType field)
+        constexpr auto operator=(BaseType field) -> EnumBitfield&
         {
             m_field = field;
             return *this;
         }
 
-        constexpr BaseType bits() const
+        constexpr auto bits() const -> BaseType
         {
             return m_field;
         }
 
-        constexpr T value() const
+        constexpr auto value() const -> T
         {
             return static_cast<T>(m_field);
         }
 
-        constexpr EnumBitfield& operator&=(EnumBitfield const& rhs)
+        constexpr auto operator&=(EnumBitfield const& rhs) -> EnumBitfield&
         {
             m_field &= rhs.m_field;
             return *this;
         }
 
-        constexpr EnumBitfield& operator&=(T rhs)
+        constexpr auto operator&=(T rhs) -> EnumBitfield&
         {
             m_field &= static_cast<BaseType>(rhs);
             return *this;
         }
 
-        constexpr EnumBitfield& operator|=(EnumBitfield const& rhs)
+        constexpr auto operator|=(EnumBitfield const& rhs) -> EnumBitfield&
         {
             m_field |= rhs.m_field;
             return *this;
         }
 
-        constexpr EnumBitfield& operator|=(T rhs)
+        constexpr auto operator|=(T rhs) -> EnumBitfield&
         {
             m_field |= static_cast<BaseType>(rhs);
             return *this;
         }
 
-        constexpr EnumBitfield& operator^=(EnumBitfield const& rhs)
+        constexpr auto operator^=(EnumBitfield const& rhs) -> EnumBitfield&
         {
             m_field ^= rhs.m_field;
             return *this;
         }
 
-        constexpr EnumBitfield& operator^=(T rhs)
+        constexpr auto operator^=(T rhs) -> EnumBitfield&
         {
             m_field ^= static_cast<BaseType>(rhs);
             return *this;
         }
 
-        constexpr EnumBitfield operator&(EnumBitfield const& rhs) const
+        constexpr auto operator&(EnumBitfield const& rhs) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp &= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator&(T rhs) const
+        constexpr auto operator&(T rhs) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp &= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator|(EnumBitfield const& rhs) const
+        constexpr auto operator|(EnumBitfield const& rhs) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp |= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator|(T rhs) const
+        constexpr auto operator|(T rhs) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp |= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator^(EnumBitfield const& rhs) const
+        constexpr auto operator^(EnumBitfield const& rhs) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp ^= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator^(T rhs) const
+        constexpr auto operator^(T rhs) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp ^= rhs;
             return tmp;
         }
 
-        constexpr EnumBitfield operator~() const
+        constexpr auto operator~() const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp.m_field = ~m_field;
@@ -132,7 +132,7 @@ namespace zeus
 
         template<typename U>
         requires std::integral<U>
-        constexpr EnumBitfield operator>>(U n) const
+        constexpr auto operator>>(U n) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp.m_field = m_field >> n;
@@ -141,7 +141,7 @@ namespace zeus
 
         template<typename U>
         requires std::integral<U>
-        constexpr EnumBitfield operator<<(U n) const
+        constexpr auto operator<<(U n) const -> EnumBitfield
         {
             EnumBitfield tmp{*this};
             tmp.m_field = m_field << n;
@@ -153,22 +153,22 @@ namespace zeus
             return static_cast<bool>(m_field);
         }
 
-        constexpr bool operator==(EnumBitfield const& rhs) const
+        constexpr auto operator==(EnumBitfield const& rhs) const -> bool
         {
             return m_field == rhs.m_field;
         }
 
-        constexpr bool operator==(T rhs) const
+        constexpr auto operator==(T rhs) const -> bool
         {
             return m_field == static_cast<BaseType>(rhs);
         }
 
-        constexpr bool operator!=(EnumBitfield const& rhs) const
+        constexpr auto operator!=(EnumBitfield const& rhs) const -> bool
         {
             return !(*this == rhs);
         }
 
-        constexpr bool operator!=(T rhs) const
+        constexpr auto operator!=(T rhs) const -> bool
         {
             return !(*this == rhs);
         }
@@ -180,37 +180,37 @@ namespace zeus
     namespace enum_bitwise_operators
     {
         template<UnsignedScopedEnum T>
-        constexpr EnumBitfield<T> operator&(T lhs, T rhs)
+        constexpr auto operator&(T lhs, T rhs) -> EnumBitfield<T>
         {
             return EnumBitfield<T>{lhs} & EnumBitfield<T>{rhs};
         }
 
         template<UnsignedScopedEnum T>
-        constexpr EnumBitfield<T> operator|(T lhs, T rhs)
+        constexpr auto operator|(T lhs, T rhs) -> EnumBitfield<T>
         {
             return EnumBitfield<T>{lhs} | EnumBitfield<T>{rhs};
         }
 
         template<UnsignedScopedEnum T>
-        constexpr EnumBitfield<T> operator^(T lhs, T rhs)
+        constexpr auto operator^(T lhs, T rhs) -> EnumBitfield<T>
         {
             return EnumBitfield<T>{lhs} ^ EnumBitfield<T>{rhs};
         }
 
         template<UnsignedScopedEnum T>
-        constexpr EnumBitfield<T> operator~(T val)
+        constexpr auto operator~(T val) -> EnumBitfield<T>
         {
             return ~EnumBitfield<T>{val};
         }
 
         template<UnsignedScopedEnum T, IntegralType U>
-        constexpr EnumBitfield<T> operator>>(T val, U n)
+        constexpr auto operator>>(T val, U n) -> EnumBitfield<T>
         {
             return EnumBitfield<T>{val} >> n;
         }
 
         template<UnsignedScopedEnum T, IntegralType U>
-        constexpr EnumBitfield<T> operator<<(T val, U n)
+        constexpr auto operator<<(T val, U n) -> EnumBitfield<T>
         {
             return EnumBitfield<T>{val} << n;
         }

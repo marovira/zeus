@@ -22,28 +22,28 @@ namespace zeus
             m_split = {};
         }
 
-        T elapsed() const
+        auto elapsed() const -> T
         {
             return time_diff(m_begin);
         }
 
-        T split() const
+        auto split() const -> T
         {
             if (m_split == TimePoint{})
             {
                 return 0;
             }
 
-            T diff  = time_diff(m_split);
+            auto diff = time_diff(m_split);
             m_split = Res::now();
             return diff;
         }
 
     private:
-        using Duration  = std::chrono::duration<T>;
+        using Duration = std::chrono::duration<T>;
         using TimePoint = std::chrono::time_point<Res>;
 
-        T time_diff(TimePoint const& first) const
+        auto time_diff(TimePoint const& first) const -> T
         {
             return std::chrono::duration_cast<Duration>(Res::now() - first).count();
         }

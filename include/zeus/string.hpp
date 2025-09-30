@@ -10,9 +10,9 @@
 
 namespace zeus
 {
-    inline constexpr bool is_whitespace(char c)
+    inline constexpr auto is_whitespace(char c) -> bool
     {
-        std::array matches = {' ', '\f', '\n', '\r', '\t', '\v'};
+        const auto matches = std::array{' ', '\f', '\n', '\r', '\t', '\v'};
         return std::ranges::any_of(matches, [c](char opt) {
             return c == opt;
         });
@@ -24,16 +24,16 @@ namespace zeus
     };
 
     template<DelimiterFunctor T>
-    constexpr std::vector<std::string>
-    split(std::string const& str, T is_delim, int max_split)
+    constexpr auto split(std::string const& str, T is_delim, int max_split)
+        -> std::vector<std::string>
     {
         if (str.empty())
         {
             return {};
         }
 
-        std::vector<std::string> items;
-        std::string cur;
+        auto items = std::vector<std::string>{};
+        auto cur = std::string{};
         for (auto ch : str)
         {
             if (is_delim(ch)
@@ -50,17 +50,19 @@ namespace zeus
         return items;
     }
 
-    inline constexpr std::vector<std::string> split(std::string const& str)
+    inline constexpr auto split(std::string const& str) -> std::vector<std::string>
     {
         return split(str, is_whitespace, -1);
     }
 
-    inline constexpr std::vector<std::string> split(std::string const& str, int max_split)
+    inline constexpr auto split(std::string const& str, int max_split)
+        -> std::vector<std::string>
     {
         return split(str, is_whitespace, max_split);
     }
 
-    inline constexpr std::vector<std::string> split(std::string const& str, char delim)
+    inline constexpr auto split(std::string const& str, char delim)
+        -> std::vector<std::string>
     {
         return split(
             str,
@@ -70,8 +72,8 @@ namespace zeus
             -1);
     }
 
-    inline constexpr std::vector<std::string>
-    split(std::string const& str, char delim, int max_split)
+    inline constexpr auto split(std::string const& str, char delim, int max_split)
+        -> std::vector<std::string>
     {
         return split(
             str,
@@ -82,9 +84,9 @@ namespace zeus
     }
 
     template<DelimiterFunctor TrailingFun>
-    constexpr std::string rstrip(std::string const& str, TrailingFun is_trailing)
+    constexpr auto rstrip(std::string const& str, TrailingFun is_trailing) -> std::string
     {
-        std::string ret{str};
+        auto ret = str;
         ret.erase(std::find_if(ret.rbegin(),
                                ret.rend(),
                                [is_trailing = std::move(is_trailing)](auto c) {
@@ -95,15 +97,15 @@ namespace zeus
         return ret;
     }
 
-    inline constexpr std::string rstrip(std::string const& str)
+    inline constexpr auto rstrip(std::string const& str) -> std::string
     {
         return rstrip(str, is_whitespace);
     }
 
     template<DelimiterFunctor LeadingFun>
-    constexpr std::string lstrip(std::string const& str, LeadingFun is_leading)
+    constexpr auto lstrip(std::string const& str, LeadingFun is_leading) -> std::string
     {
-        std::string ret{str};
+        auto ret = str;
         ret.erase(ret.begin(),
                   std::find_if(ret.begin(),
                                ret.end(),
@@ -113,37 +115,37 @@ namespace zeus
         return ret;
     }
 
-    inline constexpr std::string lstrip(std::string const& str)
+    inline constexpr auto lstrip(std::string const& str) -> std::string
     {
         return lstrip(str, is_whitespace);
     }
 
     template<DelimiterFunctor LeadingTrailingFun>
-    constexpr std::string strip(std::string const& str,
-                                LeadingTrailingFun is_leading_trailing)
+    constexpr auto strip(std::string const& str, LeadingTrailingFun is_leading_trailing)
+        -> std::string
     {
         auto ret = lstrip(str, is_leading_trailing);
-        ret      = rstrip(ret, is_leading_trailing);
+        ret = rstrip(ret, is_leading_trailing);
         return ret;
     }
 
-    inline constexpr std::string strip(std::string const& str)
+    inline constexpr auto strip(std::string const& str) -> std::string
     {
         return strip(str, is_whitespace);
     }
 
-    inline constexpr std::vector<std::string> split_lines(std::string const& str,
-                                                          bool keep_line_breaks)
+    inline constexpr auto split_lines(std::string const& str, bool keep_line_breaks)
+        -> std::vector<std::string>
     {
         if (str.empty())
         {
             return {};
         }
 
-        std::vector<std::string> lines;
-        std::string line;
-        bool check_crlf{false};
-        for (std::size_t i{0}; i < str.size(); ++i)
+        auto lines = std::vector<std::string>{};
+        auto line = std::string{};
+        auto check_crlf{false};
+        for (auto i = std::size_t{0}; i < str.size(); ++i)
         {
             if (str[i] == '\r' && !check_crlf)
             {
@@ -209,7 +211,7 @@ namespace zeus
         return lines;
     }
 
-    inline constexpr std::vector<std::string> split_lines(std::string const& str)
+    inline constexpr auto split_lines(std::string const& str) -> std::vector<std::string>
     {
         return split_lines(str, false);
     }

@@ -27,7 +27,8 @@ namespace zeus
     };
 
     template<typename T, std::size_t N, std::size_t M = Choose<N, 2>::value>
-    constexpr std::array<std::pair<T, T>, M> choose_pairs(std::array<T, N> const& list)
+    constexpr auto choose_pairs(std::array<T, N> const& list)
+        -> std::array<std::pair<T, T>, M>
     {
         using Pair = std::pair<T, T>;
 
@@ -39,11 +40,11 @@ namespace zeus
         }
         else
         {
-            std::array<Pair, M> result;
-            std::size_t k{0};
-            for (std::size_t i{0}; i < N; ++i)
+            auto result = std::array<Pair, M>{};
+            auto k = std::size_t{0};
+            for (auto i = std::size_t{0}; i < N; ++i)
             {
-                for (std::size_t j{i + 1}; j < N; ++j)
+                for (auto j{i + 1}; j < N; ++j)
                 {
                     result[k] = {list[i], list[j]};
                     ++k;

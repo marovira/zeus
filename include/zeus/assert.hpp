@@ -15,8 +15,9 @@
 
 namespace zeus
 {
-    void
-    assert_handler(bool condition, std::source_location const& loc, std::string message);
+    auto assert_handler(bool condition,
+                        std::source_location const& loc,
+                        std::string message) -> void;
 } // namespace zeus
 
 #if defined(ZEUS_BUILD_DEBUG)
@@ -43,17 +44,17 @@ namespace zeus
 
 namespace zeus
 {
-    void print_assert(std::string message)
+    auto print_assert(std::string message) -> void
     {
         fmt::print(stderr, "{}\n", message);
 
 #    if defined(ZEUS_PLATFORM_WINDOWS)
         static constexpr auto max_message_length{16 * 1'024};
-        std::array<char, max_message_length> buffer{};
+        auto buffer = std::array<char, max_message_length>{};
         memcpy(buffer.data(), message.c_str(), message.size() + 1);
         strncat_s(buffer.data(), buffer.size(), "\n", 3);
 
-        std::array<WCHAR, max_message_length> wide_buffer{};
+        auto wide_buffer = std::array<WCHAR, max_message_length>{};
         MultiByteToWideChar(CP_UTF8,
                             0,
                             buffer.data(),
@@ -64,18 +65,18 @@ namespace zeus
 #    endif
     }
 
-    void
-    assert_handler(bool condition, std::source_location const& loc, std::string message)
+    auto assert_handler(bool condition,
+                        std::source_location const& loc,
+                        std::string message) -> void
     {
         if (!condition)
         {
-            std::string assert_message =
-                fmt::format("error: in file {}({}:{}) \'{}\': {}\n",
-                            loc.file_name(),
-                            loc.line(),
-                            loc.column(),
-                            loc.function_name(),
-                            message);
+            auto assert_message = fmt::format("error: in file {}({}:{}) \'{}\': {}\n",
+                                              loc.file_name(),
+                                              loc.line(),
+                                              loc.column(),
+                                              loc.function_name(),
+                                              message);
 
 #    if !defined(ZEUS_NO_ASSERT_PRINT)
             print_assert(assert_message);

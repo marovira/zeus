@@ -17,26 +17,26 @@ namespace zeus
             m_engine{seed}
         {}
 
-        T get_random_in_range(T min, T max)
+        auto get_random_in_range(T min, T max) -> T
         {
             if constexpr (std::is_floating_point_v<T>)
             {
-                std::uniform_real_distribution<T> dist{min, max};
+                auto dist = std::uniform_real_distribution<T>{min, max};
                 return dist(m_engine);
             }
             else
             {
-                std::uniform_int_distribution<T> dist{min, max};
+                auto dist = std::uniform_int_distribution<T>{min, max};
                 return dist(m_engine);
             }
         }
 
-        T get_random_zero_to_max()
+        auto get_random_zero_to_max() -> T
         {
             return get_random_in_range(static_cast<T>(0), std::numeric_limits<T>::max());
         }
 
-        T get_random_zero_to_one()
+        auto get_random_zero_to_one() -> T
         {
             return get_random_in_range(static_cast<T>(0), static_cast<T>(1));
         }

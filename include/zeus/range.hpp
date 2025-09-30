@@ -33,19 +33,21 @@ namespace zeus
         }
 
         [[nodiscard]]
-        constexpr std::size_t size() const
+        constexpr auto size() const -> std::size_t
         {
-            T hi, lo, step;
+            auto hi = T{};
+            auto lo = T{};
+            auto step = T{};
             if (m_stride > T{0})
             {
-                lo   = m_begin;
-                hi   = m_end;
+                lo = m_begin;
+                hi = m_end;
                 step = m_stride;
             }
             else
             {
-                hi   = m_begin;
-                lo   = m_end;
+                hi = m_begin;
+                lo = m_end;
                 step = -m_stride;
             }
 
@@ -58,7 +60,7 @@ namespace zeus
         }
 
         [[nodiscard]]
-        constexpr bool empty() const
+        constexpr auto empty() const -> bool
         {
             return size() == 0;
         }
@@ -66,10 +68,10 @@ namespace zeus
         class Iterator
         {
         public:
-            using value_type        = T;
-            using difference_type   = std::ptrdiff_t;
-            using reference         = T&;
-            using pointer           = T*;
+            using value_type = T;
+            using difference_type = std::ptrdiff_t;
+            using reference = T&;
+            using pointer = T*;
             using iterator_category = std::forward_iterator_tag;
 
             constexpr Iterator() :
@@ -82,35 +84,35 @@ namespace zeus
                 m_stride{step}
             {}
 
-            constexpr const T operator*() const
+            constexpr auto operator*() const -> const T
             {
                 return m_val;
             }
 
-            constexpr const T* operator->() const
+            constexpr auto operator->() const -> const T*
             {
                 return &m_val;
             }
 
-            constexpr Iterator& operator++()
+            constexpr auto operator++() -> Iterator&
             {
                 m_val += m_stride;
                 return *this;
             }
 
-            constexpr Iterator operator++(int)
+            constexpr auto operator++(int) -> Iterator
             {
                 Iterator r{*this};
                 ++r;
                 return r;
             }
 
-            constexpr bool operator==(Iterator const& rhs) const
+            constexpr auto operator==(Iterator const& rhs) const -> bool
             {
                 return m_val == rhs.m_val;
             }
 
-            constexpr bool operator!=(Iterator const& rhs) const
+            constexpr auto operator!=(Iterator const& rhs) const -> bool
             {
                 return !(*this == rhs);
             }
@@ -119,17 +121,17 @@ namespace zeus
             T m_val, m_stride;
         };
 
-        constexpr Iterator begin() const
+        constexpr auto begin() const -> Iterator
         {
             return Iterator{m_begin, m_stride};
         }
 
-        constexpr Iterator end() const
+        constexpr auto end() const -> Iterator
         {
             return Iterator{m_begin + ((static_cast<T>(size())) * m_stride), m_stride};
         }
 
-        constexpr bool operator==(Range const& rhs) const
+        constexpr auto operator==(Range const& rhs) const -> bool
         {
             if (size() != rhs.size())
             {
@@ -148,7 +150,7 @@ namespace zeus
             return true;
         }
 
-        constexpr bool operator!=(Range const& rhs) const
+        constexpr auto operator!=(Range const& rhs) const -> bool
         {
             return !(*this == rhs);
         }
@@ -163,19 +165,19 @@ namespace zeus
     };
 
     template<ArithmeticType T>
-    constexpr Range<T> range(T end)
+    constexpr auto range(T end) -> Range<T>
     {
         return Range<T>{end};
     }
 
     template<ArithmeticType T>
-    constexpr Range<T> range(T begin, T end)
+    constexpr auto range(T begin, T end) -> Range<T>
     {
         return Range<T>{begin, end};
     }
 
     template<ArithmeticType T>
-    constexpr Range<T> range(T begin, T end, T step)
+    constexpr auto range(T begin, T end, T step) -> Range<T>
     {
         return Range<T>{begin, end, step};
     }

@@ -28,10 +28,10 @@ namespace zeus
 #endif
 
 #if !defined(ZEUS_PLATFORM_APPLE)
-    inline std::time_t get_file_last_write(std::string filename)
+    inline auto get_file_last_write(std::string filename) -> std::time_t
     {
-        const zeus_fs::path file_path{filename};
-        std::error_code code;
+        const auto file_path = zeus_fs::path{filename};
+        auto code = std::error_code{};
         auto ftime = zeus_fs::last_write_time(file_path, code);
         if (code && current_build == BuildType::debug)
         {
@@ -47,10 +47,10 @@ namespace zeus
     }
 #endif
 
-    inline std::string get_file_directory(std::string filename)
+    inline auto get_file_directory(std::string filename) -> std::string
     {
-        const zeus_fs::path file_path{filename};
-        std::string root_dir;
+        const auto file_path = zeus_fs::path{filename};
+        auto root_dir = std::string{};
         if (file_path.has_parent_path())
         {
             root_dir = file_path.parent_path().string();
@@ -69,7 +69,7 @@ namespace zeus
         }
 
         ChdirScope(ChdirScope const&) = delete;
-        ChdirScope(ChdirScope&&)      = default;
+        ChdirScope(ChdirScope&&) = default;
 
         ~ChdirScope()
         {
@@ -83,8 +83,8 @@ namespace zeus
             }
         }
 
-        ChdirScope& operator=(ChdirScope const&) = delete;
-        ChdirScope& operator=(ChdirScope&&)      = default;
+        auto operator=(ChdirScope const&) -> ChdirScope& = delete;
+        auto operator=(ChdirScope&&) -> ChdirScope& = default;
 
     private:
         zeus_fs::path m_start_path;
