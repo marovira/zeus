@@ -18,13 +18,13 @@ TEMPLATE_TEST_CASE("[NamedType] - get", "[zeus]", int, double)
 
     SECTION("Non-const object")
     {
-        Type t{1};
+        auto t = Type{1};
         REQUIRE(t.get() == 1);
     }
 
     SECTION("Const object")
     {
-        const Type t{1};
+        const auto t = Type{1};
         REQUIRE(t.get() == 1);
     }
 }
@@ -33,8 +33,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Addable", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Addable);
 
-    Type t1{1};
-    const Type t2{2};
+    auto t1 = Type{1};
+    const auto t2 = Type{2};
 
     SECTION("Operator +=")
     {
@@ -53,8 +53,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Subtractable", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Subtractable);
 
-    const Type t1{1};
-    Type t2{2};
+    const auto t1 = Type{1};
+    auto t2 = Type{2};
 
     SECTION("Operator -=")
     {
@@ -73,8 +73,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Multiplicable", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Multiplicable);
 
-    Type t1{2};
-    const Type t2{3};
+    auto t1 = Type{2};
+    const auto t2 = Type{3};
 
     SECTION("Operator *=")
     {
@@ -93,8 +93,8 @@ TEMPLATE_TEST_CASE("[NamedType] - Divisible", "[zeus]", int, double)
 {
     MAKE_TEST_TYPE_V(Type, TestType, zeus::Divisible);
 
-    Type t1{4};
-    const Type t2{2};
+    auto t1 = Type{4};
+    const auto t2 = Type{2};
 
     SECTION("Operator /=")
     {

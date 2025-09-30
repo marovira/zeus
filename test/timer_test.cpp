@@ -9,7 +9,7 @@ TEST_CASE("[timer] - timer: elapsed", "[zeus]")
     using zeus::Timer;
     using namespace std::chrono_literals;
 
-    Timer<double> t;
+    auto t = Timer<double>{};
     t.start();
     std::this_thread::sleep_for(1s);
     auto elapsed{static_cast<int>(t.elapsed())};
@@ -22,7 +22,7 @@ TEST_CASE("[timer] - Timer: split", "[zeus]")
     using zeus::Timer;
     using namespace std::chrono_literals;
 
-    Timer<int> t;
+    auto t = Timer<int>{};
 
     SECTION("Empty timer")
     {
@@ -47,7 +47,7 @@ TEST_CASE("[timer] - Timer: split", "[zeus]")
         REQUIRE(split == 1);
 
         std::this_thread::sleep_for(1s);
-        split        = t.split();
+        split = t.split();
         auto elapsed = t.elapsed();
         REQUIRE(split == 1);
         REQUIRE(elapsed == 2);

@@ -41,7 +41,7 @@ TEST_CASE("[string] DelimiterFunctor concept", "[zeus]")
 
 TEST_CASE("[string] - split", "[zeus]")
 {
-    static constexpr char delim{'_'};
+    static constexpr auto delim{'_'};
 
     SECTION("Base split function")
     {
@@ -49,8 +49,8 @@ TEST_CASE("[string] - split", "[zeus]")
         {
             SECTION("Empty string")
             {
-                const std::string s;
-                std::vector<std::string> expected;
+                const auto s = std::string{};
+                const auto expected = std::vector<std::string>{};
 
                 auto items = zeus::split(
                     s,
@@ -63,8 +63,8 @@ TEST_CASE("[string] - split", "[zeus]")
 
             SECTION("No delimiters")
             {
-                const std::string s = "some random text";
-                std::vector<std::string> expected{s};
+                const auto s = std::string{"some random text"};
+                const auto expected = std::vector{s};
 
                 auto items = zeus::split(
                     s,
@@ -77,8 +77,8 @@ TEST_CASE("[string] - split", "[zeus]")
 
             SECTION("All chars are delimiters")
             {
-                const std::string s = "some random text";
-                std::vector<std::string> expected(s.size() + 1);
+                const auto s = std::string{"some random text"};
+                const auto expected = std::vector<std::string>(s.size() + 1);
 
                 auto items = zeus::split(
                     s,
@@ -91,8 +91,8 @@ TEST_CASE("[string] - split", "[zeus]")
 
             SECTION("Specific delimiter")
             {
-                const std::string s = "some_random_text";
-                std::vector<std::string> expected{"some", "random", "text"};
+                const auto s = std::string{"some_random_text"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
                 auto items = zeus::split(
                     s,
@@ -105,8 +105,8 @@ TEST_CASE("[string] - split", "[zeus]")
 
             SECTION("Return max_split")
             {
-                const std::string s = "some_random_text";
-                std::vector<std::string> expected{"some", "random_text"};
+                const auto s = std::string{"some_random_text"};
+                const auto expected = std::vector<std::string>{"some", "random_text"};
 
                 auto items = zeus::split(
                     s,
@@ -123,8 +123,8 @@ TEST_CASE("[string] - split", "[zeus]")
             SECTION("Empty string")
             {
                 constexpr bool res = []() {
-                    const std::string s;
-                    const std::vector<std::string> expected;
+                    const auto s = std::string{};
+                    const auto expected = std::vector<std::string>{};
 
                     auto items = zeus::split(
                         s,
@@ -141,8 +141,8 @@ TEST_CASE("[string] - split", "[zeus]")
             SECTION("No delimiters")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some random text";
-                    const std::vector<std::string> expected{s};
+                    const auto s = std::string{"some random text"};
+                    const auto expected = std::vector{s};
 
                     auto items = zeus::split(
                         s,
@@ -159,8 +159,8 @@ TEST_CASE("[string] - split", "[zeus]")
             SECTION("All chars are delimiters")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some random text";
-                    const std::vector<std::string> expected(s.size() + 1);
+                    const auto s = std::string{"some random text"};
+                    const auto expected = std::vector<std::string>(s.size() + 1);
 
                     auto items = zeus::split(
                         s,
@@ -177,10 +177,9 @@ TEST_CASE("[string] - split", "[zeus]")
             SECTION("Specific delimiter")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some_random_text";
-                    const std::vector<std::string> expected{{"some"},
-                                                            {"random"},
-                                                            {"text"}};
+                    const auto s = std::string{"some_random_text"};
+                    const auto expected =
+                        std::vector<std::string>{"some", "random", "text"};
 
                     auto items = zeus::split(
                         s,
@@ -197,8 +196,8 @@ TEST_CASE("[string] - split", "[zeus]")
             SECTION("Return max_split")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some_random_text";
-                    const std::vector<std::string> expected{{"some"}, {"random_text"}};
+                    const auto s = std::string{"some_random_text"};
+                    const auto expected = std::vector<std::string>{"some", "random_text"};
 
                     auto items = zeus::split(
                         s,
@@ -218,20 +217,20 @@ TEST_CASE("[string] - split", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s = "some random text";
-            std::vector<std::string> expected{"some", "random", "text"};
+            const auto s = std::string{"some random text"};
+            const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-            auto items = zeus::split(s);
+            const auto items = zeus::split(s);
             REQUIRE(items == expected);
         }
 
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s = "some random text";
-                const std::vector<std::string> expected{{"some"}, {"random"}, {"text"}};
+                const auto s = std::string{"some random text"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-                auto items = zeus::split(s);
+                const auto items = zeus::split(s);
                 return items == expected;
             }();
 
@@ -243,18 +242,18 @@ TEST_CASE("[string] - split", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s = "some random text";
-            std::vector<std::string> expected{"some", "random text"};
+            const auto s = std::string{"some random text"};
+            const auto expected = std::vector<std::string>{"some", "random text"};
 
-            auto items = zeus::split(s, 1);
+            const auto items = zeus::split(s, 1);
             REQUIRE(items == expected);
         }
 
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s = "some random text";
-                const std::vector<std::string> expected{{"some"}, {"random text"}};
+                const auto s = std::string{"some random text"};
+                const auto expected = std::vector<std::string>{"some", "random text"};
 
                 auto items = zeus::split(s, 1);
                 return items == expected;
@@ -268,18 +267,18 @@ TEST_CASE("[string] - split", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s = "some_random_text";
-            std::vector<std::string> expected{"some", "random", "text"};
+            const auto s = std::string{"some_random_text"};
+            const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-            auto items = zeus::split(s, delim);
+            const auto items = zeus::split(s, delim);
             REQUIRE(items == expected);
         }
 
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s = "some_random_text";
-                const std::vector<std::string> expected{{"some"}, {"random"}, {"text"}};
+                const auto s = std::string{"some_random_text"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
                 auto items = zeus::split(
                     s,
@@ -297,10 +296,10 @@ TEST_CASE("[string] - split", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s = "some_random_text";
-            std::vector<std::string> expected{"some", "random_text"};
+            const auto s = std::string{"some_random_text"};
+            const auto expected = std::vector<std::string>{"some", "random_text"};
 
-            auto items = zeus::split(
+            const auto items = zeus::split(
                 s,
                 [](char c) {
                     return c == delim;
@@ -313,10 +312,10 @@ TEST_CASE("[string] - split", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s = "some_random_text";
-                const std::vector<std::string> expected{{"some"}, {"random_text"}};
+                const auto s = std::string{"some_random_text"};
+                const auto expected = std::vector<std::string>{"some", "random_text"};
 
-                auto items = zeus::split(
+                const auto items = zeus::split(
                     s,
                     [](char c) {
                         return c == delim;
@@ -337,10 +336,10 @@ TEST_CASE("[string] - rstrip", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s  = "some random text,,,,";
-            std::string expected = "some random text";
+            const auto s = std::string{"some random text,,,,"};
+            const auto expected = std::string{"some random text"};
 
-            auto res = zeus::rstrip(s, [](char c) {
+            const auto res = zeus::rstrip(s, [](char c) {
                 return c == ',';
             });
 
@@ -350,10 +349,10 @@ TEST_CASE("[string] - rstrip", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s        = "some random text,,,,";
-                const std::string expected = "some random text";
+                const auto s = std::string{"some random text,,,,"};
+                const auto expected = std::string{"some random text"};
 
-                auto res = zeus::rstrip(s, [](char c) {
+                const auto res = zeus::rstrip(s, [](char c) {
                     return c == ',';
                 });
 
@@ -368,10 +367,10 @@ TEST_CASE("[string] - rstrip", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s  = "some random text    ";
-            std::string expected = "some random text";
+            const auto s = std::string{"some random text    "};
+            const auto expected = std::string{"some random text"};
 
-            auto res = zeus::rstrip(s);
+            const auto res = zeus::rstrip(s);
 
             REQUIRE(res == expected);
         }
@@ -379,10 +378,10 @@ TEST_CASE("[string] - rstrip", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s        = "some random text    ";
-                const std::string expected = "some random text";
+                const auto s = std::string{"some random text    "};
+                const auto expected = std::string{"some random text"};
 
-                auto res = zeus::rstrip(s);
+                const auto res = zeus::rstrip(s);
 
                 return res == expected;
             }();
@@ -398,10 +397,10 @@ TEST_CASE("[string] - lstrip", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s  = ",,,,some random text";
-            std::string expected = "some random text";
+            const auto s = std::string{",,,,some random text"};
+            const auto expected = std::string{"some random text"};
 
-            auto res = zeus::lstrip(s, [](char c) {
+            const auto res = zeus::lstrip(s, [](char c) {
                 return c == ',';
             });
 
@@ -411,10 +410,10 @@ TEST_CASE("[string] - lstrip", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s        = ",,,,some random text";
-                const std::string expected = "some random text";
+                const auto s = std::string{",,,,some random text"};
+                const auto expected = std::string{"some random text"};
 
-                auto res = zeus::lstrip(s, [](char c) {
+                const auto res = zeus::lstrip(s, [](char c) {
                     return c == ',';
                 });
 
@@ -429,10 +428,10 @@ TEST_CASE("[string] - lstrip", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s  = "    some random text";
-            std::string expected = "some random text";
+            const auto s = std::string{"    some random text"};
+            const auto expected = std::string{"some random text"};
 
-            auto res = zeus::lstrip(s);
+            const auto res = zeus::lstrip(s);
 
             REQUIRE(res == expected);
         }
@@ -440,10 +439,10 @@ TEST_CASE("[string] - lstrip", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s        = "    some random text";
-                const std::string expected = "some random text";
+                const auto s = std::string{"    some random text"};
+                const auto expected = std::string{"some random text"};
 
-                auto res = zeus::lstrip(s);
+                const auto res = zeus::lstrip(s);
 
                 return res == expected;
             }();
@@ -459,10 +458,10 @@ TEST_CASE("[string] - strip", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s  = ",,,,some random text,,,,";
-            std::string expected = "some random text";
+            const auto s = std::string{",,,,some random text,,,,"};
+            const auto expected = std::string{"some random text"};
 
-            auto res = zeus::strip(s, [](char c) {
+            const auto res = zeus::strip(s, [](char c) {
                 return c == ',';
             });
 
@@ -472,10 +471,10 @@ TEST_CASE("[string] - strip", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s        = ",,,,some random text,,,,";
-                const std::string expected = "some random text";
+                const auto s = std::string{",,,,some random text,,,,"};
+                const auto expected = std::string{"some random text"};
 
-                auto res = zeus::strip(s, [](char c) {
+                const auto res = zeus::strip(s, [](char c) {
                     return c == ',';
                 });
 
@@ -490,10 +489,10 @@ TEST_CASE("[string] - strip", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::string s  = "    some random text    ";
-            std::string expected = "some random text";
+            const auto s = std::string{"    some random text    "};
+            const auto expected = std::string{"some random text"};
 
-            auto res = zeus::strip(s);
+            const auto res = zeus::strip(s);
 
             REQUIRE(res == expected);
         }
@@ -501,10 +500,10 @@ TEST_CASE("[string] - strip", "[zeus]")
         SECTION("Compile-time")
         {
             constexpr bool res = []() {
-                const std::string s        = "    some random text    ";
-                const std::string expected = "some random text";
+                const auto s = std::string{"    some random text    "};
+                const auto expected = std::string{"some random text"};
 
-                auto res = zeus::strip(s);
+                const auto res = zeus::strip(s);
 
                 return res == expected;
             }();
@@ -522,127 +521,131 @@ TEST_CASE("[string] - split_lines", "[zeus]")
         {
             SECTION("Empty string")
             {
-                const std::string s;
-                std::vector<std::string> expected;
+                const auto s = std::string{};
+                const auto expected = std::vector<std::string>{};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("No newlines")
             {
-                const std::string s = "some random text";
-                std::vector<std::string> expected{"some random text"};
+                const auto s = std::string{"some random text"};
+                const auto expected = std::vector<std::string>{"some random text"};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Newline")
             {
-                const std::string s = "some\nrandom\ntext\n";
-                std::vector<std::string> expected{"some", "random", "text"};
+                const auto s = std::string{"some\nrandom\ntext\n"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Carriage return")
             {
-                const std::string s = "some\rrandom\rtext\r";
-                std::vector<std::string> expected{"some", "random", "text"};
+                const auto s = std::string{"some\rrandom\rtext\r"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("CRLF")
             {
-                const std::string s = "some\r\nrandom\r\ntext\r\n";
-                std::vector<std::string> expected{"some", "random", "text"};
+                const auto s = std::string{"some\r\nrandom\r\ntext\r\n"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Multiple newlines")
             {
-                const std::string s = "some\n\n\n";
-                std::vector<std::string> expected{"some", "", ""};
+                const auto s = std::string{"some\n\n\n"};
+                const auto expected = std::vector<std::string>{"some", "", ""};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Multiple carriage returns")
             {
-                const std::string s = "some\r\r\r";
-                std::vector<std::string> expected{"some", "", ""};
+                const auto s = std::string{"some\r\r\r"};
+                const auto expected = std::vector<std::string>{"some", "", ""};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Multiple CRLF")
             {
-                const std::string s = "some\r\n\r\n\r\n";
-                std::vector<std::string> expected{"some", "", ""};
+                const auto s = std::string{"some\r\n\r\n\r\n"};
+                const auto expected = std::vector<std::string>{"some", "", ""};
 
-                auto lines = zeus::split_lines(s, false);
+                const auto lines = zeus::split_lines(s, false);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Keep newline")
             {
-                const std::string s = "some\nrandom\ntext\n";
-                std::vector<std::string> expected{"some\n", "random\n", "text\n"};
+                const auto s = std::string{"some\nrandom\ntext\n"};
+                const auto expected =
+                    std::vector<std::string>{"some\n", "random\n", "text\n"};
 
-                auto lines = zeus::split_lines(s, true);
+                const auto lines = zeus::split_lines(s, true);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Keep carriage return")
             {
-                const std::string s = "some\rrandom\rtext\r";
-                std::vector<std::string> expected{"some\r", "random\r", "text\r"};
+                const auto s = std::string{"some\rrandom\rtext\r"};
+                const auto expected =
+                    std::vector<std::string>{"some\r", "random\r", "text\r"};
 
-                auto lines = zeus::split_lines(s, true);
+                const auto lines = zeus::split_lines(s, true);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Keep CRLF")
             {
-                const std::string s = "some\r\nrandom\r\ntext\r\n";
-                std::vector<std::string> expected{"some\r\n", "random\r\n", "text\r\n"};
+                const auto s = std::string{"some\r\nrandom\r\ntext\r\n"};
+                const auto expected =
+                    std::vector<std::string>{"some\r\n", "random\r\n", "text\r\n"};
 
-                auto lines = zeus::split_lines(s, true);
+                const auto lines = zeus::split_lines(s, true);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Keep multiple newlines")
             {
-                const std::string s = "some\n\n\n";
-                std::vector<std::string> expected{"some\n", "\n", "\n"};
+                const auto s = std::string{"some\n\n\n"};
+                const auto expected = std::vector<std::string>{"some\n", "\n", "\n"};
 
-                auto lines = zeus::split_lines(s, true);
+                const auto lines = zeus::split_lines(s, true);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Keep multiple carriage returns")
             {
-                const std::string s = "some\r\r\r";
-                std::vector<std::string> expected{"some\r", "\r", "\r"};
+                const auto s = std::string{"some\r\r\r"};
+                const auto expected = std::vector<std::string>{"some\r", "\r", "\r"};
 
-                auto lines = zeus::split_lines(s, true);
+                const auto lines = zeus::split_lines(s, true);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Keep multiple CRLF")
             {
-                const std::string s = "some\r\n\r\n\r\n";
-                std::vector<std::string> expected{"some\r\n", "\r\n", "\r\n"};
+                const auto s = std::string{"some\r\n\r\n\r\n"};
+                const auto expected =
+                    std::vector<std::string>{"some\r\n", "\r\n", "\r\n"};
 
-                auto lines = zeus::split_lines(s, true);
+                const auto lines = zeus::split_lines(s, true);
                 REQUIRE(lines == expected);
             }
         }
@@ -652,10 +655,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Empty string")
             {
                 constexpr bool res = []() {
-                    const std::string s;
-                    const std::vector<std::string> expected;
+                    const auto s = std::string{};
+                    const auto expected = std::vector<std::string>{};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -665,10 +668,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("No newlines")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some random text";
-                    const std::vector<std::string> expected{{"some random text"}};
+                    const auto s = std::string{"some random text"};
+                    const auto expected = std::vector<std::string>{"some random text"};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -678,12 +681,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Newline")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\nrandom\ntext\n";
-                    const std::vector<std::string> expected{{"some"},
-                                                            {"random"},
-                                                            {"text"}};
+                    const auto s = std::string{"some\nrandom\ntext\n"};
+                    const auto expected =
+                        std::vector<std::string>{"some", "random", "text"};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -693,12 +695,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Carriage return")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\rrandom\rtext\r";
-                    const std::vector<std::string> expected{{"some"},
-                                                            {"random"},
-                                                            {"text"}};
+                    const auto s = std::string{"some\rrandom\rtext\r"};
+                    const auto expected =
+                        std::vector<std::string>{"some", "random", "text"};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -708,12 +709,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("CRLF")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\r\nrandom\r\ntext\r\n";
-                    const std::vector<std::string> expected{{"some"},
-                                                            {"random"},
-                                                            {"text"}};
+                    const auto s = std::string{"some\r\nrandom\r\ntext\r\n"};
+                    const auto expected =
+                        std::vector<std::string>{"some", "random", "text"};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -723,10 +723,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Multiple newlines")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\n\n\n";
-                    const std::vector<std::string> expected{{"some"}, {""}, {""}};
+                    const auto s = std::string{"some\n\n\n"};
+                    const auto expected = std::vector<std::string>{"some", "", ""};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -736,10 +736,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Multiple carriage returns")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\r\r\r";
-                    const std::vector<std::string> expected{{"some"}, {""}, {""}};
+                    const auto s = std::string{"some\r\r\r"};
+                    const auto expected = std::vector<std::string>{"some", "", ""};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -749,10 +749,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Multiple CRLF")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\r\n\r\n\r\n";
-                    const std::vector<std::string> expected{{"some"}, {""}, {""}};
+                    const auto s = std::string{"some\r\n\r\n\r\n"};
+                    const auto expected = std::vector<std::string>{"some", "", ""};
 
-                    auto lines = zeus::split_lines(s, false);
+                    const auto lines = zeus::split_lines(s, false);
                     return lines == expected;
                 }();
 
@@ -762,12 +762,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Keep newline")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\nrandom\ntext\n";
-                    const std::vector<std::string> expected{{"some\n"},
-                                                            {"random\n"},
-                                                            {"text\n"}};
+                    const auto s = std::string{"some\nrandom\ntext\n"};
+                    const auto expected =
+                        std::vector<std::string>{"some\n", "random\n", "text\n"};
 
-                    auto lines = zeus::split_lines(s, true);
+                    const auto lines = zeus::split_lines(s, true);
                     return lines == expected;
                 }();
 
@@ -777,12 +776,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Keep carriage return")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\rrandom\rtext\r";
-                    const std::vector<std::string> expected{{"some\r"},
-                                                            {"random\r"},
-                                                            {"text\r"}};
+                    const auto s = std::string{"some\rrandom\rtext\r"};
+                    const auto expected =
+                        std::vector<std::string>{"some\r", "random\r", "text\r"};
 
-                    auto lines = zeus::split_lines(s, true);
+                    const auto lines = zeus::split_lines(s, true);
                     return lines == expected;
                 }();
 
@@ -792,12 +790,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Keep CRLF")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\r\nrandom\r\ntext\r\n";
-                    const std::vector<std::string> expected{{"some\r\n"},
-                                                            {"random\r\n"},
-                                                            {"text\r\n"}};
+                    const auto s = std::string{"some\r\nrandom\r\ntext\r\n"};
+                    const auto expected =
+                        std::vector<std::string>{"some\r\n", "random\r\n", "text\r\n"};
 
-                    auto lines = zeus::split_lines(s, true);
+                    const auto lines = zeus::split_lines(s, true);
                     return lines == expected;
                 }();
 
@@ -807,10 +804,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Keep multiple newlines")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\n\n\n";
-                    const std::vector<std::string> expected{{"some\n"}, {"\n"}, {"\n"}};
+                    const auto s = std::string{"some\n\n\n"};
+                    const auto expected = std::vector<std::string>{"some\n", "\n", "\n"};
 
-                    auto lines = zeus::split_lines(s, true);
+                    const auto lines = zeus::split_lines(s, true);
                     return lines == expected;
                 }();
 
@@ -820,10 +817,10 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Keep multiple carriage returns")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\r\r\r";
-                    const std::vector<std::string> expected{{"some\r"}, {"\r"}, {"\r"}};
+                    const auto s = std::string{"some\r\r\r"};
+                    const auto expected = std::vector<std::string>{"some\r", "\r", "\r"};
 
-                    auto lines = zeus::split_lines(s, true);
+                    const auto lines = zeus::split_lines(s, true);
                     return lines == expected;
                 }();
 
@@ -833,12 +830,11 @@ TEST_CASE("[string] - split_lines", "[zeus]")
             SECTION("Keep multiple CRLF")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\r\n\r\n\r\n";
-                    const std::vector<std::string> expected{{"some\r\n"},
-                                                            {"\r\n"},
-                                                            {"\r\n"}};
+                    const auto s = std::string{"some\r\n\r\n\r\n"};
+                    const auto expected =
+                        std::vector<std::string>{"some\r\n", "\r\n", "\r\n"};
 
-                    auto lines = zeus::split_lines(s, true);
+                    const auto lines = zeus::split_lines(s, true);
                     return lines == expected;
                 }();
 
@@ -850,22 +846,21 @@ TEST_CASE("[string] - split_lines", "[zeus]")
         {
             SECTION("Runtime")
             {
-                const std::string s = "some\nrandom\ntext\n";
-                std::vector<std::string> expected{"some", "random", "text"};
+                const auto s = std::string{"some\nrandom\ntext\n"};
+                const auto expected = std::vector<std::string>{"some", "random", "text"};
 
-                auto lines = zeus::split_lines(s);
+                const auto lines = zeus::split_lines(s);
                 REQUIRE(lines == expected);
             }
 
             SECTION("Compile-time")
             {
                 constexpr bool res = []() {
-                    const std::string s = "some\nrandom\ntext\n";
-                    const std::vector<std::string> expected{{"some"},
-                                                            {"random"},
-                                                            {"text"}};
+                    const auto s = std::string{"some\nrandom\ntext\n"};
+                    const auto expected =
+                        std::vector<std::string>{"some", "random", "text"};
 
-                    auto lines = zeus::split_lines(s);
+                    const auto lines = zeus::split_lines(s);
                     return lines == expected;
                 }();
 

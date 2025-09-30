@@ -37,7 +37,7 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
     {
         SECTION("Runtime")
         {
-            const std::array<int, 2> list{1, 2};
+            const auto list = std::array{1, 2};
             auto result = zeus::choose_pairs(list);
             REQUIRE(result.size() == 1);
             REQUIRE(result[0] == std::pair<int, int>{1, 2});
@@ -46,7 +46,7 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
         SECTION("Compile-time")
         {
             const static constexpr auto result = []() {
-                const std::array<int, 2> list{1, 2};
+                const auto list = std::array{1, 2};
                 return zeus::choose_pairs(list);
             }();
 
@@ -57,13 +57,13 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
 
     SECTION("List of size 3")
     {
-        constexpr std::array<std::pair<int, int>, 3> expected{
+        constexpr auto expected = std::array<std::pair<int, int>, 3>{
             {{1, 2}, {1, 3}, {2, 3}}
         };
 
         SECTION("Runtime")
         {
-            const std::array<int, 3> list{1, 2, 3};
+            const auto list = std::array{1, 2, 3};
             auto result = zeus::choose_pairs(list);
 
             REQUIRE(result == expected);
@@ -72,7 +72,7 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
         SECTION("Compile-time")
         {
             static constexpr auto result = []() {
-                const std::array<int, 3> list{1, 2, 3};
+                const auto list = std::array{1, 2, 3};
                 return zeus::choose_pairs(list);
             }();
 
@@ -102,7 +102,7 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
 
         SECTION("Runtime")
         {
-            const std::array<int, 6> list{1, 2, 3, 4, 5, 6};
+            const auto list = std::array{1, 2, 3, 4, 5, 6};
             auto result = zeus::choose_pairs(list);
 
             REQUIRE(result == expected);
@@ -111,7 +111,7 @@ TEST_CASE("[algorithm] - choose_pairs", "[zeus]")
         SECTION("Compile-time")
         {
             static constexpr auto result = []() {
-                const std::array<int, 6> list{1, 2, 3, 4, 5, 6};
+                const auto list = std::array{1, 2, 3, 4, 5, 6};
                 return zeus::choose_pairs(list);
             }();
 

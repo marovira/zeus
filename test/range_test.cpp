@@ -15,14 +15,14 @@ TEMPLATE_TEST_CASE("[Range] - constructors", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{10};
+            const auto r = Range<TestType>{10};
             REQUIRE(r.size() == 10);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto empty = []() {
-                const Range<TestType> r{10};
+                const auto r = Range<TestType>{10};
                 return r.size();
             }();
             STATIC_REQUIRE(empty == 10);
@@ -33,14 +33,14 @@ TEMPLATE_TEST_CASE("[Range] - constructors", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0, 10};
+            const auto r = Range<TestType>{0, 10};
             REQUIRE(r.size() == 10);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{0, 10};
+                const auto r = Range<TestType>{0, 10};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 10);
@@ -51,14 +51,14 @@ TEMPLATE_TEST_CASE("[Range] - constructors", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0, 10, 1};
+            const auto r = Range<TestType>{0, 10, 1};
             REQUIRE(r.size() == 10);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{0, 10, 1};
+                const auto r = Range<TestType>{0, 10, 1};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 10);
@@ -77,14 +77,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0};
+            const auto r = Range<TestType>{0};
             REQUIRE(r.size() == 0);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto empty = []() {
-                const Range<TestType> r{0};
+                const auto r = Range<TestType>{0};
                 return r.size();
             }();
             STATIC_REQUIRE(empty == 0);
@@ -95,14 +95,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{10};
+            const auto r = Range<TestType>{10};
             REQUIRE(r.size() == 10);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{10};
+                const auto r = Range<TestType>{10};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 10);
@@ -113,14 +113,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{-10, 0};
+            const auto r = Range<TestType>{-10, 0};
             REQUIRE(r.size() == 10);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{-10, 0};
+                const auto r = Range<TestType>{-10, 0};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 10);
@@ -131,14 +131,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0, 10, 2};
+            const auto r = Range<TestType>{0, 10, 2};
             REQUIRE(r.size() == 5);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{0, 10, 2};
+                const auto r = Range<TestType>{0, 10, 2};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 5);
@@ -149,14 +149,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{10, 0, -2};
+            const auto r = Range<TestType>{10, 0, -2};
             REQUIRE(r.size() == 5);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{10, 0, -2};
+                const auto r = Range<TestType>{10, 0, -2};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 5);
@@ -167,14 +167,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{-10, 0, 2};
+            const auto r = Range<TestType>{-10, 0, 2};
             REQUIRE(r.size() == 5);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{-10, 0, 2};
+                const auto r = Range<TestType>{-10, 0, 2};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 5);
@@ -185,14 +185,14 @@ TEMPLATE_TEST_CASE("[Range] - size", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0, -10, -2};
+            const auto r = Range<TestType>{0, -10, -2};
             REQUIRE(r.size() == 5);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto size = []() {
-                const Range<TestType> r{0, -10, -2};
+                const auto r = Range<TestType>{0, -10, -2};
                 return r.size();
             }();
             STATIC_REQUIRE(size == 5);
@@ -206,14 +206,14 @@ TEMPLATE_TEST_CASE("[Range] - empty", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0};
+            const auto r = Range<TestType>{0};
             REQUIRE(r.empty());
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto empty = []() {
-                const Range<TestType> r{0};
+                const auto r = Range<TestType>{0};
                 return r.empty();
             }();
             STATIC_REQUIRE(empty);
@@ -224,14 +224,14 @@ TEMPLATE_TEST_CASE("[Range] - empty", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{10};
+            const auto r = Range<TestType>{10};
             REQUIRE_FALSE(r.empty());
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto empty = []() {
-                const Range<TestType> r{10};
+                const auto r = Range<TestType>{10};
                 return r.empty();
             }();
             STATIC_REQUIRE_FALSE(empty);
@@ -245,14 +245,14 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - constructor", "[zeus]", int, float)
 
     SECTION("Runtime")
     {
-        const It it{0, 1};
+        const auto it = It{0, 1};
         REQUIRE(*it == 0);
     }
 
     SECTION("Compile-time")
     {
         static constexpr auto val = []() {
-            const It it{0, 1};
+            const auto it = It{0, 1};
             return *it;
         }();
         STATIC_REQUIRE(val == 0);
@@ -267,7 +267,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It it{0, 1};
+            auto it = It{0, 1};
             ++it;
             REQUIRE(*it == 1);
         }
@@ -275,7 +275,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                It it{0, 1};
+                auto it = It{0, 1};
                 ++it;
                 return *it;
             }();
@@ -288,7 +288,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It it{0, 2};
+            auto it = It{0, 2};
             ++it;
             REQUIRE(*it == 2);
         }
@@ -296,7 +296,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                It it{0, 2};
+                auto it = It{0, 2};
                 ++it;
                 return *it;
             }();
@@ -309,7 +309,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It it{0, -2};
+            auto it = It{0, -2};
             ++it;
             REQUIRE(*it == -2);
         }
@@ -317,7 +317,7 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator++", "[zeus]", int, float)
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                It it{0, -2};
+                auto it = It{0, -2};
                 ++it;
                 return *it;
             }();
@@ -335,16 +335,16 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator==", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It a{0, 1};
-            It b{0, 2};
+            const auto a = It{0, 1};
+            const auto b = It{0, 2};
             REQUIRE(a == b);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                const It a{0, 1};
-                const It b{0, 2};
+                const auto a = It{0, 1};
+                const auto b = It{0, 2};
                 return a == b;
             }();
 
@@ -356,16 +356,16 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator==", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It a{0, 1};
-            It b{1, 2};
+            const auto a = It{0, 1};
+            const auto b = It{1, 2};
             REQUIRE_FALSE(a == b);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                const It a{0, 1};
-                const It b{1, 2};
+                const auto a = It{0, 1};
+                const auto b = It{1, 2};
                 return a == b;
             }();
 
@@ -382,16 +382,16 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator!=", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It a{0, 1};
-            It b{0, 2};
+            const auto a = It{0, 1};
+            const auto b = It{0, 2};
             REQUIRE_FALSE(a != b);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                const It a{0, 1};
-                const It b{0, 2};
+                const auto a = It{0, 1};
+                const auto b = It{0, 2};
                 return a != b;
             }();
 
@@ -403,16 +403,16 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator!=", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            It a{0, 1};
-            It b{1, 2};
+            const auto a = It{0, 1};
+            const auto b = It{1, 2};
             REQUIRE(a != b);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                const It a{0, 1};
-                const It b{1, 2};
+                const auto a = It{0, 1};
+                const auto b = It{1, 2};
                 return a != b;
             }();
 
@@ -427,14 +427,14 @@ TEMPLATE_TEST_CASE("[Range::Iterator] - operator*", "[zeus]", int, float)
 
     SECTION("Runtime")
     {
-        const It it{0, 2};
+        const auto it = It{0, 2};
         REQUIRE(*it == 0);
     }
 
     SECTION("Compile-time")
     {
         static constexpr auto val = []() {
-            const It it{0, 2};
+            const auto it = It{0, 2};
             return *it;
         }();
 
@@ -446,14 +446,14 @@ TEMPLATE_TEST_CASE("[Range] - begin", "[zeus]", int, float)
 {
     SECTION("Runtime")
     {
-        const Range<TestType> r{10};
+        const auto r = Range<TestType>{10};
         REQUIRE(*r.begin() == 0);
     }
 
     SECTION("Compile-time")
     {
         static constexpr auto val = []() {
-            const Range<TestType> r{10};
+            const auto r = Range<TestType>{10};
             return *r.begin();
         }();
 
@@ -467,14 +467,14 @@ TEMPLATE_TEST_CASE("[Range] - end", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{10};
+            const auto r = Range<TestType>{10};
             REQUIRE(*r.end() == 10);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                const Range<TestType> r{10};
+                const auto r = Range<TestType>{10};
                 return *r.end();
             }();
 
@@ -486,14 +486,14 @@ TEMPLATE_TEST_CASE("[Range] - end", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const Range<TestType> r{0, 10, 3};
+            const auto r = Range<TestType>{0, 10, 3};
             REQUIRE(*r.end() == 12);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val = []() {
-                const Range<TestType> r{0, 10, 3};
+                const auto r = Range<TestType>{0, 10, 3};
                 return *r.end();
             }();
 
@@ -508,26 +508,26 @@ TEMPLATE_TEST_CASE("[Range] - operator==", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            Range<TestType> a1{0};
-            Range<TestType> b1{2, 1, 3};
+            const auto a1 = Range<TestType>{0};
+            const auto b1 = Range<TestType>{2, 1, 3};
             REQUIRE(a1 == b1);
 
-            Range<TestType> a2{0, 3, 2};
-            Range<TestType> b2{0, 4, 2};
+            const auto a2 = Range<TestType>{0, 3, 2};
+            const auto b2 = Range<TestType>{0, 4, 2};
             REQUIRE(a2 == b2);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val1 = []() {
-                const Range<TestType> a{0};
-                const Range<TestType> b{2, 1, 3};
+                const auto a = Range<TestType>{0};
+                const auto b = Range<TestType>{2, 1, 3};
                 return a == b;
             }();
 
             static constexpr auto val2 = []() {
-                const Range<TestType> a{0, 3, 2};
-                const Range<TestType> b{0, 4, 2};
+                const auto a = Range<TestType>{0, 3, 2};
+                const auto b = Range<TestType>{0, 4, 2};
                 return a == b;
             }();
 
@@ -540,26 +540,26 @@ TEMPLATE_TEST_CASE("[Range] - operator==", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            Range<TestType> a1{0};
-            Range<TestType> b1{10};
+            const auto a1 = Range<TestType>{0};
+            const auto b1 = Range<TestType>{10};
             REQUIRE_FALSE(a1 == b1);
 
-            Range<TestType> a2{0, 10, 2};
-            Range<TestType> b2{0, 10, 3};
+            const auto a2 = Range<TestType>{0, 10, 2};
+            const auto b2 = Range<TestType>{0, 10, 3};
             REQUIRE_FALSE(a2 == b2);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val1 = []() {
-                const Range<TestType> a{0};
-                const Range<TestType> b{10};
+                const auto a = Range<TestType>{0};
+                const auto b = Range<TestType>{10};
                 return a == b;
             }();
 
             static constexpr auto val2 = []() {
-                const Range<TestType> a{0, 10, 2};
-                const Range<TestType> b{0, 10, 3};
+                const auto a = Range<TestType>{0, 10, 2};
+                const auto b = Range<TestType>{0, 10, 3};
                 return a == b;
             }();
 
@@ -575,26 +575,26 @@ TEMPLATE_TEST_CASE("[Range] - operator!=", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            Range<TestType> a1{0};
-            Range<TestType> b1{2, 1, 3};
+            const auto a1 = Range<TestType>{0};
+            const auto b1 = Range<TestType>{2, 1, 3};
             REQUIRE_FALSE(a1 != b1);
 
-            Range<TestType> a2{0, 3, 2};
-            Range<TestType> b2{0, 4, 2};
+            const auto a2 = Range<TestType>{0, 3, 2};
+            const auto b2 = Range<TestType>{0, 4, 2};
             REQUIRE_FALSE(a2 != b2);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val1 = []() {
-                const Range<TestType> a{0};
-                const Range<TestType> b{2, 1, 3};
+                const auto a = Range<TestType>{0};
+                const auto b = Range<TestType>{2, 1, 3};
                 return a != b;
             }();
 
             static constexpr auto val2 = []() {
-                const Range<TestType> a{0, 3, 2};
-                const Range<TestType> b{0, 4, 2};
+                const auto a = Range<TestType>{0, 3, 2};
+                const auto b = Range<TestType>{0, 4, 2};
                 return a != b;
             }();
 
@@ -607,26 +607,26 @@ TEMPLATE_TEST_CASE("[Range] - operator!=", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            Range<TestType> a1{0};
-            Range<TestType> b1{10};
+            const auto a1 = Range<TestType>{0};
+            const auto b1 = Range<TestType>{10};
             REQUIRE(a1 != b1);
 
-            Range<TestType> a2{0, 10, 2};
-            Range<TestType> b2{0, 10, 3};
+            const auto a2 = Range<TestType>{0, 10, 2};
+            const auto b2 = Range<TestType>{0, 10, 3};
             REQUIRE(a2 != b2);
         }
 
         SECTION("Compile-time")
         {
             static constexpr auto val1 = []() {
-                const Range<TestType> a{0};
-                const Range<TestType> b{10};
+                const auto a = Range<TestType>{0};
+                const auto b = Range<TestType>{10};
                 return a != b;
             }();
 
             static constexpr auto val2 = []() {
-                const Range<TestType> a{0, 10, 2};
-                const Range<TestType> b{0, 10, 3};
+                const auto a = Range<TestType>{0, 10, 2};
+                const auto b = Range<TestType>{0, 10, 3};
                 return a != b;
             }();
 
@@ -699,8 +699,8 @@ TEMPLATE_TEST_CASE("[Range] - vector conversion", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const std::vector<TestType> exp{0, 2, 4, 6, 8};
-            const Range<TestType> r{0, 10, 2};
+            const auto exp = std::vector<TestType>{0, 2, 4, 6, 8};
+            const auto r = Range<TestType>{0, 10, 2};
             auto res = std::vector<TestType>{r};
 
             REQUIRE(res == exp);
@@ -709,8 +709,8 @@ TEMPLATE_TEST_CASE("[Range] - vector conversion", "[zeus]", int, float)
         SECTION("Compile-time")
         {
             static constexpr auto res = []() {
-                const std::vector<TestType> exp{0, 2, 4, 6, 8};
-                const Range<TestType> r{0, 10, 2};
+                const auto exp = std::vector<TestType>{0, 2, 4, 6, 8};
+                const auto r = Range<TestType>{0, 10, 2};
                 auto vec = std::vector<TestType>{r};
 
                 return vec == exp;
@@ -724,8 +724,8 @@ TEMPLATE_TEST_CASE("[Range] - vector conversion", "[zeus]", int, float)
     {
         SECTION("Runtime")
         {
-            const std::vector<TestType> exp{0, 3, 6, 9};
-            const Range<TestType> r{0, 10, 3};
+            const auto exp = std::vector<TestType>{0, 3, 6, 9};
+            const auto r = Range<TestType>{0, 10, 3};
             auto res = std::vector<TestType>{r};
 
             REQUIRE(res == exp);
@@ -734,8 +734,8 @@ TEMPLATE_TEST_CASE("[Range] - vector conversion", "[zeus]", int, float)
         SECTION("Compile-time")
         {
             static constexpr auto res = []() {
-                const std::vector<TestType> exp{0, 3, 6, 9};
-                const Range<TestType> r{0, 10, 3};
+                const auto exp = std::vector<TestType>{0, 3, 6, 9};
+                const auto r = Range<TestType>{0, 10, 3};
                 auto vec = std::vector<TestType>{r};
 
                 return vec == exp;
@@ -748,11 +748,11 @@ TEMPLATE_TEST_CASE("[Range] - vector conversion", "[zeus]", int, float)
 
 TEMPLATE_TEST_CASE("[Range] - usability", "[zeus]", int, float)
 {
-    const std::vector<int> expected{0, 1, 2, 3, 4};
+    const auto expected = std::vector<int>{0, 1, 2, 3, 4};
 
     SECTION("Range-based loop")
     {
-        std::vector<int> res;
+        auto res = std::vector<int>{};
         for (auto i : Range{5})
         {
             res.push_back(i);
@@ -763,15 +763,15 @@ TEMPLATE_TEST_CASE("[Range] - usability", "[zeus]", int, float)
 
     SECTION("Fill container")
     {
-        const Range r{5};
-        std::vector<int> res(r.begin(), r.end());
+        const auto r = Range{5};
+        auto res = std::vector(r.begin(), r.end());
         REQUIRE(res == expected);
     }
 
     SECTION("Algorithm")
     {
-        const Range r{0, 10, 2};
-        std::vector<int> res(5);
+        const auto r = Range{0, 10, 2};
+        auto res = std::vector<int>(5);
         std::transform(r.begin(), r.end(), res.begin(), [](auto a) {
             return a / 2;
         });
@@ -780,9 +780,9 @@ TEMPLATE_TEST_CASE("[Range] - usability", "[zeus]", int, float)
 
     SECTION("Uneven range")
     {
-        const std::vector<int> exp{0, 3, 6, 9};
-        const Range r{0, 10, 3};
-        std::vector<int> res(r.begin(), r.end());
+        const auto exp = std::vector<int>{0, 3, 6, 9};
+        const auto r = Range{0, 10, 3};
+        auto res = std::vector(r.begin(), r.end());
         REQUIRE(res == exp);
     }
 }
