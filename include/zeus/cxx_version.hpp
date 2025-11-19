@@ -10,10 +10,12 @@ namespace zeus
     };
 
     // NOLINTBEGIN(cppcoreguidelines-macro-usage)
+    // clang-format off
 #define ZEUS_CXX_VERSION __cplusplus
-#define ZEUS_CXX_17      201'703L
-#define ZEUS_CXX_20      202'002L
-#define ZEUS_CXX_23      202'302L
+#define ZEUS_CXX_17      201703L
+#define ZEUS_CXX_20      202002L
+#define ZEUS_CXX_23      202302L
+    // clang-format on
     // NOLINTEND(cppcoreguidelines-macro-usage)
 
 #if ZEUS_CXX_VERSION < ZEUS_CXX_20
