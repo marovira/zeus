@@ -127,21 +127,17 @@ def configure_cmake(
     execute_command(f"Configuring {name}", args)
 
 
-def build(name: str, build_root: pathlib.Path, config: str | None) -> None:
+def build(name: str, build_root: pathlib.Path, config: str) -> None:
     assert config in (None, "Debug", "Release")
 
-    args = ["cmake", "--build", f"{str(build_root)}", "--parallel"]
-    if config is not None:
-        args.extend(["--config", config])
+    args = ["cmake", "--build", f"{str(build_root)}", "--parallel", "--config", config]
     execute_command(f"Building {name}", args)
 
 
-def install(name: str, build_root: pathlib.Path, config: str | None) -> None:
+def install(name: str, build_root: pathlib.Path, config: str) -> None:
     assert config in (None, "Debug", "Release")
 
-    args = ["cmake", "--install", f"{str(build_root)}"]
-    if config is not None:
-        args.extend(["--config", config])
+    args = ["cmake", "--install", f"{str(build_root)}", "--config", config]
     execute_command(f"Installing {name}", args)
 
 
@@ -151,7 +147,7 @@ def check_dependencies(deps_root: pathlib.Path) -> bool:
 
 
 def install_dependencies(
-    cmake_cfg: CMakeConfig, deps_root: pathlib.Path, config: str | None
+    cmake_cfg: CMakeConfig, deps_root: pathlib.Path, config: str
 ) -> None:
     if check_dependencies(deps_root):
         return
@@ -212,8 +208,7 @@ def main() -> None:
         help="The root where the dependencies will be built",
     )
     parser.add_argument(
-        "-b",
-        "--build",
+        "build",
         metavar="BUILD",
         type=str,
         nargs=1,
@@ -223,7 +218,7 @@ def main() -> None:
     args = parser.parse_args()
 
     deps_root = pathlib.Path(args.root[0]).resolve()
-    config = args.build[0] if args.build is not None else None
+    config = args.build[0]
 
     project_root = pathlib.Path(__file__).parent.parent
 

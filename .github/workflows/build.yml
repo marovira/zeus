@@ -67,16 +67,13 @@ jobs:
         env:
           BUILD_TYPE: ${{ matrix.build }}
         run: |
-          if [[ "$OSTYPE" == "msys" ]]; then
-            uv run tools/build_dependencies.py ~/deps -b $BUILD_TYPE
-          else
-            # Clang and GCC binaries are compatible, so only compile with GCC.
-            if [[ "$OSTYPE" == "linux-gnu" ]]; then
-              export CC="gcc-14"
-              export CXX="g++-14"
-            fi
-            uv run tools/build_dependencies.py ~/deps
+          if [[ "$OSTYPE" == "linux-gnu"]]; then
+            # Clang and GCC builds are compatible, so just use GCC.
+            export CC="gcc-14"
+            export CXX="g++-14"
           fi
+
+          uv run tools/build_dependencies.py ~/deps $BUILD_TYPE
 
       - name: Build Zeus
         shell: bash

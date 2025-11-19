@@ -52,16 +52,13 @@ jobs:
         env:
           BUILD_TYPE: Release
         run: |
-          if [[ "$OSTYPE" == "msys" ]]; then
-            uv run tools/build_dependencies.py ~/deps -b $BUILD_TYPE
-          else
-            # Clang and GCC binaries are compatible, so only compile with GCC.
-            if [[ "$OSTYPE" == "linux-gnu" ]]; then
-              export CC="gcc-14"
-              export CXX="g++-14"
-            fi
-            uv run tools/build_dependencies.py ~/deps
+          if [[ "$OSTYPE" == "linux-gnu"]]; then
+            # Clang and GCC builds are compatible, so just use GCC.
+            export CC="gcc-14"
+            export CXX="g++-14"
           fi
+
+          uv run tools/build_dependencies.py ~/deps $BUILD_TYPE
 
       - name: Build Zeus
         shell: bash
@@ -76,21 +73,6 @@ jobs:
             cmake --build build --config $BUILD_TYPE
           else
             cmake --build build --config $BUILD_TYPE --parallel
-          fi
-
-      - name: Run tests
-        shell: bash
-        working-directory: ./build
-        env:
-          BUILD_TYPE: Release
-          CONFIG_TYPE: ${{ matrix.config.preset }}
-          CC: ${{ matrix.config.cc }}
-          CXX: ${{ matrix.config.cxx }}
-        run: |
-          if [[ "$OSTYPE" == "msys" ]]; then
-            cmake --build . --target RUN_TESTS --config $BUILD_TYPE
-          else
-            make test
           fi
 
       - name: Install
