@@ -2,6 +2,7 @@
 
 #include <catch2/catch_test_macros.hpp>
 
+// NOLINTBEGIN(cppcoreguidelines-use-enum-class)
 TEST_CASE("[concepts] - Enum", "[zeus]")
 {
     enum Foo
@@ -92,6 +93,8 @@ TEST_CASE("[concepts] - UnsignedScopedEnum", "[zeus]")
     STATIC_REQUIRE_FALSE(zeus::UnsignedScopedEnum<Bar>);
     STATIC_REQUIRE_FALSE(zeus::UnsignedScopedEnum<Foo>);
 }
+
+// NOLINTEND(cppcoreguidelines-use-enum-class)
 
 TEST_CASE("[concepts] - IntegralType", "[zeus]")
 {

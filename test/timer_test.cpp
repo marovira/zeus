@@ -1,8 +1,10 @@
 #include <zeus/timer.hpp>
 
 #include <catch2/catch_test_macros.hpp>
-#include <chrono>
 #include <thread>
+
+// NOLINTNEXTLINE(misc-include-cleaner)
+#include <chrono> // IWYU pragma: keep
 
 TEST_CASE("[timer] - timer: elapsed", "[zeus]")
 {
@@ -11,7 +13,7 @@ TEST_CASE("[timer] - timer: elapsed", "[zeus]")
 
     Timer<double> t;
     t.start();
-    std::this_thread::sleep_for(1s);
+    std::this_thread::sleep_for(1s); // NOLINT(misc-include-cleaner)
     auto elapsed{static_cast<int>(t.elapsed())};
 
     REQUIRE(elapsed == 1);
