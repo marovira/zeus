@@ -33,10 +33,10 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: "windows-2025", cxx: "msvc", cc: "msvc", preset: "msvc"}
-          - {os: "ubuntu-24.04", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
-          - {os: "ubuntu-24.04", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
-          - {os: "macos-14", cxx: "clang++", cc: "clang", preset: "apple"}
+          - {os: "windows-latest", cxx: "msvc", cc: "msvc", preset: "msvc"}
+          - {os: "ubuntu-latest", cxx: "clang++-18", cc: "clang-18", preset: "clang"}
+          - {os: "ubuntu-latest", cxx: "g++-14", cc: "gcc-14", preset: "gcc"}
+          - {os: "macos-latest", cxx: "clang++", cc: "clang", preset: "apple"}
         build: ["Debug", "Release"]
     steps:
       - name: Chekout
