@@ -68,16 +68,11 @@ jobs:
           CC: ${{ matrix.config.cc }}
           CXX: ${{ matrix.config.cxx }}
         run: |
-          cmake --preset=$CONFIG_TYPE -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps -DCMAKE_INSTALL_PREFIX=install/zeus -DZEUS_INSTALL_TARGET=ON
-          if [[ "$OSTYPE" == "msys" ]]; then
-            cmake --build build --config $BUILD_TYPE
-          else
-            cmake --build build --config $BUILD_TYPE --parallel
-          fi
+          cmake --preset=$CONFIG_TYPE -DBUILD_SHARED_LIBS=OFF -DCMAKE_PREFIX_PATH=~/deps -DCMAKE_INSTALL_PREFIX=install/zeus -DZEUS_INSTALL_TARGET=ON
+          cmake --build build --config $BUILD_TYPE
 
       - name: Install
         shell: bash
-        working-directory: ./build
         env:
           BUILD_TYPE: Release
           CONFIG_TYPE: ${{ matrix.config.preset }}
@@ -85,9 +80,9 @@ jobs:
           CXX: ${{ matrix.config.cxx }}
         run: |
           if [[ "$OSTYPE" == "msys" ]]; then
-            cmake --build . --target INSTALL --config $BUILD_TYPE
+            cmake --build build --target INSTALL --config $BUILD_TYPE
           else
-            make install
+            cmake --build build --target install --config $BUILD_TYPE
           fi
 
       - name: Package
