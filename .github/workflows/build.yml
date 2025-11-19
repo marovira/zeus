@@ -67,7 +67,7 @@ jobs:
         env:
           BUILD_TYPE: ${{ matrix.build }}
         run: |
-          if [[ "$OSTYPE" == "linux-gnu"]]; then
+          if [[ "$OSTYPE" == "linux-gnu" ]]; then
             # Clang and GCC builds are compatible, so just use GCC.
             export CC="gcc-14"
             export CXX="g++-14"
