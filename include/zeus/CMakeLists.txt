@@ -23,6 +23,7 @@ set(ZEUS_INCLUDE_LIST
     ${INCLUDE_ROOT}/string.hpp
     ${INCLUDE_ROOT}/range.hpp
     ${INCLUDE_ROOT}/container_traits.hpp
+    ${INCLUDE_ROOT}/linspace.hpp
     )
 
 source_group("include" FILES)

@@ -15,6 +15,7 @@ set(TEST_SOURCE
     ${ZEUS_TEST_ROOT}/concepts_test.cpp
     ${ZEUS_TEST_ROOT}/container_traits_test.cpp
     ${ZEUS_TEST_ROOT}/cxx_version_test.cpp
+    ${ZEUS_TEST_ROOT}/linspace_test.cpp
     )
 
 source_group("source" FILES ${TEST_SOURCE})
