@@ -2,7 +2,7 @@
 # Project setup.
 #================================
 cmake_minimum_required(VERSION 3.30)
-project(zeus VERSION 1.8.0 LANGUAGES CXX C)
+project(zeus VERSION 1.8.0 LANGUAGES CXX)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -47,7 +47,7 @@ if (NOT fmt_FOUND)
     fetch_library(
         NAME fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        GIT_TAG 40626af88bd7df9a5fb80be7b25ac85b122d6c21
+        GIT_TAG 407c905e45ad75fc29bf0f9bb7c5c2fd3475976f
         )
 endif()
 
