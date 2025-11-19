@@ -9,7 +9,7 @@
 namespace zeus
 {
     // Note: To be removed in C++23. Superseded by std::abs
-    template<ArithmeticType T>
+    template<Arithmetic T>
     constexpr T abs(T x)
     {
         return x < T{0} ? -x : x;

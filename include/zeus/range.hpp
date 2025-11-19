@@ -9,7 +9,7 @@
 
 namespace zeus
 {
-    template<IntegralType T>
+    template<Integral T>
     class Range
     {
     public:
@@ -162,19 +162,19 @@ namespace zeus
         T m_begin{0}, m_end{0}, m_stride{0};
     };
 
-    template<IntegralType T>
+    template<Integral T>
     constexpr Range<T> range(T end)
     {
         return Range<T>{end};
     }
 
-    template<IntegralType T>
+    template<Integral T>
     constexpr Range<T> range(T begin, T end)
     {
         return Range<T>{begin, end};
     }
 
-    template<IntegralType T>
+    template<Integral T>
     constexpr Range<T> range(T begin, T end, T step)
     {
         return Range<T>{begin, end, step};

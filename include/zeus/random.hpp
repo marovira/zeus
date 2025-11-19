@@ -7,7 +7,7 @@
 
 namespace zeus
 {
-    template<ArithmeticType T, typename Engine = std::mt19937>
+    template<Arithmetic T, typename Engine = std::mt19937>
     class Random
     {
     public:

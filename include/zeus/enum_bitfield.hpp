@@ -203,13 +203,13 @@ namespace zeus
             return ~EnumBitfield<T>{val};
         }
 
-        template<UnsignedScopedEnum T, IntegralType U>
+        template<UnsignedScopedEnum T, Integral U>
         constexpr EnumBitfield<T> operator>>(T val, U n)
         {
             return EnumBitfield<T>{val} >> n;
         }
 
-        template<UnsignedScopedEnum T, IntegralType U>
+        template<UnsignedScopedEnum T, Integral U>
         constexpr EnumBitfield<T> operator<<(T val, U n)
         {
             return EnumBitfield<T>{val} << n;

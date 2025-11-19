@@ -6,7 +6,7 @@
 
 namespace zeus
 {
-    template<ArithmeticType T, typename Res = std::chrono::high_resolution_clock>
+    template<Arithmetic T, typename Res = std::chrono::high_resolution_clock>
     class Timer
     {
     public:

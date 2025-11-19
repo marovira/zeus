@@ -96,38 +96,43 @@ TEST_CASE("[concepts] - UnsignedScopedEnum", "[zeus]")
 
 // NOLINTEND(cppcoreguidelines-use-enum-class)
 
-TEST_CASE("[concepts] - IntegralType", "[zeus]")
+TEST_CASE("[concepts] - Integral", "[zeus]")
 {
-    STATIC_REQUIRE(zeus::IntegralType<char>);
-    STATIC_REQUIRE(zeus::IntegralType<char8_t>);
-    STATIC_REQUIRE(zeus::IntegralType<char16_t>);
-    STATIC_REQUIRE(zeus::IntegralType<char32_t>);
-    STATIC_REQUIRE(zeus::IntegralType<wchar_t>);
-    STATIC_REQUIRE(zeus::IntegralType<short>);
-    STATIC_REQUIRE(zeus::IntegralType<int>);
-    STATIC_REQUIRE(zeus::IntegralType<long>);
-    STATIC_REQUIRE(zeus::IntegralType<long long>);
+    STATIC_REQUIRE(zeus::Integral<signed char>);
+    STATIC_REQUIRE(zeus::Integral<short int>);
+    STATIC_REQUIRE(zeus::Integral<int>);
+    STATIC_REQUIRE(zeus::Integral<long int>);
+    STATIC_REQUIRE(zeus::Integral<long long int>);
 
-    STATIC_REQUIRE_FALSE(zeus::IntegralType<float>);
-    STATIC_REQUIRE_FALSE(zeus::IntegralType<double>);
-    STATIC_REQUIRE_FALSE(zeus::IntegralType<long double>);
-    STATIC_REQUIRE_FALSE(zeus::IntegralType<bool>);
+    STATIC_REQUIRE(zeus::Integral<unsigned char>);
+    STATIC_REQUIRE(zeus::Integral<unsigned short int>);
+    STATIC_REQUIRE(zeus::Integral<unsigned int>);
+    STATIC_REQUIRE(zeus::Integral<unsigned long int>);
+    STATIC_REQUIRE(zeus::Integral<unsigned long long int>);
+
+    STATIC_REQUIRE_FALSE(zeus::Integral<float>);
+    STATIC_REQUIRE_FALSE(zeus::Integral<double>);
+    STATIC_REQUIRE_FALSE(zeus::Integral<long double>);
+    STATIC_REQUIRE_FALSE(zeus::Integral<bool>);
 }
 
-TEST_CASE("[concepts] - ArithmeticType", "[zeus]")
+TEST_CASE("[concepts] - Arithmetic", "[zeus]")
 {
-    STATIC_REQUIRE(zeus::ArithmeticType<char>);
-    STATIC_REQUIRE(zeus::ArithmeticType<char8_t>);
-    STATIC_REQUIRE(zeus::ArithmeticType<char16_t>);
-    STATIC_REQUIRE(zeus::ArithmeticType<char32_t>);
-    STATIC_REQUIRE(zeus::ArithmeticType<wchar_t>);
-    STATIC_REQUIRE(zeus::ArithmeticType<short>);
-    STATIC_REQUIRE(zeus::ArithmeticType<int>);
-    STATIC_REQUIRE(zeus::ArithmeticType<long>);
-    STATIC_REQUIRE(zeus::ArithmeticType<long long>);
-    STATIC_REQUIRE(zeus::ArithmeticType<float>);
-    STATIC_REQUIRE(zeus::ArithmeticType<double>);
-    STATIC_REQUIRE(zeus::ArithmeticType<long double>);
+    STATIC_REQUIRE(zeus::Integral<signed char>);
+    STATIC_REQUIRE(zeus::Integral<short int>);
+    STATIC_REQUIRE(zeus::Integral<int>);
+    STATIC_REQUIRE(zeus::Integral<long int>);
+    STATIC_REQUIRE(zeus::Integral<long long int>);
 
-    STATIC_REQUIRE_FALSE(zeus::ArithmeticType<bool>);
+    STATIC_REQUIRE(zeus::Integral<unsigned char>);
+    STATIC_REQUIRE(zeus::Integral<unsigned short int>);
+    STATIC_REQUIRE(zeus::Integral<unsigned int>);
+    STATIC_REQUIRE(zeus::Integral<unsigned long int>);
+    STATIC_REQUIRE(zeus::Integral<unsigned long long int>);
+
+    STATIC_REQUIRE(zeus::Arithmetic<float>);
+    STATIC_REQUIRE(zeus::Arithmetic<double>);
+    STATIC_REQUIRE(zeus::Arithmetic<long double>);
+
+    STATIC_REQUIRE_FALSE(zeus::Arithmetic<bool>);
 }

@@ -19,8 +19,8 @@ namespace zeus
     concept UnsignedScopedEnum = ScopedEnum<T> && UnsignedEnum<T>;
 
     template<typename T>
-    concept IntegralType = std::is_integral_v<T> && !std::is_same_v<bool, T>;
+    concept Integral = std::is_integral_v<T> && !std::is_same_v<bool, T>;
 
     template<typename T>
-    concept ArithmeticType = IntegralType<T> || std::is_floating_point_v<T>;
+    concept Arithmetic = Integral<T> || std::is_floating_point_v<T>;
 } // namespace zeus
