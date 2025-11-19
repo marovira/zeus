@@ -32,13 +32,13 @@ Zeus supports the following platforms and compilers:
 | Windows (MSVC) | 19.44 |
 | Linux (GCC) | 14.2.0 |
 | Linux (LLVM Clang) | 18.1 |
-| macOS (Apple Clang) | 15 |
+| macOS (Apple Clang) | 17 |
 
 In addition, Zeus depends on the following libraries:
 
 | Library | Version |
 |---------|---------|
-| [FMT](https://github.com/fmtlib/fmt) | 11.2.0 |
+| [FMT](https://github.com/fmtlib/fmt) | 12.1.0 |
 | [magic_enum](https://github.com/Neargye/magic_enum) | 0.9.7 |
 | [Catch2](https://github.com/catchorg/Catch2) | 3.10.0 |
 
