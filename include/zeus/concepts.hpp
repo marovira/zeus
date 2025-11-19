@@ -22,5 +22,8 @@ namespace zeus
     concept Integral = std::is_integral_v<T> && !std::is_same_v<bool, T>;
 
     template<typename T>
+    concept UnsignedIntegral = Integral<T> && std::is_unsigned_v<T>;
+
+    template<typename T>
     concept Arithmetic = Integral<T> || std::is_floating_point_v<T>;
 } // namespace zeus

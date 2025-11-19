@@ -116,6 +116,26 @@ TEST_CASE("[concepts] - Integral", "[zeus]")
     STATIC_REQUIRE_FALSE(zeus::Integral<bool>);
 }
 
+TEST_CASE("[concepts] - UnsignedIntegral", "[zeus]")
+{
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<signed char>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<short int>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<int>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<long int>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<long long int>);
+
+    STATIC_REQUIRE(zeus::UnsignedIntegral<unsigned char>);
+    STATIC_REQUIRE(zeus::UnsignedIntegral<unsigned short int>);
+    STATIC_REQUIRE(zeus::UnsignedIntegral<unsigned int>);
+    STATIC_REQUIRE(zeus::UnsignedIntegral<unsigned long int>);
+    STATIC_REQUIRE(zeus::UnsignedIntegral<unsigned long long int>);
+
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<float>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<double>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<long double>);
+    STATIC_REQUIRE_FALSE(zeus::UnsignedIntegral<bool>);
+}
+
 TEST_CASE("[concepts] - Arithmetic", "[zeus]")
 {
     STATIC_REQUIRE(zeus::Integral<signed char>);
